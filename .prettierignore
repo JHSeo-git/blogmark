@@ -1,0 +1,11 @@
+.gitignore
+.yarn
+
+node_modules
+
+# Build artifacts
+build
+coverage
+dist
+lib
+.next
