@@ -16,7 +16,8 @@ module.exports = {
   rules: {
     'arrow-body-style': 'off',
     'consistent-return': 'off',
-    camelcase: 'off',
+    'camelcase': 'off',
+    'jsx-a11y/anchor-is-valid': 'off', // next/link
     'no-nested-ternary': 'off',
     'no-restricted-exports': 'off',
     'no-shadow': 'off',
