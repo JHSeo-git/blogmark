@@ -1,16 +1,17 @@
-import Link from 'next/link';
-import { signOut, useSession } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 
 import MenuIcon from '../__icons/Menu.Icon';
 import { DrawerAction } from '../Drawer';
+import UserAddon from './UserAddon';
 
 export interface HeaderProps {}
 
 function Header(props: HeaderProps) {
   const { data, status } = useSession();
 
-  const onClick = () => {
-    signOut({ redirect: false });
+  const onSignInClick = () => {
+    // The redirect option is only available for credentials and email providers.
+    signIn('github');
   };
 
   return (
@@ -23,20 +24,13 @@ function Header(props: HeaderProps) {
           </DrawerAction>
           {status === 'loading' && 'loading...'}
           {status === 'authenticated' && (
-            <div className="avatar placeholder">
-              <div className="bg-base-300 rounded-full w-8">
-                {data.user?.image ? (
-                  <picture>
-                    <source srcSet={data.user.image} type="image/*" />
-                    <img src={data.user.image} alt={`${data.user?.name} avatar`} />
-                  </picture>
-                ) : (
-                  <span className="text-xs">{data.user?.name?.slice(0, 2) ?? 'UN'}</span>
-                )}
-              </div>
-            </div>
+            <UserAddon image={data?.user?.image} name={data?.user?.name} />
           )}
-          {status === 'unauthenticated' && 'unauthenticated'}
+          {status === 'unauthenticated' && (
+            <button type="button" onClick={onSignInClick}>
+              Login
+            </button>
+          )}
         </nav>
       </div>
     </header>

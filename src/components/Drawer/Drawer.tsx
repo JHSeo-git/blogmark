@@ -30,7 +30,7 @@ export function DrawerSide({ children }: DrawerProps) {
 export function DrawerAction({ children }: DrawerProps) {
   // eslint-disable-next-line jsx-a11y/label-has-associated-control
   return (
-    <label htmlFor={DRAWER_LABEL} className="lg:hidden">
+    <label htmlFor={DRAWER_LABEL} className="cursor-pointer lg:hidden">
       {children}
     </label>
   );
