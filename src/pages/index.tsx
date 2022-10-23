@@ -13,6 +13,12 @@ const Home: NextPage = () => {
       <button type="button" onClick={onClick}>
         github login
       </button>
+      <p className="py-10">github login</p>
+      <p className="py-10">github login</p>
+      <p className="py-10">github login</p>
+      <p className="py-10">github login</p>
+      <p className="py-10">github login</p>
+      <p className="py-10">github login</p>
     </Layout>
   );
 };
