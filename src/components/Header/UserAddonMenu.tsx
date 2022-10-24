@@ -15,7 +15,6 @@ function UserAddonMenu({ isOpen, onClose }: UserAddonMenuProps) {
   useLockedBodyEffect(isOpen);
 
   const onSignOut = () => {
-    console.log('tt');
     signOut({ redirect: false });
   };
 
