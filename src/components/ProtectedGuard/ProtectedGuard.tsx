@@ -11,6 +11,7 @@ function ProtectedGuard({ children }: ProtectedGuardProps) {
   useSession({
     required: true,
     onUnauthenticated() {
+      // TODO: redirectUrl using router.asPath
       router.replace('/');
     },
   });
