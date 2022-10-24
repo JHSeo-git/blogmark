@@ -44,13 +44,13 @@ function UserAddonMenu({ isOpen, onClose }: UserAddonMenuProps) {
               <ul className="border bg-base-100 rounded-sm w-52 mt-1 shadow-lg">
                 <li className="border-b">
                   <Link href="/" passHref>
-                    <a className="px-4 py-3 flex w-full hover:bg-base-200">홈</a>
+                    <a className="px-4 py-3 flex w-full hover:bg-base-200">사용자 정보</a>
                   </Link>
                 </li>
                 <li>
                   <button
                     type="button"
-                    className="px-4 py-3 flex w-full hover:bg-base-200"
+                    className="px-4 py-3 flex w-full hover:bg-base-200 transition-colors"
                     onClick={onSignOut}
                   >
                     로그아웃
@@ -58,7 +58,7 @@ function UserAddonMenu({ isOpen, onClose }: UserAddonMenuProps) {
                 </li>
               </ul>
             </motion.div>
-            <button type="button" className="fixed inset-0" onClick={onClose}>
+            <button type="button" className="fixed inset-0 cursor-default" onClick={onClose}>
               <Hidden>Menu Close</Hidden>
             </button>
           </>
