@@ -1,7 +1,5 @@
 import { useRef, useState } from 'react';
 
-import useOnClickOutside from '@/hooks/useOnClickOutside';
-
 import UserAddonMenu from './UserAddonMenu';
 
 export interface UserAddonProps {
@@ -24,8 +22,6 @@ function UserAddon({ image, name }: UserAddonProps) {
   const onClose = () => {
     setIsMenuOpen(false);
   };
-
-  // useOnClickOutside(ref, onClose);
 
   return (
     <div ref={ref} className="flex relative">

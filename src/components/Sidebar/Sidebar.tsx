@@ -17,8 +17,8 @@ function Sidebar(props: SidebarProps) {
           </Link>
         </li>
         <li>
-          <Link href="/new" passHref>
-            <a className="block py-4">추가</a>
+          <Link href="/items/new" passHref>
+            <a className="block py-4">신규</a>
           </Link>
         </li>
       </ul>
