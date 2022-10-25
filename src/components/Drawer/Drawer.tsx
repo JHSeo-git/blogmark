@@ -20,7 +20,6 @@ export function DrawerContent({ children }: DrawerProps) {
 export function DrawerSide({ children }: DrawerProps) {
   return (
     <div className="drawer-side">
-      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
       <label htmlFor={DRAWER_LABEL} className="drawer-overlay" />
       {children}
     </div>
@@ -28,7 +27,6 @@ export function DrawerSide({ children }: DrawerProps) {
 }
 
 export function DrawerAction({ children }: DrawerProps) {
-  // eslint-disable-next-line jsx-a11y/label-has-associated-control
   return (
     <label htmlFor={DRAWER_LABEL} className="cursor-pointer lg:hidden">
       {children}
