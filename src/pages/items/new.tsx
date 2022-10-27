@@ -23,7 +23,7 @@ const ItemsNew: ProtectedNextPage = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
     watch,
     resetField,
   } = useForm<FormData>({
@@ -42,7 +42,7 @@ const ItemsNew: ProtectedNextPage = () => {
           <Input
             type="text"
             label="URL"
-            className="mb-4"
+            className="mb-8"
             {...register('url')}
             error={errors.url?.message}
             resetInput={watch('url') ? () => resetField('url') : undefined}
@@ -50,23 +50,24 @@ const ItemsNew: ProtectedNextPage = () => {
           <Input
             type="text"
             label="제목"
-            className="mb-4"
+            className="mb-8"
             {...register('title')}
             error={errors.title?.message}
             resetInput={watch('title') ? () => resetField('title') : undefined}
           />
           <Input
             type="text"
-            label="설명"
+            label="소개글"
             {...register('description')}
             error={errors.description?.message}
             resetInput={watch('description') ? () => resetField('description') : undefined}
           />
           <button
             type="submit"
-            className="mt-16 w-full bg-primary text-base-100 rounded-md p-3 transition-all hover:bg-primary-focus active:bg-primary disabled:bg-base-300"
+            disabled={!isValid}
+            className="mt-16 btn btn-block btn-primary no-animation active:bg-primary text-base"
           >
-            등록
+            블로그마크{isValid ? ' 🎉' : ''}
           </button>
         </form>
       </section>

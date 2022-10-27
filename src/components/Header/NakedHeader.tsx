@@ -15,7 +15,7 @@ function NakedHeader({ hasBack = true }: NakedHeaderProps) {
   };
 
   return (
-    <HeaderBox className="border-b">
+    <HeaderBox className="border-b bg-base-100">
       <div className="flex justify-between">
         {hasBack && (
           <button type="button" className="flex" onClick={onClick}>

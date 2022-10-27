@@ -17,7 +17,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     const id = useId();
 
     return (
-      <div className={className}>
+      <div className={`relative ${className ?? ''}`}>
         {label && (
           <label htmlFor={id} className="label">
             <span
@@ -48,6 +48,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           <AnimatePresence>
             {resetInput && isFocus && (
               <motion.button
+                tabIndex={-1}
                 type="button"
                 className="flex pr-3 text-base-content"
                 onClick={resetInput}
@@ -62,9 +63,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           </AnimatePresence>
         </div>
         {error && (
-          <label className="label">
-            <span className="label-text-alt text-error">{error}</span>
-          </label>
+          <div className="absolute">
+            <label className="label">
+              <span className="label-text-alt text-error">{error}</span>
+            </label>
+          </div>
         )}
       </div>
     );

@@ -2,7 +2,11 @@
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        'hover-hover': { raw: '(hover: hover)' },
+      },
+    },
   },
   plugins: [require('daisyui')],
   daisyui: {
