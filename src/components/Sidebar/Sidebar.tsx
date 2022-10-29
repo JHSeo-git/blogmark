@@ -10,13 +10,13 @@ function Sidebar() {
       </div>
       <ul className="px-6 py-4">
         <li>
-          <Link href="/" passHref>
-            <a className="block py-4">홈</a>
+          <Link href="/" className="block py-4">
+            홈
           </Link>
         </li>
         <li>
-          <Link href="/items/new" passHref>
-            <a className="block py-4">신규</a>
+          <Link href="/items/new" className="block py-4">
+            신규
           </Link>
         </li>
       </ul>
