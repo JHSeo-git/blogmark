@@ -1,33 +1,23 @@
-import { signIn, useSession } from 'next-auth/react';
+import type { Session } from 'next-auth';
 
 import MenuIcon from '../__icons/Menu.Icon';
 import { DrawerAction } from '../Drawer';
+import SignInButton from '../SignInButton';
 import HeaderBox from './Header.Box';
 import UserAddon from './UserAddon';
 
-function BaseHeader() {
-  const { data, status } = useSession();
+interface BaseHeaderProps {
+  user?: Session['user'] | null;
+}
 
-  const onSignInClick = () => {
-    // The redirect option is only available for credentials and email providers.
-    signIn('github');
-  };
-
+function BaseHeader({ user }: BaseHeaderProps) {
   return (
     <HeaderBox>
-      <nav className="px-4 py-2 lg:px-8 lg:py-4 flex items-center justify-between bg-base-100 rounded-md shadow-md">
+      <nav className="min-h-[56px] px-4 py-3 lg:px-8 lg:py-4 flex items-center justify-between bg-base-100 rounded-md shadow-md">
         <DrawerAction>
           <MenuIcon />
         </DrawerAction>
-        {status === 'loading' && 'loading...'}
-        {status === 'authenticated' && (
-          <UserAddon image={data?.user?.image} name={data?.user?.name} />
-        )}
-        {status === 'unauthenticated' && (
-          <button type="button" onClick={onSignInClick}>
-            로그인
-          </button>
-        )}
+        {user ? <UserAddon image={user.image} name={user.name} /> : <SignInButton />}
       </nav>
     </HeaderBox>
   );

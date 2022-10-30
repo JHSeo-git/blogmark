@@ -1,6 +1,4 @@
-import { useRouter } from 'next/router';
-
-import ChevronLeftIcon from '../__icons/ChevronLeft.icon';
+import BackButton from '../BackButton';
 import HeaderBox from './Header.Box';
 
 export interface NakedHeaderProps {
@@ -8,21 +6,9 @@ export interface NakedHeaderProps {
 }
 
 function NakedHeader({ hasBack = true }: NakedHeaderProps) {
-  const router = useRouter();
-
-  const onClick = () => {
-    router.back();
-  };
-
   return (
     <HeaderBox className="border-b bg-base-100">
-      <div className="flex justify-between">
-        {hasBack && (
-          <button type="button" className="flex" onClick={onClick}>
-            <ChevronLeftIcon />
-          </button>
-        )}
-      </div>
+      <div className="flex justify-between">{hasBack && <BackButton />}</div>
     </HeaderBox>
   );
 }
