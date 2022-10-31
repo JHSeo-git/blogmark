@@ -7,7 +7,7 @@ export interface DrawerProps {
 function Drawer({ children }: DrawerProps) {
   return (
     <div className="drawer">
-      <input id={DRAWER_LABEL} type="checkbox" className="drawer-toggle" />
+      <input id={DRAWER_LABEL} type="checkbox" className="drawer-toggle" defaultChecked={false} />
       {children}
     </div>
   );

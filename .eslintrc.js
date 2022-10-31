@@ -42,6 +42,7 @@ module.exports = {
     'react/require-default-props': 'off',
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
+    '@next/next/no-head-element': 'off',
     '@typescript-eslint/ban-types': 'off',
     '@typescript-eslint/consistent-type-imports': [
       'error',

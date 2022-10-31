@@ -1,3 +1,5 @@
+'use client';
+
 import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
 import { signOut } from 'next-auth/react';
@@ -15,7 +17,8 @@ function UserAddonMenu({ isOpen, onClose }: UserAddonMenuProps) {
   useLockedBodyEffect(isOpen);
 
   const onSignOut = () => {
-    signOut({ redirect: false });
+    signOut();
+    onClose?.();
   };
 
   return (
