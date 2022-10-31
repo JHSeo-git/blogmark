@@ -15,7 +15,9 @@ function SignInButton({ className }: SignInButtonProps) {
       setIsLoading(true);
       // The redirect option is only available for credentials and email providers.
       await signIn('github');
-    } finally {
+    } catch (e) {
+      // only reset the state when occurs error
+      // because the page will be redirected
       setIsLoading(false);
     }
   };
