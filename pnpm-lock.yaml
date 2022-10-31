@@ -1,5 +1,10 @@
 lockfileVersion: 5.4
 
+patchedDependencies:
+  next@13.0.0:
+    hash: qvl4r424vrjypg7phmwssqcytq
+    path: patches/next@13.0.0.patch
+
 specifiers:
   '@hookform/resolvers': ^2.9.10
   '@next-auth/prisma-adapter': 1.0.5
@@ -42,7 +47,7 @@ dependencies:
   '@prisma/client': 4.5.0_prisma@4.5.0
   clsx: 1.2.1
   framer-motion: 7.6.1_biqbaboplfbrettd7655fr4n2y
-  next: 13.0.0_biqbaboplfbrettd7655fr4n2y
+  next: 13.0.0_qvl4r424vrjypg7phmwssqcytq_biqbaboplfbrettd7655fr4n2y
   next-auth: 4.15.0_r5sq4deac3rmm2d5onhwvomqve
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -51,7 +56,7 @@ dependencies:
   yup: 0.32.11
 
 devDependencies:
-  '@types/node': 18.11.7
+  '@types/node': 18.11.8
   '@types/react': 18.0.24
   '@types/react-dom': 18.0.8
   '@typescript-eslint/eslint-plugin': 5.41.0_huremdigmcnkianavgfk3x6iou
@@ -393,7 +398,7 @@ packages:
     resolution: {integrity: sha512-ZUxbzKl0IfJILTS6t7ip5fQQM/J3TJYubDm3nMbgubNNYS62eXeUpoLUC8/7fJNiFYHTrGPQn7hspDUzIHX3UA==}
     dependencies:
       '@types/minimatch': 5.1.2
-      '@types/node': 18.11.7
+      '@types/node': 18.11.8
     dev: true
 
   /@types/json-schema/7.0.11:
@@ -412,8 +417,8 @@ packages:
     resolution: {integrity: sha512-K0VQKziLUWkVKiRVrx4a40iPaxTUefQmjtkQofBkYRcoaaL/8rhwDWww9qWbrgicNOgnpIsMxyNIUM4+n6dUIA==}
     dev: true
 
-  /@types/node/18.11.7:
-    resolution: {integrity: sha512-LhFTglglr63mNXUSRYD8A+ZAIu5sFqNJ4Y2fPuY7UlrySJH87rRRlhtVmMHplmfk5WkoJGmDjE9oiTfyX94CpQ==}
+  /@types/node/18.11.8:
+    resolution: {integrity: sha512-uGwPWlE0Hj972KkHtCDVwZ8O39GmyjfMane1Z3GUBGGnkZ2USDq7SxLpVIiIHpweY9DS0QTDH0Nw7RNBsAAZ5A==}
     dev: true
 
   /@types/prop-types/15.7.5:
@@ -2079,7 +2084,7 @@ packages:
       '@panva/hkdf': 1.0.2
       cookie: 0.5.0
       jose: 4.10.2
-      next: 13.0.0_biqbaboplfbrettd7655fr4n2y
+      next: 13.0.0_qvl4r424vrjypg7phmwssqcytq_biqbaboplfbrettd7655fr4n2y
       oauth: 0.9.15
       openid-client: 5.2.0
       preact: 10.11.2
@@ -2089,7 +2094,7 @@ packages:
       uuid: 8.3.2
     dev: false
 
-  /next/13.0.0_biqbaboplfbrettd7655fr4n2y:
+  /next/13.0.0_qvl4r424vrjypg7phmwssqcytq_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-puH1WGM6rGeFOoFdXXYfUxN9Sgi4LMytCV5HkQJvVUOhHfC1DoVqOfvzaEteyp6P04IW+gbtK2Q9pInVSrltPA==}
     engines: {node: '>=14.6.0'}
     hasBin: true
@@ -2133,6 +2138,7 @@ packages:
       - '@babel/core'
       - babel-plugin-macros
     dev: false
+    patched: true
 
   /node-releases/2.0.6:
     resolution: {integrity: sha512-PiVXnNuFm5+iYkLBNeq5211hvO38y63T0i2KKh2KnUs3RpzJ+JtODFjkD8yjLwnDkTYF1eKXheUwdssR+NRZdg==}

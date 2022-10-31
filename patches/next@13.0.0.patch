@@ -1,0 +1,77 @@
+diff --git a/dist/lib/typescript/writeVscodeConfigurations.js b/dist/lib/typescript/writeVscodeConfigurations.js
+index 067a032ec4d2b1ab86249640e9bf5e67b394f82f..8b5064fd84e3f9ebc6a92e1e51f73787de9e07b9 100644
+--- a/dist/lib/typescript/writeVscodeConfigurations.js
++++ b/dist/lib/typescript/writeVscodeConfigurations.js
+@@ -11,39 +11,39 @@ function _interopRequireDefault(obj) {
+     };
+ }
+ async function writeVscodeConfigurations(baseDir) {
+-    const vscodeSettings = _path.default.join(baseDir, ".vscode", "settings.json");
+-    let settings = {};
+-    let currentContent = "";
+-    try {
+-        currentContent = await _fs.promises.readFile(vscodeSettings, "utf8");
+-        settings = JSON.parse(currentContent);
+-    } catch (err) {}
+-    const libPath = "." + _path.default.sep + _path.default.join("node_modules", "typescript", "lib");
+-    if (settings["typescript.tsdk"] === libPath && settings["typescript.enablePromptUseWorkspaceTsdk"]) {
+-        return;
+-    }
+-    settings["typescript.tsdk"] = libPath;
+-    settings["typescript.enablePromptUseWorkspaceTsdk"] = true;
+-    const content = JSON.stringify(settings, null, 2);
+-    const vscodeFolder = _path.default.join(baseDir, ".vscode");
+-    try {
+-        await _fs.promises.lstat(vscodeFolder);
+-    } catch (e) {
+-        await _fs.promises.mkdir(vscodeFolder, {
+-            recursive: true
+-        });
+-    }
+-    await _fs.promises.writeFile(vscodeSettings, content);
+-    // Write to .gitignore if it exists
+-    const gitIgnore = _path.default.join(baseDir, ".gitignore");
+-    try {
+-        const gitIgnoreContent = await _fs.promises.readFile(gitIgnore, "utf8");
+-        if (!gitIgnoreContent.includes(".vscode")) {
+-            await _fs.promises.writeFile(gitIgnore, `${gitIgnoreContent}\n.vscode\n`);
+-        }
+-    } catch (e1) {
+-        await _fs.promises.writeFile(gitIgnore, `.vscode\n`);
+-    }
++    // const vscodeSettings = _path.default.join(baseDir, ".vscode", "settings.json");
++    // let settings = {};
++    // let currentContent = "";
++    // try {
++    //     currentContent = await _fs.promises.readFile(vscodeSettings, "utf8");
++    //     settings = JSON.parse(currentContent);
++    // } catch (err) {}
++    // const libPath = "." + _path.default.sep + _path.default.join("node_modules", "typescript", "lib");
++    // if (settings["typescript.tsdk"] === libPath && settings["typescript.enablePromptUseWorkspaceTsdk"]) {
++    //     return;
++    // }
++    // settings["typescript.tsdk"] = libPath;
++    // settings["typescript.enablePromptUseWorkspaceTsdk"] = true;
++    // const content = JSON.stringify(settings, null, 2);
++    // const vscodeFolder = _path.default.join(baseDir, ".vscode");
++    // try {
++    //     await _fs.promises.lstat(vscodeFolder);
++    // } catch (e) {
++    //     await _fs.promises.mkdir(vscodeFolder, {
++    //         recursive: true
++    //     });
++    // }
++    // await _fs.promises.writeFile(vscodeSettings, content);
++    // // Write to .gitignore if it exists
++    // const gitIgnore = _path.default.join(baseDir, ".gitignore");
++    // try {
++    //     const gitIgnoreContent = await _fs.promises.readFile(gitIgnore, "utf8");
++    //     if (!gitIgnoreContent.includes(".vscode")) {
++    //         await _fs.promises.writeFile(gitIgnore, `${gitIgnoreContent}\n.vscode\n`);
++    //     }
++    // } catch (e1) {
++    //     await _fs.promises.writeFile(gitIgnore, `.vscode\n`);
++    // }
+ }
+ 
+ //# sourceMappingURL=writeVscodeConfigurations.js.map
