@@ -1,9 +1,14 @@
-import { headers } from 'next/headers';
+import { headers as nextHeaders } from 'next/headers';
 import type { Session } from 'next-auth';
 
 export async function getSession(): Promise<Session | null> {
+  const cookie = nextHeaders().get('cookie');
+  const headers: HeadersInit = {
+    cookie: cookie ?? '',
+  };
+
   const response = await fetch(`${process.env.NEXTAUTH_URL}/api/auth/session`, {
-    headers: headers(),
+    headers,
   });
 
   if (!response?.ok) {

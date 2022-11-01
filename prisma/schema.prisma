@@ -65,12 +65,13 @@ model VerificationToken {
 }
 
 model Item {
-  id        Int      @id @default(autoincrement())
-  title     String
-  content   String?
-  url       String?
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  url         String?
+  thumbnail   String?
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }

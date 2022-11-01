@@ -1,21 +1,20 @@
 import type { NextApiHandler } from 'next';
 
+import { withMethods } from '@/lib/api-middlewares/with-methods';
+import itemService from '@/services/item.service';
+
 const itemsIndexHandler: NextApiHandler = async (req, res) => {
   const { method } = req;
 
-  switch (method) {
-    case 'GET':
-      // Get data from your database
-      break;
-    case 'POST':
-      // Update or create data in your database
-      break;
-    default:
-      res.setHeader('Allow', ['GET', 'POST']);
-      res.status(405).end(`Method ${method} Not Allowed`);
-  }
+  if (method === 'GET') {
+    try {
+      const items = await itemService.getItems();
 
-  res.status(200).json({ name: 'John Doe' });
+      return res.status(200).json(items);
+    } catch (error) {
+      res.status(500).end();
+    }
+  }
 };
 
-export default itemsIndexHandler;
+export default withMethods(['GET'], itemsIndexHandler);
