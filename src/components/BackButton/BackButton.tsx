@@ -4,7 +4,11 @@ import { useRouter } from 'next/navigation';
 
 import ChevronLeftIcon from '../__icons/ChevronLeft.icon';
 
-function BackButton() {
+interface BackButtonProps {
+  text?: string;
+}
+
+function BackButton({ text }: BackButtonProps) {
   const router = useRouter();
 
   const onClick = () => {
@@ -12,8 +16,9 @@ function BackButton() {
   };
 
   return (
-    <button type="button" className="flex" onClick={onClick}>
+    <button type="button" className="inline-flex transition-all" onClick={onClick}>
       <ChevronLeftIcon />
+      {text && <span className="ml-2">{text}</span>}
     </button>
   );
 }
