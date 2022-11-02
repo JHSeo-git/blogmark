@@ -19,6 +19,7 @@ module.exports = {
     camelcase: 'off',
     'jsx-a11y/anchor-is-valid': 'off', // next/link
     'jsx-a11y/label-has-associated-control': 'off',
+    'no-console': ['warn', { allow: ['warn', 'error'] }],
     'no-nested-ternary': 'off',
     'no-restricted-exports': 'off',
     'no-shadow': 'off',

@@ -18,6 +18,7 @@ const itemService = {
         description: data.description,
         url: data.url,
         userId: data.userId,
+        thumbnail: data.thumbnail,
       },
     });
 
