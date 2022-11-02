@@ -1,5 +1,4 @@
 import BackButton from '../BackButton';
-import HeaderBox from './Header.Box';
 
 export interface NakedHeaderProps {
   hasBack?: boolean;
@@ -7,9 +6,11 @@ export interface NakedHeaderProps {
 
 function NakedHeader({ hasBack = true }: NakedHeaderProps) {
   return (
-    <HeaderBox className="border-b bg-base-100">
-      <div className="flex justify-between">{hasBack && <BackButton />}</div>
-    </HeaderBox>
+    <header className="sticky top-0 left-0 right-0 z-50">
+      <div className="p-8 relative">
+        <div className="flex justify-between">{hasBack && <BackButton />}</div>
+      </div>
+    </header>
   );
 }
 

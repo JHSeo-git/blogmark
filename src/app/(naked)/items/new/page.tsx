@@ -17,7 +17,7 @@ async function NewPage() {
   }
 
   return (
-    <section className="p-6">
+    <section className="px-8 py-4">
       <NewItemForm />
     </section>
   );

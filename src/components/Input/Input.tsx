@@ -52,7 +52,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               <motion.button
                 tabIndex={-1}
                 type="button"
-                className="flex pr-3 text-base-content"
+                className="flex pr-3 text-gray-400"
                 onClick={resetInput}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}

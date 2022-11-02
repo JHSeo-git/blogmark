@@ -8,3 +8,6 @@ build
 coverage
 dist
 .next
+
+# pnpm
+pnpm-lock.yaml

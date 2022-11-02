@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation';
 
 import BackButton from '@/components/BackButton';
+import NakedHeader from '@/components/NakedHeader/NakedHeader';
 import { getSession } from '@/lib/session';
 
 interface AuthLayoutProps {
@@ -21,12 +22,10 @@ async function AuthLayout({ children }: AuthLayoutProps) {
   }
 
   return (
-    <main className="absolute inset-0 flex items-center justify-center">
-      <div className="absolute top-8 left-8">
-        <BackButton text="Back" />
-      </div>
-      {children}
-    </main>
+    <>
+      <NakedHeader />
+      <main className="absolute inset-0 flex items-center justify-center">{children}</main>
+    </>
   );
 }
 

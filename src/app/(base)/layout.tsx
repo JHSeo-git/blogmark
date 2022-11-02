@@ -1,5 +1,5 @@
+import BaseHeader from '@/components/BaseHeader/BaseHeader';
 import Drawer, { DrawerContent, DrawerSide } from '@/components/Drawer';
-import BaseHeader from '@/components/Header/BaseHeader';
 import Sidebar from '@/components/Sidebar';
 import { getSession } from '@/lib/session';
 

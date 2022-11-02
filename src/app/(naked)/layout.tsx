@@ -1,4 +1,4 @@
-import NakedHeader from '@/components/Header/NakedHeader';
+import NakedHeader from '@/components/NakedHeader/NakedHeader';
 
 interface NakedLayoutProps {
   children: React.ReactNode;
