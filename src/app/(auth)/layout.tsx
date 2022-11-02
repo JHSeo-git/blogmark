@@ -1,6 +1,5 @@
 import { redirect } from 'next/navigation';
 
-import BackButton from '@/components/BackButton';
 import NakedHeader from '@/components/NakedHeader/NakedHeader';
 import { getSession } from '@/lib/session';
 

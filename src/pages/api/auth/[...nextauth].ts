@@ -18,6 +18,13 @@ export const authOptions: NextAuthOptions = {
   ],
   adapter: PrismaAdapter(prisma),
   secret: process.env.SECRET,
+  callbacks: {
+    async session({ session, user }) {
+      // eslint-disable-next-line no-param-reassign
+      session.user.id = user.id;
+      return session;
+    },
+  },
 };
 
 export default NextAuth(authOptions);

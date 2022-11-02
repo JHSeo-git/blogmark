@@ -32,7 +32,6 @@ const serializeItem = (item: Item) => {
     description: item.description,
     url: item.url,
     thumbnail: item.thumbnail,
-    userId: item.userId,
   };
 };
 

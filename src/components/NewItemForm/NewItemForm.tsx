@@ -12,7 +12,7 @@ type FormData = {
   description: string;
 };
 
-const schema = yup.object().shape({
+export const newItemScheme = yup.object().shape({
   url: yup.string().url('URL 형식에 맞게 작성해주세요.').required('URL을 입력해주세요.'),
   title: yup.string().min(2, '2글자 이상 입력해주세요').required('제목을 입력해주세요.'),
   description: yup.string(),
@@ -27,7 +27,7 @@ function NewItemForm() {
     resetField,
   } = useForm<FormData>({
     mode: 'onChange',
-    resolver: yupResolver(schema),
+    resolver: yupResolver(newItemScheme),
   });
 
   const onSubmit = handleSubmit((data) => {
