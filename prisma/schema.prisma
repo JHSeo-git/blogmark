@@ -66,6 +66,7 @@ model VerificationToken {
 
 model Item {
   id          Int      @id @default(autoincrement())
+  slug        String   @unique
   title       String
   description String?
   url         String?

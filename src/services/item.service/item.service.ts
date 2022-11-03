@@ -1,6 +1,7 @@
 import type { Item } from '@prisma/client';
 
 import db from '@/lib/prisma';
+import { slugify } from '@/lib/utils';
 
 import type { CreateItemParam } from './item.types';
 
@@ -14,6 +15,7 @@ const itemService = {
   createItem: async (data: CreateItemParam) => {
     const item = await db.item.create({
       data: {
+        slug: slugify(data.title),
         title: data.title,
         description: data.description,
         url: data.url,
