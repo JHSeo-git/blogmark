@@ -36,4 +36,6 @@ const serializeItem = (item: Item) => {
   };
 };
 
+export type SerializedItem = ReturnType<typeof serializeItem>;
+
 export default itemService;

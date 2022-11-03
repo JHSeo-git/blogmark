@@ -14,10 +14,6 @@ function UserAddon({ image, name }: UserAddonProps) {
   const ref = useRef<HTMLDivElement>(null);
 
   const onClick = () => {
-    if (!image) {
-      return;
-    }
-
     setIsMenuOpen((prev) => !prev);
   };
 

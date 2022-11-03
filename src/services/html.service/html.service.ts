@@ -1,6 +1,6 @@
 import { load } from 'cheerio';
 
-import AppError from '@/lib/error';
+import AppError, { isCodeError } from '@/lib/error';
 
 const htmlService = {
   scraper: async (url: string) => {
@@ -10,7 +10,7 @@ const htmlService = {
       const html = await response.text();
 
       if (!html) {
-        return null;
+        throw new AppError('URLBadRequest');
       }
 
       const $ = load(html);
@@ -27,6 +27,16 @@ const htmlService = {
         thumbnail,
       };
     } catch (e) {
+      console.error(e);
+
+      if (e instanceof TypeError) {
+        if (isCodeError(e.cause)) {
+          if (e.cause?.code === 'SELF_SIGNED_CERT_IN_CHAIN') {
+            throw new AppError('SSLCertificateError');
+          }
+        }
+      }
+
       throw new AppError('URLBadRequest');
     }
   },

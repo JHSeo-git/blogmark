@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
 import Input from '@/components/Input';
+import { createItem } from '@/lib/api/items';
 
 type FormData = {
   url: string;
@@ -31,7 +32,11 @@ function NewItemForm() {
   });
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    createItem({
+      title: data.title,
+      url: data.url,
+      description: data.description,
+    });
   });
 
   return (

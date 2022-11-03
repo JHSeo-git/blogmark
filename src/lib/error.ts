@@ -47,6 +47,10 @@ export const errorMap = {
     message: 'Already Exists',
     statusCode: 409,
   },
+  SSLCertificateError: {
+    message: 'Error the URL page SSL Certificate',
+    statusCode: 495,
+  },
   InternalServer: {
     message: 'Internal Server Error',
     statusCode: 500,
@@ -69,8 +73,16 @@ class AppError extends Error {
   }
 }
 
+interface CodeError extends Error {
+  code?: string;
+}
+
 export const isAppError = (error: unknown): error is AppError => {
   return error instanceof AppError;
+};
+
+export const isCodeError = (error: unknown): error is CodeError => {
+  return error instanceof Error && Boolean((error as CodeError).code);
 };
 
 export default AppError;
