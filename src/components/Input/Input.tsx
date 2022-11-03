@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { forwardRef, useId, useState } from 'react';
 
-import XCircleIcon from '../__icons/XCircle.icon';
+import XCircleIcon from '../__icons/XCircle.Icon';
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;

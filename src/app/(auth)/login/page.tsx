@@ -1,4 +1,4 @@
-import FolderHeartIcon from '@/components/__icons/FolderHeart.icon';
+import FolderHeartIcon from '@/components/__icons/FolderHeart.Icon';
 import LoginForm from '@/components/LoginForm';
 
 function LoginPage() {

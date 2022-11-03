@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import LogoIcon from '../__icons/Logo.icon';
+import LogoIcon from '../__icons/Logo.Icon';
 
 function Sidebar() {
   return (

@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 
-import ChevronLeftIcon from '../__icons/ChevronLeft.icon';
+import ChevronLeftIcon from '../__icons/ChevronLeft.Icon';
 
 interface BackButtonProps {
   text?: string;

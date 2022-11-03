@@ -3,7 +3,7 @@
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 
-import GithubIcon from '../__icons/Github.icon';
+import GithubIcon from '../__icons/Github.Icon';
 
 function LoginForm() {
   const [isLoading, setIsLoading] = useState(false);
