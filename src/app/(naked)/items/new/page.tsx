@@ -1,13 +1,7 @@
 import { redirect } from 'next/navigation';
 
 import NewItemForm from '@/components/NewItemForm';
-import { getSession } from '@/lib/session';
-
-const getUser = async () => {
-  const session = await getSession();
-
-  return session?.user;
-};
+import { getUser } from '@/lib/session';
 
 async function NewPage() {
   const user = await getUser();

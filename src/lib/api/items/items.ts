@@ -1,15 +1,15 @@
-import type { CreateItemParams, CreateItemResponse } from './items.types';
+import client from '../client';
+import type { CreateItemParams, CreateItemResponse, GetItemsResponse } from './items.types';
 
-export async function createItem(params: CreateItemParams): Promise<CreateItemResponse> {
-  const response = await fetch('/api/items', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(params),
-  });
+export async function createItem(params: CreateItemParams) {
+  const data = await client.post<CreateItemResponse>('/api/items', params);
 
-  const data = await response.json();
+  return data;
+}
+
+// TODO: pagination
+export async function getItems() {
+  const data = await client.get<GetItemsResponse>('/api/items');
 
   return data;
 }

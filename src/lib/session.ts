@@ -19,3 +19,9 @@ export async function getSession(): Promise<Session | null> {
 
   return Object.keys(session).length > 0 ? session : null;
 }
+
+export async function getUser(): Promise<Session['user'] | undefined> {
+  const session = await getSession();
+
+  return session?.user;
+}

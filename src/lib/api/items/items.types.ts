@@ -7,3 +7,7 @@ export interface CreateItemParams {
 }
 
 export type CreateItemResponse = SerializedItem;
+
+export type GetItemsResponse = {
+  data: SerializedItem[];
+};

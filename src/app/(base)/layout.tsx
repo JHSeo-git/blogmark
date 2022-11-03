@@ -1,17 +1,11 @@
 import BaseHeader from '@/components/BaseHeader/BaseHeader';
 import Drawer, { DrawerContent, DrawerSide } from '@/components/Drawer';
 import Sidebar from '@/components/Sidebar';
-import { getSession } from '@/lib/session';
+import { getUser } from '@/lib/session';
 
 interface BaseLayoutProps {
   children: React.ReactNode;
 }
-
-const getUser = async () => {
-  const session = await getSession();
-
-  return session?.user;
-};
 
 async function BaseLayout({ children }: BaseLayoutProps) {
   const user = await getUser();
