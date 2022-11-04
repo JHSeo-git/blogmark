@@ -7,9 +7,11 @@ function LoginPage() {
       <FolderHeartIcon />
       <h1 className="mt-2 font-bold text-2xl">Blogmark</h1>
       <p className="text-sm">Please sign in to Github account</p>
-      <div className="h-6" />
-      <LoginForm />
-      <div className="h-10" />
+      <div className="w-full">
+        <div className="h-6" />
+        <LoginForm />
+        <div className="h-10" />
+      </div>
     </section>
   );
 }
