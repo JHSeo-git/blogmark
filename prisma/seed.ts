@@ -57,6 +57,22 @@ export async function main() {
         'https://www.seonest.net/_next/image?url=%2Fpost%2Fjavascript%2Fesm-typescript%2Fthumbnail.png&w=750&q=75',
       url: 'https://www.seonest.net/posts/javascript/esm-typescript',
     },
+    {
+      slug: 'acreom-1-0-markdown-office',
+      title: 'Acreom 1.0 Markdown Office',
+      description: 'Acreom 1.0 - 개발자들을 위한 마크다운 기반 작업 관리 도구',
+      userId: 'cla0fho6n0000ok5u70l59szw',
+      thumbnail: 'https://acreom.com/fb.png',
+      url: 'https://acreom.com/',
+    },
+    {
+      slug: 'nhost-io-based-graphql',
+      title: 'nhost.io based GraphQL',
+      description: 'GraphQL 기반으로 작동하는 오픈소스 Firebase 대체제',
+      userId: 'cla0fho6n0000ok5u70l59szw',
+      thumbnail: 'https://nhost.io/splash.png',
+      url: 'https://nhost.io/',
+    },
   ];
 
   const generatedItems = await Promise.all(
