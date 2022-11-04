@@ -15,11 +15,11 @@ async function AuthLayout({ children }: AuthLayoutProps) {
     <>
       <NakedHeader />
       <main className="absolute inset-0 flex items-center justify-center">
+        <Hidden>
+          <h1>Login</h1>
+        </Hidden>
         {user ? (
           <div className="w-[320px] flex flex-col items-center">
-            <Hidden>
-              <h1>Already Logged In.</h1>
-            </Hidden>
             <p className="text-lg font-bold">You already logged in.</p>
             <Link
               href="/"

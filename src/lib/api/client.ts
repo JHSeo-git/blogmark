@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:3010';
+const baseUrl = 'http://localhost:3000';
 
 type ClientOpeion = Omit<RequestInit, 'method'>;
 

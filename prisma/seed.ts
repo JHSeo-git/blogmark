@@ -8,6 +8,19 @@ const prisma = new PrismaClient();
 type SeedItem = Omit<Item, 'id' | 'createdAt' | 'updatedAt'>;
 
 export async function main() {
+  const user = {
+    id: 'cla0fho6n0000ok5u70l59szw',
+    name: 'Seo Jun Hyung',
+    email: 'qnfqnfqnf@gmail.com',
+    image: 'https://avatars.githubusercontent.com/u/61136724?v=4',
+  };
+
+  const generatedUser = await prisma.user.upsert({
+    where: { id: user.id },
+    update: { ...user },
+    create: { ...user },
+  });
+
   const account = {
     id: 'cla0fho6w0002ok5u36ize7nq',
     userId: 'cla0fho6n0000ok5u70l59szw',
@@ -23,19 +36,6 @@ export async function main() {
     where: { id: account.id },
     update: { ...account },
     create: { ...account },
-  });
-
-  const user = {
-    id: 'cla0fho6n0000ok5u70l59szw',
-    name: 'Seo Jun Hyung',
-    email: 'qnfqnfqnf@gmail.com',
-    image: 'https://avatars.githubusercontent.com/u/61136724?v=4',
-  };
-
-  const generatedUser = await prisma.user.upsert({
-    where: { id: user.id },
-    update: { ...user },
-    create: { ...user },
   });
 
   const items: SeedItem[] = [
