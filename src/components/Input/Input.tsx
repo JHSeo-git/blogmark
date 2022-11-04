@@ -64,13 +64,19 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             )}
           </AnimatePresence>
         </div>
-        {error && (
-          <div className="absolute">
-            <label className="label">
+        <AnimatePresence>
+          {error && (
+            <motion.label
+              className="label p-0 px-2"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: '32px' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.15 }}
+            >
               <span className="label-text-alt text-error">{error}</span>
-            </label>
-          </div>
-        )}
+            </motion.label>
+          )}
+        </AnimatePresence>
       </div>
     );
   },

@@ -48,7 +48,7 @@ function NewItemForm() {
       <Input
         type="text"
         label="URL"
-        className="mb-8"
+        className="mb-4"
         {...register('url')}
         error={errors.url?.message}
         resetInput={watch('url') ? () => resetField('url') : undefined}
@@ -56,7 +56,7 @@ function NewItemForm() {
       <Input
         type="text"
         label="제목"
-        className="mb-8"
+        className="mb-4"
         {...register('title')}
         error={errors.title?.message}
         resetInput={watch('title') ? () => resetField('title') : undefined}
