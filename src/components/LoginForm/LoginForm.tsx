@@ -12,7 +12,7 @@ function LoginForm() {
     try {
       setIsLoading(true);
       // The redirect option is only available for credentials and email providers.
-      await signIn('github');
+      await signIn('github', { callbackUrl: '/' });
     } catch (e) {
       // only reset the state when occurs error
       // because the page will be redirected
