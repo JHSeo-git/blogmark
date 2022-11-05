@@ -1,11 +1,15 @@
 'use client';
 
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
 import Input from '@/components/Input';
 import { createItem } from '@/lib/api/items';
+
+import LoadingIcon from '../__icons/Loading.Icon';
 
 type FormData = {
   url: string;
@@ -35,12 +39,25 @@ function NewItemForm() {
     resolver: yupResolver(newItemScheme),
   });
 
-  const onSubmit = handleSubmit((data) => {
-    createItem({
-      title: data.title,
-      url: data.url,
-      description: data.description,
-    });
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      setIsLoading(true);
+
+      await createItem({
+        title: data.title,
+        url: data.url,
+        description: data.description,
+      });
+
+      router.push('/');
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setIsLoading(false);
+    }
   });
 
   return (
@@ -70,10 +87,10 @@ function NewItemForm() {
       />
       <button
         type="submit"
-        disabled={!isValid}
+        disabled={!isValid || isLoading}
         className="mt-16 btn btn-block btn-primary no-animation active:bg-primary text-base"
       >
-        블로그마크{isValid ? ' 🎉' : ''}
+        {isLoading ? <LoadingIcon /> : `블로그마크 ${isValid ? ' 🎉' : ''}`}
       </button>
     </form>
   );

@@ -6,12 +6,9 @@ interface RootLayoutProps {
 
 function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="ko" data-theme="winter">
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-      </head>
+    <html lang="ko" data-theme="winter" className="antialiased">
       {/* TODO: data-theme */}
+      <head />
       <body>{children}</body>
     </html>
   );

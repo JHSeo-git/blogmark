@@ -7,7 +7,11 @@ import type { CreateItemParam } from './item.types';
 
 const itemService = {
   getItems: async () => {
-    const items = await db.item.findMany();
+    const items = await db.item.findMany({
+      orderBy: {
+        id: 'desc',
+      },
+    });
 
     return items.map(serializeItem);
   },
