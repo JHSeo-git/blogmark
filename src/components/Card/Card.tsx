@@ -12,7 +12,7 @@ function Card({ title, content, thumbnail }: CardProps) {
   return (
     <div className="rounded-lg overflow-hidden">
       <CardThumbnail src={thumbnail} />
-      <p>{title}</p>
+      <p className="mt-4 text-xl text-neutral font-bold">{title}</p>
       <p>{content}</p>
     </div>
   );

@@ -11,7 +11,7 @@ function CardThumbnail({ src, alt }: CardThumbnailProps) {
   const [isError, setIsError] = useState(false);
 
   return (
-    <div className="bg-base-300 rounded-lg overflow-hidden">
+    <div className="bg-base-200 rounded-lg overflow-hidden">
       {src && !isError ? (
         <picture>
           <source srcSet={src} type="image/*" />
@@ -24,8 +24,8 @@ function CardThumbnail({ src, alt }: CardThumbnailProps) {
           />
         </picture>
       ) : (
-        <div className="flex items-center justify-center">
-          <ImageOffIcon />
+        <div className="flex items-center justify-center w-full aspect-video text-gray-400">
+          <ImageOffIcon width={32} height={32} />
         </div>
       )}
     </div>

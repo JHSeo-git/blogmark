@@ -13,7 +13,7 @@ function BaseHeader({ user }: BaseHeaderProps) {
   return (
     <header className="sticky top-0 left-0 right-0 z-50">
       <div className="px-6 py-4 lg:px-8 lg:py-6 relative">
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-base-100 to-transparent" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-base-100 via-base-100" />
         <nav className="min-h-[56px] px-4 py-3 lg:px-8 lg:py-4 flex items-center justify-between bg-base-100 rounded-md shadow-md">
           <DrawerAction>
             <MenuIcon />

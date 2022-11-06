@@ -1,7 +1,7 @@
 import type { Item } from '@prisma/client';
 
 import db from '@/lib/prisma';
-import { slugify } from '@/lib/utils';
+import { getDateString, slugify } from '@/lib/utils';
 
 import type { CreateItemParam } from './item.types';
 
@@ -39,6 +39,7 @@ const serializeItem = (item: Item) => {
     description: item.description,
     url: item.url,
     thumbnail: item.thumbnail,
+    createDate: getDateString(item.createdAt),
   };
 };
 
