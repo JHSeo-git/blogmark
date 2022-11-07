@@ -28,7 +28,7 @@ specifiers:
   framer-motion: 7.6.1
   github-slugger: ^2.0.0
   next: 13.0.2
-  next-auth: 4.16.2
+  next-auth: 4.16.3
   postcss: 8.4.18
   prettier: latest
   prisma: 4.5.0
@@ -43,14 +43,14 @@ specifiers:
 
 dependencies:
   '@hookform/resolvers': 2.9.10_react-hook-form@7.38.0
-  '@next-auth/prisma-adapter': 1.0.5_tih3yxqtac5gsi6ya47cxevw6m
+  '@next-auth/prisma-adapter': 1.0.5_javrrw2if6d7u4674p3nz2zvya
   '@prisma/client': 4.5.0_prisma@4.5.0
   cheerio: 1.0.0-rc.12
   clsx: 1.2.1
   framer-motion: 7.6.1_biqbaboplfbrettd7655fr4n2y
   github-slugger: 2.0.0
   next: 13.0.2_biqbaboplfbrettd7655fr4n2y
-  next-auth: 4.16.2_pknogjuzx4bv7zxtatcb2ahtsq
+  next-auth: 4.16.3_pknogjuzx4bv7zxtatcb2ahtsq
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-hook-form: 7.38.0_react@18.2.0
@@ -246,14 +246,14 @@ packages:
       tslib: 2.4.0
     dev: false
 
-  /@next-auth/prisma-adapter/1.0.5_tih3yxqtac5gsi6ya47cxevw6m:
+  /@next-auth/prisma-adapter/1.0.5_javrrw2if6d7u4674p3nz2zvya:
     resolution: {integrity: sha512-VqMS11IxPXrPGXw6Oul6jcyS/n8GLOWzRMrPr3EMdtD6eOalM6zz05j08PcNiis8QzkfuYnCv49OvufTuaEwYQ==}
     peerDependencies:
       '@prisma/client': '>=2.26.0 || >=3'
       next-auth: ^4
     dependencies:
       '@prisma/client': 4.5.0_prisma@4.5.0
-      next-auth: 4.16.2_pknogjuzx4bv7zxtatcb2ahtsq
+      next-auth: 4.16.3_pknogjuzx4bv7zxtatcb2ahtsq
     dev: false
 
   /@next/env/13.0.2:
@@ -2463,8 +2463,8 @@ packages:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: true
 
-  /next-auth/4.16.2_pknogjuzx4bv7zxtatcb2ahtsq:
-    resolution: {integrity: sha512-ZSb9omFv4hJT9Rm2OUAuUxCCBwpQnvQRXdcFHk7WIyt7Ud4O6NcNKH0fRTelFl30ycvr3Mc5PdnAt+zdr07nQw==}
+  /next-auth/4.16.3_pknogjuzx4bv7zxtatcb2ahtsq:
+    resolution: {integrity: sha512-xDQHQJRpB/pjBDj53r4Br03jvhM1TI73J9OCX0afBTOHZEfpQ6ZrjsBFdSrdx6NeQSEMq6R/ZRny2Y6Nt/XqrA==}
     engines: {node: ^12.19.0 || ^14.15.0 || ^16.13.0 || ^18.12.0}
     peerDependencies:
       next: ^12.2.5 || ^13
