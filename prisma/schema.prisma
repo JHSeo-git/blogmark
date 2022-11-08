@@ -71,6 +71,7 @@ model Item {
   description String?
   url         String?
   thumbnail   String?
+  favicon     String?
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId      String
   createdAt   DateTime @default(now())

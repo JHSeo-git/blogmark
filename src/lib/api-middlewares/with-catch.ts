@@ -11,7 +11,7 @@ export function withCatch(handler: NextApiHandler) {
       console.error(error);
 
       if (error instanceof yup.ValidationError) {
-        res.status(400).json({ message: error.message });
+        res.status(422).json({ message: error.message });
       }
 
       if (isAppError(error)) {

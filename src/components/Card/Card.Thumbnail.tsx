@@ -3,7 +3,7 @@ import { useState } from 'react';
 import ImageOffIcon from '../__icons/ImageOff.Icon';
 
 interface CardThumbnailProps {
-  src?: string;
+  src?: string | null;
   alt?: string;
 }
 

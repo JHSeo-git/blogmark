@@ -18,13 +18,16 @@ const htmlService = {
       const title = $('title').text();
       const description = $('meta[name="description"]').attr('content');
       const thumbnailUrl = $('meta[property="og:image"]').attr('content');
+      const faviconUrl = $('link[rel="icon"]').attr('href');
 
-      const thumbnail = thumbnailUrl ? generateThumbnailUrl(url, thumbnailUrl) : null;
+      const thumbnail = thumbnailUrl ? generateAssetUrl(url, thumbnailUrl) : null;
+      const favicon = faviconUrl ? generateAssetUrl(url, faviconUrl) : generateFaviconUrl(url);
 
       return {
         title,
         description,
         thumbnail,
+        favicon,
       };
     } catch (e) {
       console.error(e);
@@ -42,15 +45,21 @@ const htmlService = {
   },
 };
 
-const generateThumbnailUrl = (url: string, thumbnailUrl: string) => {
-  let thumbnail = thumbnailUrl;
+const generateAssetUrl = (url: string, assetUrl: string) => {
+  let asset = assetUrl;
 
-  if (thumbnailUrl.startsWith('/')) {
+  if (assetUrl.startsWith('/')) {
     const urlObject = new URL(url);
-    thumbnail = `${urlObject.origin}${thumbnailUrl}`;
+    asset = `${urlObject.origin}${assetUrl}`;
   }
 
-  return thumbnail;
+  return asset;
+};
+
+const generateFaviconUrl = (url: string) => {
+  const urlObject = new URL(url);
+
+  return `${urlObject.origin}/favicon.ico`;
 };
 
 export default htmlService;

@@ -28,6 +28,7 @@ const itemService = {
         url: data.url,
         userId: data.userId,
         thumbnail: data.thumbnail,
+        favicon: data.favicon,
       },
       include: {
         user: true,
@@ -45,6 +46,7 @@ const serializeItem = (item: Item & { user: User }) => {
     description: item.description,
     url: item.url,
     thumbnail: item.thumbnail,
+    favicon: item.favicon,
     userName: item.user.name,
     createDate: getDateString(item.createdAt),
   };

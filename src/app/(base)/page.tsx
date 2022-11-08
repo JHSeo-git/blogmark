@@ -16,10 +16,11 @@ async function HomePage() {
           <li key={item.id}>
             <Card
               title={item.title}
-              content={item.description ?? undefined}
-              thumbnail={item.thumbnail ?? undefined}
+              content={item.description}
+              thumbnail={item.thumbnail}
               date={item.createDate}
-              author={item.userName ?? undefined}
+              author={item.userName}
+              favicon={item.favicon}
             />
           </li>
         ))}

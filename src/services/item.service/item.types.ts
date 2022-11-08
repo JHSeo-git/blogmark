@@ -4,4 +4,5 @@ export interface CreateItemParam {
   description?: string;
   url: string;
   thumbnail?: string;
+  favicon?: string;
 }

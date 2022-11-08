@@ -47,6 +47,7 @@ export async function main() {
       thumbnail:
         'https://www.seonest.net/_next/image?url=%2Fpost%2Freact%2Fnext-js-13%2Fthumbnail.png&w=750&q=75',
       url: 'https://www.seonest.net/posts/react/next-js-13',
+      favicon: 'https://www.seonest.net/favicon.ico',
     },
     {
       slug: 'esm-typescript',
@@ -56,6 +57,7 @@ export async function main() {
       thumbnail:
         'https://www.seonest.net/_next/image?url=%2Fpost%2Fjavascript%2Fesm-typescript%2Fthumbnail.png&w=750&q=75',
       url: 'https://www.seonest.net/posts/javascript/esm-typescript',
+      favicon: 'https://www.seonest.net/favicon.ico',
     },
     {
       slug: 'acreom-1-0-markdown-office',
@@ -64,6 +66,7 @@ export async function main() {
       userId: 'cla0fho6n0000ok5u70l59szw',
       thumbnail: 'https://acreom.com/fb.png',
       url: 'https://acreom.com/',
+      favicon: 'https://acreom.com/favicon.ico',
     },
     {
       slug: 'nhost-io-based-graphql',
@@ -72,6 +75,7 @@ export async function main() {
       userId: 'cla0fho6n0000ok5u70l59szw',
       thumbnail: 'https://nhost.io/splash.png',
       url: 'https://nhost.io/',
+      favicon: 'https://nhost.io/favicon.ico',
     },
   ];
 
