@@ -1,4 +1,4 @@
-import type { Item } from '@prisma/client';
+import type { Item, User } from '@prisma/client';
 
 import db from '@/lib/prisma';
 import { getDateString, slugify } from '@/lib/utils';
@@ -8,6 +8,9 @@ import type { CreateItemParam } from './item.types';
 const itemService = {
   getItems: async () => {
     const items = await db.item.findMany({
+      include: {
+        user: true,
+      },
       orderBy: {
         id: 'desc',
       },
@@ -26,19 +29,23 @@ const itemService = {
         userId: data.userId,
         thumbnail: data.thumbnail,
       },
+      include: {
+        user: true,
+      },
     });
 
     return serializeItem(item);
   },
 };
 
-const serializeItem = (item: Item) => {
+const serializeItem = (item: Item & { user: User }) => {
   return {
     id: item.id,
     title: item.title,
     description: item.description,
     url: item.url,
     thumbnail: item.thumbnail,
+    userName: item.user.name,
     createDate: getDateString(item.createdAt),
   };
 };

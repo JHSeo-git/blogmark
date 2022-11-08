@@ -1,26 +1,12 @@
-import { headers as nextHeaders } from 'next/headers';
-import type { Session } from 'next-auth';
+import { unstable_getServerSession } from 'next-auth';
 
-export async function getSession(): Promise<Session | null> {
-  const cookie = nextHeaders().get('cookie');
-  const headers: HeadersInit = {
-    cookie: cookie ?? '',
-  };
+import { authOptions } from './auth';
 
-  const response = await fetch(`${process.env.NEXTAUTH_URL}/api/auth/session`, {
-    headers,
-  });
-
-  if (!response?.ok) {
-    return null;
-  }
-
-  const session = await response.json();
-
-  return Object.keys(session).length > 0 ? session : null;
+export function getSession() {
+  return unstable_getServerSession(authOptions);
 }
 
-export async function getUser(): Promise<Session['user'] | undefined> {
+export async function getUser() {
   const session = await getSession();
 
   return session?.user;
