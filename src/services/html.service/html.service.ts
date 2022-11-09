@@ -28,7 +28,7 @@ const htmlService = {
         ? generateAssetUrl(urlObject, faviconUrl)
         : generateFaviconUrl(urlObject);
       const domain = urlObject.hostname;
-      const publisher = generatePublisher($);
+      const publisher = generatePublisher($) ?? getPublisherFromUrl(url);
 
       return {
         title,
@@ -71,6 +71,7 @@ const publishers = [
   ($: CheerioAPI) => $('[class*="logo" i] a img[alt]').attr('alt'),
   ($: CheerioAPI) => $('[class*="logo" i] img[alt]').attr('alt'),
 ];
+
 const generatePublisher = ($: CheerioAPI) => {
   let generated: string | undefined;
 
@@ -99,5 +100,8 @@ const generateAssetUrl = (url: URL, assetUrl: string) => {
 const generateFaviconUrl = (url: URL) => {
   return `${url.origin}/favicon.ico`;
 };
+
+const EXCEPT_URL = /.+\/\/|www.|\..+/g;
+const getPublisherFromUrl = (url: string) => url.replace(EXCEPT_URL, '');
 
 export default htmlService;
