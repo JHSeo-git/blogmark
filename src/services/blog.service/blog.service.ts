@@ -2,8 +2,8 @@ import db from '@/lib/prisma';
 
 interface GetBlogByUrlParams {
   url: string;
+  publisher: string;
   favicon?: string;
-  publisher?: string;
 }
 
 const blogService = {
@@ -24,7 +24,7 @@ const blogService = {
         },
         data: {
           favicon,
-          name: publisher ?? domain,
+          name: publisher,
         },
       });
 
@@ -34,7 +34,7 @@ const blogService = {
     const createdBlog = await db.blog.create({
       data: {
         domain,
-        name: publisher ?? domain,
+        name: publisher,
         favicon,
       },
     });
