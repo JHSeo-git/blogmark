@@ -71,9 +71,20 @@ model Item {
   description String?
   url         String?
   thumbnail   String?
-  favicon     String?
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId      String
+  blog        Blog     @relation(fields: [blogId], references: [id], onDelete: Cascade)
+  blogId      Int
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+model Blog {
+  id        Int      @id @default(autoincrement())
+  domain    String   @unique
+  name      String
+  favicon   String?
+  items     Item[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

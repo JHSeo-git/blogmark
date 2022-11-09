@@ -1,4 +1,4 @@
-import type { Item } from '@prisma/client';
+import type { Blog, Item } from '@prisma/client';
 import { PrismaClient } from '@prisma/client';
 
 const c = console;
@@ -6,6 +6,7 @@ const c = console;
 const prisma = new PrismaClient();
 
 type SeedItem = Omit<Item, 'id' | 'createdAt' | 'updatedAt'>;
+type SeedBlog = Omit<Blog, 'id' | 'createdAt' | 'updatedAt'>;
 
 export async function main() {
   const user = {
@@ -38,44 +39,60 @@ export async function main() {
     create: { ...account },
   });
 
+  const blogs: SeedBlog[] = [
+    {
+      domain: 'seonest.net',
+      name: 'JHSeo',
+      favicon: 'https://seonest.net/favicon.ico',
+    },
+    {
+      domain: 'nhost.io',
+      name: 'nhost',
+      favicon: 'https://nhost.io/favicon.ico',
+    },
+  ];
+
+  const blogA = await prisma.blog.upsert({
+    where: { domain: blogs[0].domain },
+    update: { ...blogs[0] },
+    create: { ...blogs[0] },
+  });
+
+  const blogB = await prisma.blog.upsert({
+    where: { domain: blogs[1].domain },
+    update: { ...blogs[1] },
+    create: { ...blogs[1] },
+  });
+
   const items: SeedItem[] = [
     {
+      userId: generatedUser.id,
+      blogId: blogA.id,
       slug: 'next-js-13',
       title: 'Next.js 13',
       description: 'next13 업데이트 확인용',
-      userId: 'cla0fho6n0000ok5u70l59szw',
       thumbnail:
         'https://www.seonest.net/_next/image?url=%2Fpost%2Freact%2Fnext-js-13%2Fthumbnail.png&w=750&q=75',
       url: 'https://www.seonest.net/posts/react/next-js-13',
-      favicon: 'https://www.seonest.net/favicon.ico',
     },
     {
+      userId: generatedUser.id,
+      blogId: blogA.id,
       slug: 'esm-typescript',
       title: 'ESM + TypeScript',
       description: 'ES Module System과 TypeScript를 사용하는법',
-      userId: 'cla0fho6n0000ok5u70l59szw',
       thumbnail:
         'https://www.seonest.net/_next/image?url=%2Fpost%2Fjavascript%2Fesm-typescript%2Fthumbnail.png&w=750&q=75',
       url: 'https://www.seonest.net/posts/javascript/esm-typescript',
-      favicon: 'https://www.seonest.net/favicon.ico',
     },
     {
-      slug: 'acreom-1-0-markdown-office',
-      title: 'Acreom 1.0 Markdown Office',
-      description: 'Acreom 1.0 - 개발자들을 위한 마크다운 기반 작업 관리 도구',
-      userId: 'cla0fho6n0000ok5u70l59szw',
-      thumbnail: 'https://acreom.com/fb.png',
-      url: 'https://acreom.com/',
-      favicon: 'https://acreom.com/favicon.ico',
-    },
-    {
+      userId: generatedUser.id,
+      blogId: blogB.id,
       slug: 'nhost-io-based-graphql',
       title: 'nhost.io based GraphQL',
       description: 'GraphQL 기반으로 작동하는 오픈소스 Firebase 대체제',
-      userId: 'cla0fho6n0000ok5u70l59szw',
       thumbnail: 'https://nhost.io/splash.png',
       url: 'https://nhost.io/',
-      favicon: 'https://nhost.io/favicon.ico',
     },
   ];
 

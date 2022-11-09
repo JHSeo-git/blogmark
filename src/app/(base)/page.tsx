@@ -21,6 +21,7 @@ async function HomePage() {
               date={item.createDate}
               author={item.userName}
               favicon={item.favicon}
+              publisher={item.publisher}
             />
           </li>
         ))}

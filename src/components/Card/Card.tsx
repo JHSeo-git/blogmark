@@ -10,9 +10,10 @@ interface CardProps {
   date?: string | null;
   author?: string | null;
   favicon?: string | null;
+  publisher?: string | null;
 }
 
-function Card({ title, content, thumbnail, date, author, favicon }: CardProps) {
+function Card({ title, content, thumbnail, date, author, favicon, publisher }: CardProps) {
   return (
     <div className="rounded-lg overflow-hidden">
       <div>
@@ -24,7 +25,7 @@ function Card({ title, content, thumbnail, date, author, favicon }: CardProps) {
         </div>
         <div className="flex items-center gap-2">
           {favicon && <CardFavicon src={favicon} />}
-          {author && <p className="text-sm">{author}</p>}
+          {publisher && <p className="text-sm">{publisher}</p>}
         </div>
       </div>
       <p className="mt-2 text-xl text-neutral font-bold">{title}</p>
