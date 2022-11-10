@@ -13,7 +13,7 @@ function CardThumbnail({ src, alt, children }: CardThumbnailProps) {
   const [isError, setIsError] = useState(false);
 
   return (
-    <section className="bg-base-200 relative">
+    <section className="relative">
       {src && !isError ? (
         <div className="rounded-xl w-full aspect-video object-cover relative overflow-hidden">
           <Image
@@ -25,7 +25,7 @@ function CardThumbnail({ src, alt, children }: CardThumbnailProps) {
           />
         </div>
       ) : (
-        <div className="rounded-xl flex items-center justify-center w-full aspect-video text-gray-400">
+        <div className="bg-base-200 rounded-xl flex items-center justify-center w-full aspect-video text-gray-400">
           <ImageOffIcon width={32} height={32} />
         </div>
       )}

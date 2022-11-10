@@ -10,7 +10,7 @@ function CardFavicon({ src, alt }: CardFaviconProps) {
   const [isError, setIsError] = useState(false);
 
   return (
-    <div className="rounded-full overflow-hidden h-6 w-6">
+    <div className="rounded-full overflow-hidden h-5 w-5">
       {src && !isError ? (
         <div className="w-full h-full object-cover relative">
           <Image

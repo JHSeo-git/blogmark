@@ -2,6 +2,7 @@
 
 import { getDateByString } from '@/lib/utils';
 
+import Hidden from '../Hidden';
 import CardFavicon from './Card.Favicon';
 import CardThumbnail from './Card.Thumbnail';
 
@@ -19,14 +20,14 @@ function Card({ title, content, thumbnail, date, author, favicon, publisher }: C
   return (
     <article>
       <CardThumbnail src={thumbnail}>
-        <div className="bg-base-100 z-[1] rounded-full border-primary border-4 absolute px-2 py-1 -bottom-4 right-2">
+        <div className="bg-base-100 z-[1] rounded-full border-base-300 border-4 absolute p-1 -bottom-4 right-4">
           <div className="flex items-center gap-2">
             {favicon && <CardFavicon src={favicon} />}
-            {publisher && <p className="text-sm">{publisher}</p>}
+            <Hidden>{publisher && <p className="text-sm">{publisher}</p>}</Hidden>
           </div>
         </div>
       </CardThumbnail>
-      <div className="mt-4 flex gap-2 items-center">
+      <div className="mt-4 px-1 flex gap-2 items-center">
         <p className="text-sm">{author}</p>
         <div className="flex items-center gap-2">
           {date && (
@@ -39,7 +40,7 @@ function Card({ title, content, thumbnail, date, author, favicon, publisher }: C
           )}
         </div>
       </div>
-      <div className="mt-2 flex items-center justify-between">
+      <div className="mt-2 px-1 flex items-center justify-between">
         <p className="text-xl text-neutral font-bold">{title}</p>
       </div>
       <div className="mt-2">
