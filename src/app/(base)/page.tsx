@@ -18,7 +18,7 @@ async function HomePage() {
               title={item.title}
               content={item.description}
               thumbnail={item.thumbnail}
-              date={item.createDate}
+              date={item.createdAt}
               author={item.userName}
               favicon={item.favicon}
               publisher={item.publisher}

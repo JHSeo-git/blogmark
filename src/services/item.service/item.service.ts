@@ -1,7 +1,7 @@
 import type { Blog, Item, User } from '@prisma/client';
 
 import db from '@/lib/prisma';
-import { getDateString, slugify } from '@/lib/utils';
+import { getDate, slugify } from '@/lib/utils';
 
 import imageService from '../image.service';
 import type { CreateItemParam } from './item.types';
@@ -81,7 +81,8 @@ const serializeItem = (item: Item & { user: User; blog: Blog }) => {
     favicon: item.blog.favicon,
     publisher: item.blog.name,
     userName: item.user.name,
-    createDate: getDateString(item.createdAt),
+    createdDate: getDate(item.createdAt),
+    createdAt: item.createdAt.toISOString(),
   };
 };
 

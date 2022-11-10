@@ -13,10 +13,16 @@ export function slugify(str: string) {
   return slugger.slug(str);
 }
 
-export function getDateString(date: Date) {
+export function getDate(date: Date) {
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
   const day = date.getDate();
 
   return `${year}-${month}-${day}`;
+}
+
+export function getDateByString(dateText: string) {
+  const date = new Date(dateText);
+
+  return getDate(date);
 }

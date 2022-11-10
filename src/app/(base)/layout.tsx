@@ -14,7 +14,7 @@ async function BaseLayout({ children }: BaseLayoutProps) {
     <Drawer>
       <DrawerContent>
         <BaseHeader user={user} />
-        <main>{children}</main>
+        <main className="max-w-7xl mx-auto">{children}</main>
       </DrawerContent>
       <DrawerSide>
         <Sidebar />

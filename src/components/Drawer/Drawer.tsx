@@ -28,7 +28,7 @@ export function DrawerSide({ children }: DrawerProps) {
 
 export function DrawerAction({ children }: DrawerProps) {
   return (
-    <label htmlFor={DRAWER_LABEL} className="cursor-pointer lg:hidden">
+    <label htmlFor={DRAWER_LABEL} className="cursor-pointer">
       {children}
     </label>
   );
