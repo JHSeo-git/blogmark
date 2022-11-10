@@ -1,5 +1,7 @@
 import db from '@/lib/prisma';
 
+import imageService from '../image.service';
+
 interface GetBlogByUrlParams {
   url: string;
   publisher: string;
@@ -18,17 +20,7 @@ const blogService = {
     });
 
     if (blog) {
-      const updated = await db.blog.update({
-        where: {
-          id: blog.id,
-        },
-        data: {
-          favicon,
-          name: publisher,
-        },
-      });
-
-      return updated;
+      return blog;
     }
 
     const createdBlog = await db.blog.create({
@@ -38,6 +30,23 @@ const blogService = {
         favicon,
       },
     });
+
+    if (favicon) {
+      const faviconUrl = await imageService.upload({
+        id: createdBlog.id,
+        imageUrl: favicon,
+        type: 'favicon',
+      });
+
+      await db.blog.update({
+        where: {
+          id: createdBlog.id,
+        },
+        data: {
+          favicon: faviconUrl,
+        },
+      });
+    }
 
     return createdBlog;
   },

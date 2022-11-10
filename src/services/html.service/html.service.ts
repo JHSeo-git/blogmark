@@ -23,7 +23,7 @@ const htmlService = {
 
       const urlObject = new URL(url);
 
-      const thumbnail = thumbnailUrl ? generateAssetUrl(urlObject, thumbnailUrl) : null;
+      const thumbnail = thumbnailUrl ? generateAssetUrl(urlObject, thumbnailUrl) : undefined;
       const favicon = faviconUrl
         ? generateAssetUrl(urlObject, faviconUrl)
         : generateFaviconUrl(urlObject);

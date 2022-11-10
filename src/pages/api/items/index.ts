@@ -29,8 +29,8 @@ const itemsIndexHandler: NextApiHandler = async (req, res) => {
     }
 
     const body = await newItemScheme.validate(req.body);
-
     const scrapped = await htmlService.scraper(body.url);
+
     const blog = await blogService.getBlogByUrl({
       url: body.url,
       favicon: scrapped.favicon,
@@ -43,7 +43,7 @@ const itemsIndexHandler: NextApiHandler = async (req, res) => {
       title: body.title,
       description: body.description,
       url: body.url,
-      thumbnail: scrapped?.thumbnail ?? undefined,
+      thumbnail: scrapped?.thumbnail,
       favicon: scrapped?.favicon,
     });
 

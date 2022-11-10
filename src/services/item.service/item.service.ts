@@ -3,6 +3,7 @@ import type { Blog, Item, User } from '@prisma/client';
 import db from '@/lib/prisma';
 import { getDateString, slugify } from '@/lib/utils';
 
+import imageService from '../image.service';
 import type { CreateItemParam } from './item.types';
 
 const itemService = {
@@ -21,11 +22,23 @@ const itemService = {
   },
 
   async createItem(data: CreateItemParam) {
+    let slug = slugify(data.title);
+
+    const alreadyExists = await db.item.findUnique({
+      where: {
+        slug,
+      },
+    });
+
+    if (alreadyExists) {
+      slug = `${slug}-${Date.now()}`;
+    }
+
     const item = await db.item.create({
       data: {
         userId: data.userId,
         blogId: data.blogId,
-        slug: slugify(data.title),
+        slug,
         title: data.title,
         description: data.description,
         url: data.url,
@@ -36,6 +49,23 @@ const itemService = {
         blog: true,
       },
     });
+
+    if (data.thumbnail) {
+      const thumbnailUrl = await imageService.upload({
+        id: item.id,
+        imageUrl: data.thumbnail,
+        type: 'thumbnail',
+      });
+
+      await db.item.update({
+        where: {
+          id: item.id,
+        },
+        data: {
+          thumbnail: thumbnailUrl,
+        },
+      });
+    }
 
     return serializeItem(item);
   },
