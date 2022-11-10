@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useState } from 'react';
 
 export interface CardFaviconProps {
@@ -11,16 +12,15 @@ function CardFavicon({ src, alt }: CardFaviconProps) {
   return (
     <div className="rounded-full overflow-hidden h-6 w-6">
       {src && !isError ? (
-        <picture>
-          <source srcSet={src} type="image/*" />
-          <img
+        <div className="w-full h-full object-cover relative">
+          <Image
             src={src}
             alt={alt ?? 'favicon'}
-            className="w-full h-full object-cover"
+            fill
             onError={() => setIsError(true)}
             loading="lazy"
           />
-        </picture>
+        </div>
       ) : (
         <div className="w-full h-full bg-secondary" />
       )}

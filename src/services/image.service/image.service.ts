@@ -30,9 +30,9 @@ const r2 = new S3Client({
 });
 
 interface UploadParams {
-  id: number;
+  id: number | string;
   imageUrl: string;
-  type?: 'favicon' | 'thumbnail';
+  type?: 'favicon' | 'thumbnail' | 'avatar';
 }
 
 const imageService = {

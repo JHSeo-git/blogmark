@@ -1,7 +1,9 @@
 'use client';
 
+import Image from 'next/image';
 import { useRef, useState } from 'react';
 
+import UserIcon from '../__icons/User.Icon';
 import UserAddonMenu from './UserAddonMenu';
 
 export interface UserAddonProps {
@@ -24,14 +26,13 @@ function UserAddon({ image, name }: UserAddonProps) {
   return (
     <div ref={ref} className="flex relative">
       <button type="button" className="avatar placeholder" onClick={onClick}>
-        <div className="bg-base-300 rounded-full w-8">
+        <div className="bg-base-300 rounded-full w-8 relative">
           {image ? (
-            <picture>
-              <source srcSet={image} type="image/*" />
-              <img src={image} alt={`${name} avatar`} />
-            </picture>
+            <Image src={image} alt={`${name} avatar`} fill loading="lazy" />
           ) : (
-            <span className="text-xs">{name?.slice(0, 2) ?? 'UN'}</span>
+            <div className="flex items-center justify-center text-gray-500">
+              <UserIcon width={16} height={16} />
+            </div>
           )}
         </div>
       </button>

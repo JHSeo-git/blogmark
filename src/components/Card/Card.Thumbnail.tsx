@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useState } from 'react';
 
 import ImageOffIcon from '../__icons/ImageOff.Icon';
@@ -13,16 +14,15 @@ function CardThumbnail({ src, alt }: CardThumbnailProps) {
   return (
     <div className="bg-base-200 rounded-lg overflow-hidden">
       {src && !isError ? (
-        <picture>
-          <source srcSet={src} type="image/*" />
-          <img
+        <div className="w-full aspect-video object-cover relative">
+          <Image
             src={src}
             alt={alt ?? 'thumbnail'}
-            className="w-full aspect-video object-cover"
+            fill
             onError={() => setIsError(true)}
             loading="lazy"
           />
-        </picture>
+        </div>
       ) : (
         <div className="flex items-center justify-center w-full aspect-video text-gray-400">
           <ImageOffIcon width={32} height={32} />
