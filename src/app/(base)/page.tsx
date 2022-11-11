@@ -1,9 +1,15 @@
 import Card from '@/components/Card';
 import Hidden from '@/components/Hidden';
-import { getItems } from '@/lib/api/items';
+import itemService from '@/services/item.service';
+
+async function getItems() {
+  const items = await itemService.getItems();
+
+  return items;
+}
 
 async function HomePage() {
-  const { data: items } = await getItems();
+  const items = await getItems();
 
   return (
     <>

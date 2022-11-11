@@ -1,10 +1,10 @@
 import type { NextApiHandler } from 'next';
-import { unstable_getServerSession } from 'next-auth';
+import { getSession } from 'next-auth/react';
 
 import { newItemScheme } from '@/components/NewItemForm/NewItemForm';
+import { withAuthentication } from '@/lib/api-middlewares/with-authentication';
 import { withCatch } from '@/lib/api-middlewares/with-catch';
 import { withMethods } from '@/lib/api-middlewares/with-methods';
-import { authOptions } from '@/lib/auth';
 import blogService from '@/services/blog.service';
 import htmlService from '@/services/html.service';
 import itemService from '@/services/item.service';
@@ -13,6 +13,7 @@ const itemsIndexHandler: NextApiHandler = async (req, res) => {
   const { method } = req;
 
   if (method === 'GET') {
+    // actually not used
     // TODO: paggination
     const items = await itemService.getItems();
 
@@ -22,7 +23,7 @@ const itemsIndexHandler: NextApiHandler = async (req, res) => {
   }
 
   if (method === 'POST') {
-    const session = await unstable_getServerSession(req, res, authOptions);
+    const session = await getSession({ req });
 
     if (!session) {
       return res.status(403).end();
@@ -51,4 +52,4 @@ const itemsIndexHandler: NextApiHandler = async (req, res) => {
   }
 };
 
-export default withCatch(withMethods(['GET', 'POST'], itemsIndexHandler));
+export default withCatch(withMethods(['GET', 'POST'], withAuthentication(itemsIndexHandler)));
