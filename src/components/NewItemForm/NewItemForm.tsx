@@ -55,7 +55,6 @@ function NewItemForm() {
       router.push('/');
     } catch (e) {
       console.error(e);
-    } finally {
       setIsLoading(false);
     }
   });

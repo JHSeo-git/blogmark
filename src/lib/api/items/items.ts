@@ -9,7 +9,7 @@ export async function createItem(params: CreateItemParams) {
 
 // TODO: pagination
 export async function getItems() {
-  const data = await client.get<GetItemsResponse>('/api/items');
+  const data = await client.get<GetItemsResponse>('/api/items', { cache: 'no-store' });
 
   return data;
 }
