@@ -1,6 +1,5 @@
 import db from '@/lib/prisma';
-
-import imageService from '../image.service';
+import { uploadImage } from '@/lib/r2';
 
 interface GetBlogByUrlParams {
   url: string;
@@ -32,7 +31,7 @@ const blogService = {
     });
 
     if (favicon) {
-      const faviconUrl = await imageService.upload({
+      const faviconUrl = await uploadImage({
         id: createdBlog.id,
         imageUrl: favicon,
         type: 'favicon',

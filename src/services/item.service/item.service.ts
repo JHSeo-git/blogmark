@@ -1,9 +1,9 @@
 import type { Blog, Item, User } from '@prisma/client';
 
 import db from '@/lib/prisma';
+import { uploadImage } from '@/lib/r2';
 import { getDate, slugify } from '@/lib/utils';
 
-import imageService from '../image.service';
 import type { CreateItemParam } from './item.types';
 
 const itemService = {
@@ -51,7 +51,7 @@ const itemService = {
     });
 
     if (data.thumbnail) {
-      const thumbnailUrl = await imageService.upload({
+      const thumbnailUrl = await uploadImage({
         id: item.id,
         imageUrl: data.thumbnail,
         type: 'thumbnail',

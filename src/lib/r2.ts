@@ -35,28 +35,26 @@ interface UploadParams {
   type?: 'favicon' | 'thumbnail' | 'avatar';
 }
 
-const imageService = {
-  async upload({ id, imageUrl, type = 'favicon' }: UploadParams) {
-    const buffer = await downloadImage(imageUrl);
+export async function uploadImage({ id, imageUrl, type = 'favicon' }: UploadParams) {
+  const buffer = await downloadImage(imageUrl);
 
-    const contentType = mimeTypes.lookup(imageUrl) || 'image/png';
-    const extenstion = mimeTypes.extension(contentType) || 'png';
-    const key = `${type}/${id}/${nanoid()}.${extenstion}`;
+  const contentType = mimeTypes.lookup(imageUrl) || 'image/png';
+  const extenstion = mimeTypes.extension(contentType) || 'png';
+  const key = `${type}/${id}/${nanoid()}.${extenstion}`;
 
-    const command = new PutObjectCommand({
-      Bucket: process.env.R2_BUCKET_NAME,
-      Key: key,
-      Body: buffer,
-      ContentType: contentType,
-    });
+  const command = new PutObjectCommand({
+    Bucket: process.env.R2_BUCKET_NAME,
+    Key: key,
+    Body: buffer,
+    ContentType: contentType,
+  });
 
-    await r2.send(command);
+  await r2.send(command);
 
-    const uploadedImageUrl = `${r2SiteUrl}/${key}`;
+  const uploadedImageUrl = `${r2SiteUrl}/${key}`;
 
-    return uploadedImageUrl;
-  },
-};
+  return uploadedImageUrl;
+}
 
 const downloadImage = async (url: string) => {
   const response = await fetch(url);
@@ -65,5 +63,3 @@ const downloadImage = async (url: string) => {
 
   return Buffer.from(arrayBuffer);
 };
-
-export default imageService;
