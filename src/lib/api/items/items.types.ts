@@ -5,9 +5,16 @@ export interface CreateItemParams {
   description?: string;
   url: string;
 }
-
 export type CreateItemResponse = SerializedItem;
 
-export type GetItemsResponse = {
-  data: SerializedItem[];
-};
+export interface GetItemsParams {
+  cursor?: number;
+  limit?: number;
+}
+export interface GetItemsResponse {
+  items: SerializedItem[];
+  pageInfo: {
+    nextCursor: number;
+    hasNextPage: boolean;
+  };
+}

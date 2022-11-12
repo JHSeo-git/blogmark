@@ -9,7 +9,10 @@ async function getItems() {
 }
 
 async function HomePage() {
-  const items = await getItems();
+  const {
+    items,
+    pageInfo: { nextCursor, hasNextPage },
+  } = await getItems();
 
   return (
     <>
@@ -31,6 +34,8 @@ async function HomePage() {
             />
           </li>
         ))}
+        {/* {hasNextPage && nextCursor && <PaginationItems cursor={nextCursor} />} */}
+        {hasNextPage && nextCursor && <div>더 있어유</div>}
       </ul>
     </>
   );

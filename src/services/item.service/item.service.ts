@@ -4,11 +4,13 @@ import db from '@/lib/prisma';
 import { uploadImage } from '@/lib/r2';
 import { getDate, slugify } from '@/lib/utils';
 
-import type { CreateItemParam } from './item.types';
+import type { CreateItemParam, GetItemsParams } from './item.types';
+
+const DEFAULT_PAGINATION_LIMIT = 10;
 
 const itemService = {
-  async getItems() {
-    const items = await db.item.findMany({
+  async getItems({ cursor, limit = DEFAULT_PAGINATION_LIMIT }: GetItemsParams = {}) {
+    const itemsWithNext = await db.item.findMany({
       include: {
         user: true,
         blog: true,
@@ -16,9 +18,24 @@ const itemService = {
       orderBy: {
         id: 'desc',
       },
+      cursor: cursor ? { id: cursor } : undefined,
+      take: limit + 1,
     });
 
-    return items.map(serializeItem);
+    const items = itemsWithNext.slice(0, limit);
+
+    const nextCursor = itemsWithNext[limit] ? itemsWithNext[limit].id : null;
+    const hasNextPage = Boolean(nextCursor);
+
+    const serializeItems = items.map(serializeItem);
+
+    return {
+      items: serializeItems,
+      pageInfo: {
+        nextCursor,
+        hasNextPage,
+      },
+    };
   },
 
   async createItem(data: CreateItemParam) {

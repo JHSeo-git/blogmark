@@ -1,3 +1,8 @@
+export type GetItemsParams = {
+  cursor?: number;
+  limit?: number;
+};
+
 export interface CreateItemParam {
   userId: string;
   blogId: number;

@@ -1,5 +1,12 @@
+import qs from 'qs';
+
 import client from '../client';
-import type { CreateItemParams, CreateItemResponse, GetItemsResponse } from './items.types';
+import type {
+  CreateItemParams,
+  CreateItemResponse,
+  GetItemsParams,
+  GetItemsResponse,
+} from './items.types';
 
 export async function createItem(params: CreateItemParams) {
   const data = await client.post<CreateItemResponse>('/api/items', params);
@@ -7,9 +14,9 @@ export async function createItem(params: CreateItemParams) {
   return data;
 }
 
-// TODO: pagination
-export async function getItems() {
-  const data = await client.get<GetItemsResponse>('/api/items', { cache: 'no-store' });
+export async function getItems({ cursor, limit }: GetItemsParams = {}) {
+  const query = qs.stringify({ cursor, limit }, { addQueryPrefix: true });
+  const data = await client.get<GetItemsResponse>(`/api/items${query}`);
 
   return data;
 }

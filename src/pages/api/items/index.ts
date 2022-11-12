@@ -5,6 +5,7 @@ import { newItemScheme } from '@/components/NewItemForm/NewItemForm';
 import { withAuthentication } from '@/lib/api-middlewares/with-authentication';
 import { withCatch } from '@/lib/api-middlewares/with-catch';
 import { withMethods } from '@/lib/api-middlewares/with-methods';
+import { paginationSchema } from '@/lib/schema';
 import blogService from '@/services/blog.service';
 import htmlService from '@/services/html.service';
 import itemService from '@/services/item.service';
@@ -13,11 +14,15 @@ const itemsIndexHandler: NextApiHandler = async (req, res) => {
   const { method } = req;
 
   if (method === 'GET') {
-    // actually not used
-    const items = await itemService.getItems();
+    const query = await paginationSchema.validate(req.query);
+
+    const data = await itemService.getItems({
+      cursor: query.cursor,
+      limit: query.limit,
+    });
 
     return res.status(200).json({
-      data: items,
+      data,
     });
   }
 
