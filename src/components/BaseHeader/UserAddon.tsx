@@ -28,7 +28,14 @@ function UserAddon({ image, name }: UserAddonProps) {
       <button type="button" className="avatar placeholder" onClick={onClick}>
         <div className="bg-base-300 rounded-full w-8 relative">
           {image ? (
-            <Image src={image} alt={`${name} avatar`} fill loading="lazy" />
+            <Image
+              src={image}
+              alt={`${name} avatar`}
+              fill
+              loading="lazy"
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
           ) : (
             <div className="flex items-center justify-center text-gray-500">
               <UserIcon width={16} height={16} />

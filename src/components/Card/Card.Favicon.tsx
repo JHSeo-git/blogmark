@@ -26,6 +26,8 @@ function CardFavicon({ src, alt, publisher }: CardFaviconProps) {
                   fill
                   onError={() => setIsError(true)}
                   loading="lazy"
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
               </div>
             ) : (
