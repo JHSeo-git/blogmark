@@ -14,7 +14,6 @@ const itemsIndexHandler: NextApiHandler = async (req, res) => {
 
   if (method === 'GET') {
     // actually not used
-    // TODO: paggination
     const items = await itemService.getItems();
 
     return res.status(200).json({

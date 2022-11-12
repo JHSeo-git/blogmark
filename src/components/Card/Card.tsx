@@ -2,7 +2,6 @@
 
 import { getDateByString } from '@/lib/utils';
 
-import Hidden from '../Hidden';
 import CardFavicon from './Card.Favicon';
 import CardThumbnail from './Card.Thumbnail';
 
@@ -22,8 +21,7 @@ function Card({ title, content, thumbnail, date, author, favicon, publisher }: C
       <CardThumbnail src={thumbnail}>
         <div className="bg-base-100 z-[1] rounded-full border-base-300 border-4 absolute p-1 -bottom-4 right-4">
           <div className="flex items-center gap-2">
-            {favicon && <CardFavicon src={favicon} />}
-            <Hidden>{publisher && <p className="text-sm">{publisher}</p>}</Hidden>
+            {favicon && <CardFavicon src={favicon} publisher={publisher} />}
           </div>
         </div>
       </CardThumbnail>
