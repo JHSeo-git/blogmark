@@ -52,6 +52,10 @@ function NewItemForm() {
         description: data.description,
       });
 
+      /**
+       * @see https://beta.nextjs.org/docs/data-fetching/mutating
+       */
+      router.refresh();
       router.push('/');
     } catch (e) {
       console.error(e);
