@@ -45,9 +45,9 @@ const itemsIndexHandler: NextApiHandler = async (req, res) => {
     const item = await itemService.createItem({
       userId: session.user.id,
       blogId: blog.id,
-      title: body.title,
-      description: body.description,
+      description: body.title,
       url: body.url,
+      title: scrapped.title ?? body.title,
       thumbnail: scrapped?.thumbnail,
       favicon: scrapped?.favicon,
     });

@@ -24,7 +24,6 @@ export const newItemScheme = yup.object().shape({
     .min(2, '2~40글자를 입력해주세요.')
     .max(40, '2~40글자를 입력해주세요.')
     .required('제목을 입력해주세요.'),
-  description: yup.string(),
 });
 
 function NewItemForm() {
@@ -49,7 +48,6 @@ function NewItemForm() {
       await createItem({
         title: data.title,
         url: data.url,
-        description: data.description,
       });
 
       /**
@@ -80,13 +78,6 @@ function NewItemForm() {
         {...register('title')}
         error={errors.title?.message}
         resetInput={watch('title') ? () => resetField('title') : undefined}
-      />
-      <Input
-        type="text"
-        label="소개글"
-        {...register('description')}
-        error={errors.description?.message}
-        resetInput={watch('description') ? () => resetField('description') : undefined}
       />
       <button
         type="submit"
