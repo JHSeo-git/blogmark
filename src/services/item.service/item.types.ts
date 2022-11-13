@@ -3,6 +3,11 @@ export type GetItemsParams = {
   limit?: number;
 };
 
+export type GetPaginationItemsParams = {
+  page?: number;
+  limit?: number;
+};
+
 export interface CreateItemParam {
   userId: string;
   blogId: number;

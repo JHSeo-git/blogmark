@@ -4,9 +4,9 @@ import db from '@/lib/prisma';
 import { uploadImage } from '@/lib/r2';
 import { getDate, slugify } from '@/lib/utils';
 
-import type { CreateItemParam, GetItemsParams } from './item.types';
+import type { CreateItemParam, GetItemsParams, GetPaginationItemsParams } from './item.types';
 
-const DEFAULT_PAGINATION_LIMIT = 10;
+const DEFAULT_PAGINATION_LIMIT = 12;
 
 const itemService = {
   async getItems({ cursor, limit = DEFAULT_PAGINATION_LIMIT }: GetItemsParams = {}) {
@@ -25,7 +25,6 @@ const itemService = {
     const items = itemsWithNext.slice(0, limit);
 
     const nextCursor = itemsWithNext[limit] ? itemsWithNext[limit].id : null;
-    const hasNextPage = Boolean(nextCursor);
 
     const serializeItems = items.map(serializeItem);
 
@@ -33,7 +32,35 @@ const itemService = {
       items: serializeItems,
       pageInfo: {
         nextCursor,
-        hasNextPage,
+      },
+    };
+  },
+
+  async getPaginationItems({
+    page = 1,
+    limit = DEFAULT_PAGINATION_LIMIT,
+  }: GetPaginationItemsParams = {}) {
+    const [total, items] = await Promise.all([
+      db.item.count(),
+      db.item.findMany({
+        include: {
+          user: true,
+          blog: true,
+        },
+        orderBy: {
+          id: 'desc',
+        },
+        take: limit,
+        skip: limit * (page - 1),
+      }),
+    ]);
+
+    return {
+      items: items.map(serializeItem),
+      pageInfo: {
+        currentPage: page,
+        nextPage: total > page * limit ? page + 1 : null,
+        total,
       },
     };
   },

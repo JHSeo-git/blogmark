@@ -1,26 +1,39 @@
 import Card from '@/components/Card';
 import Hidden from '@/components/Hidden';
+import { paginationSchema } from '@/lib/schema';
 import itemService from '@/services/item.service';
 
-async function getItems() {
-  const items = await itemService.getItems();
+import PaginationButtons from './components/PaginationButtons';
+
+async function getItems({ page }: { page?: string }) {
+  const { page: pageNumber } = await paginationSchema.validate({ page });
+
+  const items = await itemService.getPaginationItems({ page: pageNumber });
 
   return items;
 }
 
-async function HomePage() {
+interface PageProps {
+  searchParams: { page?: string };
+}
+async function HomePage({ searchParams }: PageProps) {
+  const data = await getItems({ page: searchParams.page });
+
+  if (!data) {
+    return null;
+  }
+
   const {
     items,
-    pageInfo: { nextCursor, hasNextPage },
-  } = await getItems();
+    pageInfo: { total, nextPage, currentPage },
+  } = data;
 
   return (
     <>
       <Hidden>
         <h1>Home Page</h1>
       </Hidden>
-      <div className="flex items-center justify-center">{/* TODO: tabs */}</div>
-      <ul className="p-4 pb-10 grid grid-cols-1 gap-10 md:p-6 md:grid-cols-2 xl:grid-cols-3">
+      <ul className="p-4 grid grid-cols-1 gap-10 md:p-6 md:grid-cols-2 xl:grid-cols-3">
         {items.map((item) => (
           <li key={item.id}>
             <Card
@@ -35,8 +48,10 @@ async function HomePage() {
           </li>
         ))}
         {/* {hasNextPage && nextCursor && <PaginationItems cursor={nextCursor} />} */}
-        {hasNextPage && nextCursor && <div>더 있어유</div>}
       </ul>
+      <div className="p-4 py-10 md:p-6">
+        <PaginationButtons currentPage={currentPage} nextPage={nextPage} />
+      </div>
     </>
   );
 }

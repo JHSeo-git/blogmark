@@ -1,9 +1,9 @@
 'use client';
 
-import PaginationItems from '../components/PaginationItems';
+import InfiniteScrolling from '../components/InfiniteScrollingItems';
 
 function ItemsPage() {
-  return <PaginationItems cursor={20} />;
+  return <InfiniteScrolling cursor={20} />;
 }
 
 export default ItemsPage;

@@ -5,7 +5,7 @@ import { newItemScheme } from '@/components/NewItemForm/NewItemForm';
 import { withAuthentication } from '@/lib/api-middlewares/with-authentication';
 import { withCatch } from '@/lib/api-middlewares/with-catch';
 import { withMethods } from '@/lib/api-middlewares/with-methods';
-import { paginationSchema } from '@/lib/schema';
+import { infiniteScrollingSchema, paginationSchema } from '@/lib/schema';
 import blogService from '@/services/blog.service';
 import htmlService from '@/services/html.service';
 import itemService from '@/services/item.service';
@@ -14,7 +14,10 @@ const itemsIndexHandler: NextApiHandler = async (req, res) => {
   const { method } = req;
 
   if (method === 'GET') {
-    const query = await paginationSchema.validate(req.query);
+    /**
+     * Infinite Scroll
+     */
+    const query = await infiniteScrollingSchema.validate(req.query);
 
     const data = await itemService.getItems({
       cursor: query.cursor,
@@ -24,6 +27,20 @@ const itemsIndexHandler: NextApiHandler = async (req, res) => {
     return res.status(200).json({
       data,
     });
+
+    /**
+     * Pagination
+     */
+    // const query = await paginationSchema.validate(req.query);
+
+    // const data = await itemService.getPaginationItems({
+    //   page: query.page,
+    //   limit: query.limit,
+    // });
+
+    // return res.status(200).json({
+    //   data,
+    // });
   }
 
   if (method === 'POST') {
