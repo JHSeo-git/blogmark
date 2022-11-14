@@ -2,6 +2,9 @@
 
 import { useRouter } from 'next/navigation';
 
+import ChevronLeftIcon from '@/components/__icons/ChevronLeft.Icon';
+import Hidden from '@/components/Hidden';
+
 export interface PaginationButtonsProps {
   currentPage?: number | null;
   nextPage?: number | null;
@@ -24,22 +27,22 @@ function PaginationButtons({ currentPage, nextPage }: PaginationButtonsProps) {
     router.push(`/?page=${nextPage}`);
   };
   return (
-    <div className="flex align-items gap-6 md:justify-center">
+    <div className="flex align-items gap-6 md:justify-end">
       <button
         type="button"
-        className="rounded-md bg-primary text-primary-content font-bold p-2 flex-1 md:flex-initial md:w-64 md:py-2 disabled:opacity-40"
+        className="flex items-center justify-center gap-2 rounded-md bg-primary text-primary-content font-bold p-2 flex-1 md:flex-initial disabled:opacity-40"
         onClick={onClickPrevPage}
         disabled={!currentPage || currentPage === 1}
       >
-        이전
+        <ChevronLeftIcon />
       </button>
       <button
         type="button"
-        className="rounded-md bg-base-300 font-bold p-2 flex-1 md:flex-initial md:w-64 md:py-2 disabled:opacity-40"
+        className="flex items-center justify-center gap-2 rounded-md bg-primary text-primary-content font-bold p-2 flex-1 md:flex-initial disabled:opacity-40"
         onClick={onClickNextPage}
         disabled={!nextPage}
       >
-        다음
+        <ChevronLeftIcon className="rotate-180" />
       </button>
     </div>
   );
