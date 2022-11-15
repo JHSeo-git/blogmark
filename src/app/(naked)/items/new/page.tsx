@@ -12,9 +12,9 @@ async function NewPage() {
   }
 
   return (
-    <section className="mt-8 max-w-2xl mx-auto px-8 flex flex-col items-center space-y-2">
+    <section className="my-6 max-w-lg mx-auto px-8 flex flex-col items-center space-y-2 md:my-12">
       <FolderHeartIcon />
-      <h1 className="mt-2 font-bold text-lg">
+      <h1 className="mt-2 font-bold text-xl">
         Register new <span className="text-primary">Blogmark</span>
       </h1>
       <div className="w-full">

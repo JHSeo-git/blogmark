@@ -66,7 +66,6 @@ function NewItemForm() {
       <Input
         type="text"
         label="URL"
-        className="mb-4"
         {...register('url')}
         error={errors.url?.message}
         resetInput={watch('url') ? () => resetField('url') : undefined}
@@ -74,18 +73,20 @@ function NewItemForm() {
       <Input
         type="text"
         label="제목"
-        className="mb-4"
+        className="mt-4 md:mt-6"
         {...register('title')}
         error={errors.title?.message}
         resetInput={watch('title') ? () => resetField('title') : undefined}
       />
-      <button
-        type="submit"
-        disabled={!isValid || isLoading}
-        className="mt-16 btn btn-block btn-primary no-animation active:bg-primary text-base"
-      >
-        {isLoading ? <LoadingIcon /> : `블로그마크 ${isValid ? ' 🎉' : ''}`}
-      </button>
+      <div className="mt-16 flex md:justify-end">
+        <button
+          type="submit"
+          disabled={!isValid || isLoading}
+          className="btn w-full btn-primary no-animation active:bg-primary text-base md:w-auto"
+        >
+          {isLoading ? <LoadingIcon /> : 'MARK'}
+        </button>
+      </div>
     </form>
   );
 }

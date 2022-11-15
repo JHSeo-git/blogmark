@@ -8,14 +8,20 @@ function Sidebar() {
       <div className="px-6 py-6 border-b">
         <LogoIcon height="24" />
       </div>
-      <ul className="px-6 py-4">
+      <ul className="py-4">
         <li>
-          <Link href="/" className="block py-4">
+          <Link
+            href="/"
+            className="block px-6 py-4 hover:bg-base-300 active:bg-base-200 transition-color"
+          >
             홈
           </Link>
         </li>
         <li>
-          <Link href="/items/new" className="block py-4">
+          <Link
+            href="/items/new"
+            className="block px-6 py-4 hover:bg-base-300 active:bg-base-200 transition-color"
+          >
             신규
           </Link>
         </li>
