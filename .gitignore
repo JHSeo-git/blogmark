@@ -40,3 +40,5 @@ next-env.d.ts
 dev.db
 dev.db-journal
 .vscode
+
+prisma/seed.ts
