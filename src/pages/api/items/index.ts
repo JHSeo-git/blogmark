@@ -1,10 +1,11 @@
 import type { NextApiHandler } from 'next';
-import { getSession } from 'next-auth/react';
+import { unstable_getServerSession } from 'next-auth/next';
 
 import { newItemScheme } from '@/components/NewItemForm/NewItemForm';
 import { withAuthentication } from '@/lib/api-middlewares/with-authentication';
 import { withCatch } from '@/lib/api-middlewares/with-catch';
 import { withMethods } from '@/lib/api-middlewares/with-methods';
+import { authOptions } from '@/lib/auth';
 import { infiniteScrollingSchema } from '@/lib/schema';
 import blogService from '@/services/blog.service';
 import htmlService from '@/services/html.service';
@@ -30,7 +31,7 @@ const itemsIndexHandler: NextApiHandler = async (req, res) => {
   }
 
   if (method === 'POST') {
-    const session = await getSession({ req });
+    const session = await unstable_getServerSession(req, res, authOptions);
 
     if (!session) {
       return res.status(403).end();

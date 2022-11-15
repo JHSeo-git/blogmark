@@ -21,6 +21,7 @@ module.exports = {
     'jsx-a11y/label-has-associated-control': 'off',
     'no-console': ['warn', { allow: ['warn', 'error'] }],
     'no-nested-ternary': 'off',
+    'no-param-reassign': 'off',
     'no-restricted-exports': 'off',
     'no-shadow': 'off',
     'no-useless-return': 'off',

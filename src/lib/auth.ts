@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid';
 import type { NextAuthOptions } from 'next-auth';
 import GitHubProvider from 'next-auth/providers/github';
 
-import prisma from '@/lib/prisma';
+import db from '@/lib/prisma';
 import userService from '@/services/user.service';
 
 import { uploadImage } from './r2';
@@ -19,8 +19,13 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GITHUB_SECRET,
     }),
   ],
-  adapter: PrismaAdapter(prisma),
-  secret: process.env.SECRET,
+  adapter: PrismaAdapter(db),
+  session: {
+    strategy: 'jwt',
+  },
+  pages: {
+    signIn: '/login',
+  },
   callbacks: {
     async signIn({ user }) {
       if (user.image) {
@@ -41,10 +46,38 @@ export const authOptions: NextAuthOptions = {
 
       return true;
     },
-    async session({ session, user }) {
-      // eslint-disable-next-line no-param-reassign
-      session.user.id = user.id;
+    async session({ session, token }) {
+      if (token) {
+        session.user.id = token.id;
+        session.user.name = token.name;
+        session.user.email = token.email;
+        session.user.image = token.picture;
+      }
+
       return session;
+    },
+    async jwt({ token, user }) {
+      const dbUser = await db.user.findFirst({
+        where: {
+          email: token.email,
+        },
+      });
+
+      if (!dbUser) {
+        if (user) {
+          token.id = user.id;
+        }
+        return token;
+      }
+
+      return {
+        id: dbUser.id,
+        name: dbUser.name,
+        email: dbUser.email,
+        picture: dbUser.image,
+      };
     },
   },
 };
+
+export const loginUrl = authOptions.pages?.signIn ?? '/login';

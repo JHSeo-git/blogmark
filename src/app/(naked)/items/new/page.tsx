@@ -2,13 +2,14 @@ import { redirect } from 'next/navigation';
 
 import FolderHeartIcon from '@/components/__icons/FolderHeart.Icon';
 import NewItemForm from '@/components/NewItemForm';
+import { loginUrl } from '@/lib/auth';
 import { getUser } from '@/lib/session';
 
 async function NewPage() {
   const user = await getUser();
 
   if (!user) {
-    return redirect('/login');
+    return redirect(loginUrl);
   }
 
   return (

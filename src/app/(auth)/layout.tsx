@@ -1,16 +1,11 @@
-import Link from 'next/link';
-
 import Hidden from '@/components/Hidden';
 import NakedHeader from '@/components/NakedHeader/NakedHeader';
-import { getUser } from '@/lib/session';
 
 interface AuthLayoutProps {
   children: React.ReactNode;
 }
 
 async function AuthLayout({ children }: AuthLayoutProps) {
-  const user = await getUser();
-
   return (
     <>
       <NakedHeader />
@@ -18,7 +13,7 @@ async function AuthLayout({ children }: AuthLayoutProps) {
         <Hidden>
           <h1>Login</h1>
         </Hidden>
-        {user ? (
+        {/* {user ? (
           <div className="w-[320px] flex flex-col items-center">
             <p className="text-lg font-bold">You already logged in.</p>
             <Link
@@ -30,7 +25,8 @@ async function AuthLayout({ children }: AuthLayoutProps) {
           </div>
         ) : (
           <>{children}</>
-        )}
+        )} */}
+        {children}
       </main>
     </>
   );
