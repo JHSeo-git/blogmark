@@ -16,6 +16,7 @@ export async function createItem(params: CreateItemParams) {
 
 export async function getItems({ cursor, limit }: GetItemsParams = {}) {
   const query = qs.stringify({ cursor, limit }, { addQueryPrefix: true });
+
   const data = await client.get<GetItemsResponse>(`/api/items${query}`);
 
   return data;

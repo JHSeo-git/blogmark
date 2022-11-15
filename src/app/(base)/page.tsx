@@ -28,6 +28,14 @@ async function HomePage({ searchParams }: PageProps) {
     pageInfo: { total, nextPage, currentPage },
   } = data;
 
+  if (items.length === 0) {
+    return (
+      <div className="absolute inset-0 flex flex-col items-center justify-center h-full">
+        <h1 className="text-2xl font-bold">Sorry, there is nothing.</h1>
+      </div>
+    );
+  }
+
   return (
     <>
       <Hidden>
@@ -49,9 +57,7 @@ async function HomePage({ searchParams }: PageProps) {
         ))}
         {/* {hasNextPage && nextCursor && <PaginationItems cursor={nextCursor} />} */}
       </ul>
-      <div className="p-4 py-10 md:p-6">
-        <PaginationButtons currentPage={currentPage} nextPage={nextPage} />
-      </div>
+      <PaginationButtons currentPage={currentPage} nextPage={nextPage} />
     </>
   );
 }

@@ -78,6 +78,7 @@ const itemService = {
       slug = `${slug}-${Date.now()}`;
     }
 
+    const calendarDate = getDate(new Date());
     const item = await db.item.create({
       data: {
         userId: data.userId,
@@ -87,12 +88,25 @@ const itemService = {
         description: data.description,
         url: data.url,
         thumbnail: data.thumbnail,
+        calendarDate,
       },
       include: {
         user: true,
         blog: true,
       },
     });
+
+    const createdDate = getDate(item.createdAt);
+    if (calendarDate !== createdDate) {
+      await db.item.update({
+        where: {
+          id: item.id,
+        },
+        data: {
+          calendarDate: createdDate,
+        },
+      });
+    }
 
     if (data.thumbnail) {
       const thumbnailUrl = await uploadImage({
@@ -125,7 +139,7 @@ const serializeItem = (item: Item & { user: User; blog: Blog }) => {
     favicon: item.blog.favicon,
     publisher: item.blog.name,
     userName: item.user.name,
-    createdDate: getDate(item.createdAt),
+    calendarDate: item.calendarDate,
     createdAt: item.createdAt.toISOString(),
   };
 };

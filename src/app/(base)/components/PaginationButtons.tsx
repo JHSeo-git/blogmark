@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 
 import ChevronLeftIcon from '@/components/__icons/ChevronLeft.Icon';
-import Hidden from '@/components/Hidden';
+import PageButton from '@/components/PageButton';
 
 export interface PaginationButtonsProps {
   currentPage?: number | null;
@@ -26,24 +26,30 @@ function PaginationButtons({ currentPage, nextPage }: PaginationButtonsProps) {
     }
     router.push(`/?page=${nextPage}`);
   };
+
+  const hasPrev = currentPage && currentPage > 1;
+  const hasNext = nextPage;
+
+  if (!hasPrev && !hasNext) {
+    return null;
+  }
+
   return (
-    <div className="flex align-items gap-6 md:justify-end">
-      <button
-        type="button"
-        className="flex items-center justify-center gap-2 rounded-md bg-primary text-primary-content font-bold p-2 flex-1 md:flex-initial disabled:opacity-40"
-        onClick={onClickPrevPage}
-        disabled={!currentPage || currentPage === 1}
-      >
-        <ChevronLeftIcon />
-      </button>
-      <button
-        type="button"
-        className="flex items-center justify-center gap-2 rounded-md bg-primary text-primary-content font-bold p-2 flex-1 md:flex-initial disabled:opacity-40"
-        onClick={onClickNextPage}
-        disabled={!nextPage}
-      >
-        <ChevronLeftIcon className="rotate-180" />
-      </button>
+    <div className="flex align-items gap-6 p-4 py-10 md:p-6 md:justify-end">
+      <div className="flex-1 md:flex-initial">
+        {hasPrev && (
+          <PageButton className="btn-block" onClick={onClickPrevPage} disabled={!hasPrev}>
+            <ChevronLeftIcon />
+          </PageButton>
+        )}
+      </div>
+      <div className="flex-1 md:flex-initial">
+        {hasNext && (
+          <PageButton className="btn-block" onClick={onClickNextPage} disabled={!hasNext}>
+            <ChevronLeftIcon className="rotate-180" />
+          </PageButton>
+        )}
+      </div>
     </div>
   );
 }

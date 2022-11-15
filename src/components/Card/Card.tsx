@@ -38,11 +38,9 @@ function Card({ title, content, thumbnail, date, author, favicon, publisher }: C
           )}
         </div>
       </div>
-      <div className="mt-2 px-1 flex items-center justify-between">
-        <p className="text-xl text-neutral font-bold">{title}</p>
-      </div>
-      <div className="mt-2">
-        <p>{content}</p>
+      <div className="mt-2 px-1">
+        <h2 className="text-xl text-neutral font-bold">{title}</h2>
+        <p className="mt-1">{content}</p>
       </div>
     </article>
   );
