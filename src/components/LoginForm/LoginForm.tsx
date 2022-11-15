@@ -1,5 +1,6 @@
 'use client';
 
+import { useSearchParams } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 
@@ -7,12 +8,15 @@ import GithubIcon from '../__icons/Github.Icon';
 
 function LoginForm() {
   const [isLoading, setIsLoading] = useState(false);
+  const searchParams = useSearchParams();
 
   const onSubmit = async () => {
     try {
       setIsLoading(true);
       // The redirect option is only available for credentials and email providers.
-      await signIn('github', { callbackUrl: '/' });
+      await signIn('github', {
+        callbackUrl: searchParams.get('from') ?? '/',
+      });
     } catch (e) {
       // only reset the state when occurs error
       // because the page will be redirected
