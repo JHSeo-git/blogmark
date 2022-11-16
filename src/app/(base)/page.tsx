@@ -41,7 +41,7 @@ async function HomePage({ searchParams }: PageProps) {
       <Hidden>
         <h1>Home Page</h1>
       </Hidden>
-      <ul className="p-4 grid grid-cols-1 gap-10 md:p-6 md:grid-cols-2 xl:grid-cols-3">
+      <ul className="p-4 pb-12 grid grid-cols-1 gap-10 md:p-6 md:grid-cols-2 xl:grid-cols-3">
         {items.map((item) => (
           <li key={item.id}>
             <Card
