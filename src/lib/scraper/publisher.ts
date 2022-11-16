@@ -17,6 +17,7 @@ const publishers = [
   ($: CheerioAPI) => $('[class*="logo" i] a img[alt]').attr('alt'),
   ($: CheerioAPI) => $('[class*="logo" i] img[alt]').attr('alt'),
 ];
+const filter = (text: string) => text.replace(/(logo|ltd|llc|co)$/i, '').trim();
 
 export const scrapPublisher = ($: CheerioAPI) => {
   let generated: string | undefined;
@@ -26,7 +27,7 @@ export const scrapPublisher = ($: CheerioAPI) => {
     const name = publisher($);
 
     if (name) {
-      generated = name;
+      generated = filter(name);
       break;
     }
   }
