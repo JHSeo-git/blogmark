@@ -18,7 +18,7 @@ interface CardProps {
 function Card({ title, content, thumbnail, date, author, favicon, publisher }: CardProps) {
   return (
     <article>
-      <CardThumbnail src={thumbnail}>
+      <CardThumbnail title={title} src={thumbnail} alt={`${title}'s thumbnail`}>
         <div className="bg-base-100 z-[1] rounded-full border-base-300 border-4 absolute p-1 -bottom-4 right-4">
           <div className="flex items-center gap-2">
             {favicon && <CardFavicon src={favicon} publisher={publisher} />}

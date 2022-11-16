@@ -1,15 +1,14 @@
 import Image from 'next/image';
 import { useState } from 'react';
 
-import ImageOffIcon from '../__icons/ImageOff.Icon';
-
 interface CardThumbnailProps {
+  title?: string;
   src?: string | null;
   alt?: string;
   children?: React.ReactNode;
 }
 
-function CardThumbnail({ src, alt, children }: CardThumbnailProps) {
+function CardThumbnail({ title, src, alt, children }: CardThumbnailProps) {
   const [isError, setIsError] = useState(false);
 
   return (
@@ -27,8 +26,8 @@ function CardThumbnail({ src, alt, children }: CardThumbnailProps) {
           />
         </div>
       ) : (
-        <div className="bg-base-200 rounded-xl flex items-center justify-center w-full aspect-video text-gray-400">
-          <ImageOffIcon width={32} height={32} />
+        <div className="select-none bg-gradient-to-b from-secondary to-primary rounded-xl flex items-center justify-center w-full aspect-video text-gray-400">
+          <h3 className="text-base-100 text-4xl font-bold">{title}</h3>
         </div>
       )}
       {children}
