@@ -12,7 +12,7 @@ function Sidebar() {
         <li>
           <Link
             href="/"
-            className="block px-6 py-4 hover:bg-base-300 active:bg-base-200 transition-color"
+            className="block px-6 py-4 hover:bg-base-300 active:bg-base-200 transition-all"
           >
             홈
           </Link>
@@ -20,7 +20,7 @@ function Sidebar() {
         <li>
           <Link
             href="/items/new"
-            className="block px-6 py-4 hover:bg-base-300 active:bg-base-200 transition-color"
+            className="block px-6 py-4 hover:bg-base-300 active:bg-base-200 transition-all"
           >
             신규
           </Link>
