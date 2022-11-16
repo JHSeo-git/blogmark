@@ -1,4 +1,4 @@
-import useIsomorphicLayoutEffect from './useIsomorhickLayoutEffect';
+import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect';
 
 export default function useLockedBodyEffect(hidden = false) {
   useIsomorphicLayoutEffect(() => {
