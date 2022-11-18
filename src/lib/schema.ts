@@ -9,3 +9,5 @@ export const paginationSchema = yup.object({
   page: yup.number().optional(),
   limit: yup.number().optional(),
 });
+
+export const urlSchema = yup.string().url();

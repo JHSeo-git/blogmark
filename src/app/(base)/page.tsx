@@ -1,4 +1,5 @@
 import Card from '@/components/Card';
+import ClipboardPop from '@/components/ClipboardPop';
 import Hidden from '@/components/Hidden';
 import { paginationSchema } from '@/lib/schema';
 import itemService from '@/services/item.service';
@@ -58,6 +59,7 @@ async function HomePage({ searchParams }: PageProps) {
         {/* {hasNextPage && nextCursor && <PaginationItems cursor={nextCursor} />} */}
       </ul>
       <PaginationButtons currentPage={currentPage} nextPage={nextPage} />
+      <ClipboardPop />
     </>
   );
 }
