@@ -1,6 +1,12 @@
 # Blogmark
 
-like bookmark, but for blog.
+Marking blog site. Like bookmark, but for blog.
+
+## stack
+
+- next.js 13 with `/app`
+- prisma
+- cloudflare r2
 
 ## reference
 
