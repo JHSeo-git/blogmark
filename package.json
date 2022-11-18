@@ -10,6 +10,7 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "eslint . --fix --ext .ts,.tsx --ignore-path .gitignore && prettier -w .",
+    "preview": "next build && next start",
     "seed": "node -r esbuild-register prisma/seed.ts",
     "start": "next start"
   },
