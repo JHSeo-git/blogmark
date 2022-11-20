@@ -57,7 +57,7 @@ module.exports = {
       },
     },
   },
-  plugins: [require('daisyui'), require('tailwindcss-radix')],
+  plugins: [require('daisyui'), require('tailwindcss-radix'), require('@tailwindcss/line-clamp')],
   daisyui: {
     themes: ['winter', 'dracula'],
     darkTheme: 'dracula',

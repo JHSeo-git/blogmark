@@ -37,6 +37,7 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "@tailwindcss/line-clamp": "^0.4.2",
     "@types/mime-types": "^2.1.1",
     "@types/node": "latest",
     "@types/qs": "^6.9.7",
