@@ -16,7 +16,7 @@ const validator: Record<ClipboardType, yup.StringSchema> = {
 };
 
 export default function useClipboardReady({
-  timeOut = 10000,
+  timeOut = 15000,
   type = 'url',
 }: UseClipboardReadyProps = {}) {
   const focused = useWindowFocus();

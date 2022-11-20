@@ -37,7 +37,12 @@ const itemsIndexHandler: NextApiHandler = async (req, res) => {
       return res.status(403).end();
     }
 
-    const body = await newItemScheme.validate(req.body);
+    const decodedBody = {
+      ...req.body,
+      url: decodeURIComponent(req.body.url),
+    };
+
+    const body = await newItemScheme.validate(decodedBody);
     const scrapped = await htmlService.scraper(body.url);
 
     const blog = await blogService.getBlogByUrl({

@@ -26,7 +26,11 @@ export const newItemScheme = yup.object().shape({
     .required('제목을 입력해주세요.'),
 });
 
-function NewItemForm() {
+interface NewItemFormProps {
+  initialUrl?: string;
+}
+
+function NewItemForm({ initialUrl }: NewItemFormProps) {
   const {
     register,
     handleSubmit,
@@ -34,6 +38,9 @@ function NewItemForm() {
     watch,
     resetField,
   } = useForm<FormData>({
+    defaultValues: {
+      url: initialUrl ?? '',
+    },
     mode: 'onChange',
     resolver: yupResolver(newItemScheme),
   });
@@ -47,7 +54,7 @@ function NewItemForm() {
 
       await createItem({
         title: data.title,
-        url: data.url,
+        url: encodeURIComponent(data.url),
       });
 
       /**
