@@ -31,8 +31,8 @@ async function HomePage({ searchParams }: PageProps) {
 
   if (items.length === 0) {
     return (
-      <div className="absolute inset-0 flex flex-col items-center justify-center h-full">
-        <h1 className="text-2xl font-bold">Sorry, there is nothing.</h1>
+      <div className="absolute inset-0 flex items-center justify-center h-full">
+        <h1 className="text-2xl font-bold">Sorry, there is nothing yet.</h1>
       </div>
     );
   }
