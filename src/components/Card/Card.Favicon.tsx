@@ -19,14 +19,14 @@ function CardFavicon({ src, alt, publisher }: CardFaviconProps) {
         <Tooltip.Trigger asChild>
           <div className="rounded-full overflow-hidden h-5 w-5">
             {src && !isError ? (
-              <div className="w-full h-full object-cover relative">
+              <div className="w-full h-full relative">
                 <Image
                   src={src}
                   alt={alt ?? 'favicon'}
                   fill
                   onError={() => setIsError(true)}
                   loading="lazy"
-                  className="object-cover"
+                  className="object-contain"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
               </div>
