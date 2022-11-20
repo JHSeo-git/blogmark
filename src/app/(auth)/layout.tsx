@@ -13,19 +13,6 @@ async function AuthLayout({ children }: AuthLayoutProps) {
         <Hidden>
           <h1>Login</h1>
         </Hidden>
-        {/* {user ? (
-          <div className="w-[320px] flex flex-col items-center">
-            <p className="text-lg font-bold">You already logged in.</p>
-            <Link
-              href="/"
-              className="mt-6 btn btn-block btn-primary no-animation active:bg-primary text-base"
-            >
-              Home
-            </Link>
-          </div>
-        ) : (
-          <>{children}</>
-        )} */}
         {children}
       </main>
     </>
