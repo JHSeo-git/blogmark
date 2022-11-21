@@ -1,12 +1,12 @@
-export type GetItemsParams = {
-  cursor?: number;
-  limit?: number;
-};
-
-export type GetPaginationItemsParams = {
+export interface GetItemsParams {
   page?: number;
   limit?: number;
-};
+}
+
+export interface GetItemsByCursorParams {
+  cursor?: number;
+  limit?: number;
+}
 
 export interface CreateItemParam {
   userId: string;

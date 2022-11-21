@@ -1,4 +1,4 @@
-import type { SerializedItem } from '@/services/item.service/item.service';
+import type { GetItems, SerializedItem } from '@/services/item.service/item.service';
 
 export interface CreateItemParams {
   title: string;
@@ -7,13 +7,7 @@ export interface CreateItemParams {
 export type CreateItemResponse = SerializedItem;
 
 export interface GetItemsParams {
-  cursor?: number;
+  page?: number;
   limit?: number;
 }
-export interface GetItemsResponse {
-  items: SerializedItem[];
-  pageInfo: {
-    nextCursor: number;
-    hasNextPage: boolean;
-  };
-}
+export type GetItemsResponse = GetItems;

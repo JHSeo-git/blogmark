@@ -4,42 +4,12 @@ import db from '@/lib/prisma';
 import { uploadImage } from '@/lib/r2';
 import { getDate, slugify } from '@/lib/utils';
 
-import type { CreateItemParam, GetItemsParams, GetPaginationItemsParams } from './item.types';
+import type { CreateItemParam, GetItemsByCursorParams, GetItemsParams } from './item.types';
 
 const DEFAULT_PAGINATION_LIMIT = 12;
 
 const itemService = {
-  async getItems({ cursor, limit = DEFAULT_PAGINATION_LIMIT }: GetItemsParams = {}) {
-    const itemsWithNext = await db.item.findMany({
-      include: {
-        user: true,
-        blog: true,
-      },
-      orderBy: {
-        id: 'desc',
-      },
-      cursor: cursor ? { id: cursor } : undefined,
-      take: limit + 1,
-    });
-
-    const items = itemsWithNext.slice(0, limit);
-
-    const nextCursor = itemsWithNext[limit] ? itemsWithNext[limit].id : null;
-
-    const serializeItems = items.map(serializeItem);
-
-    return {
-      items: serializeItems,
-      pageInfo: {
-        nextCursor,
-      },
-    };
-  },
-
-  async getPaginationItems({
-    page = 1,
-    limit = DEFAULT_PAGINATION_LIMIT,
-  }: GetPaginationItemsParams = {}) {
+  async getItems({ page = 1, limit = DEFAULT_PAGINATION_LIMIT }: GetItemsParams = {}) {
     const [total, items] = await Promise.all([
       db.item.count(),
       db.item.findMany({
@@ -59,7 +29,41 @@ const itemService = {
       items: items.map(serializeItem),
       pageInfo: {
         currentPage: page,
-        nextPage: total > page * limit ? page + 1 : null,
+        nextPage: total >= (page + 1) * limit ? page + 1 : undefined,
+        total,
+      },
+    };
+  },
+
+  async getItemsByCursor({
+    cursor,
+    limit = DEFAULT_PAGINATION_LIMIT,
+  }: GetItemsByCursorParams = {}) {
+    const [total, itemsWithNext] = await Promise.all([
+      db.item.count(),
+      db.item.findMany({
+        include: {
+          user: true,
+          blog: true,
+        },
+        orderBy: {
+          id: 'desc',
+        },
+        cursor: cursor ? { id: cursor } : undefined,
+        take: limit + 1,
+      }),
+    ]);
+
+    const items = itemsWithNext.slice(0, limit);
+
+    const nextCursor = itemsWithNext[limit] ? itemsWithNext[limit].id : null;
+
+    const serializeItems = items.map(serializeItem);
+
+    return {
+      items: serializeItems,
+      pageInfo: {
+        nextCursor,
         total,
       },
     };
@@ -144,6 +148,8 @@ const serializeItem = (item: Item & { user: User; blog: Blog }) => {
   };
 };
 
+export type GetItemsByCursor = Awaited<ReturnType<typeof itemService.getItemsByCursor>>;
+export type GetItems = Awaited<ReturnType<typeof itemService.getItems>>;
 export type SerializedItem = ReturnType<typeof serializeItem>;
 
 export default itemService;
