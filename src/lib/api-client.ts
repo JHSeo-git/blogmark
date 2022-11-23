@@ -1,8 +1,4 @@
-import { delimiterSearchParam } from './utils';
-
-type ClientOpeion = Omit<RequestInit, 'method'> & {
-  accessToken?: string;
-};
+type ClientOpeion = Omit<RequestInit, 'method'>;
 
 class ApiClient {
   private baseUrl: string;
@@ -19,19 +15,12 @@ class ApiClient {
     return data;
   }
 
-  generateUrl(url: string, accessToken?: string) {
-    const generatedUrl = `${this.baseUrl}${url}`;
-
-    const accessTokenQuery = `${delimiterSearchParam(generatedUrl)}access_token=${
-      accessToken ?? ''
-    }`;
-    const addedUrl = `${generatedUrl}${accessTokenQuery}`;
-
-    return addedUrl;
+  generateUrl(url: string) {
+    return `${this.baseUrl}/${url.startsWith('/') ? url.slice(1) : url}`;
   }
 
   get<TResponse>(url: string, option?: ClientOpeion | undefined) {
-    const generatedUrl = this.generateUrl(url, option?.accessToken);
+    const generatedUrl = this.generateUrl(url);
 
     return ApiClient.request<TResponse>(generatedUrl, {
       ...option,
@@ -40,7 +29,7 @@ class ApiClient {
   }
 
   post<TResponse>(url: string, body: object, option?: ClientOpeion | undefined) {
-    const generatedUrl = this.generateUrl(url, option?.accessToken);
+    const generatedUrl = this.generateUrl(url);
 
     return ApiClient.request<TResponse>(generatedUrl, {
       ...option,

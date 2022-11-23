@@ -6,6 +6,8 @@ if (!process.env.NEXT_PUBLIC_FB_APP_ID || !process.env.NEXT_PUBLIC_FB_SECRET_COD
   );
 }
 
+const accessToken = `${process.env.NEXT_PUBLIC_FB_APP_ID}|${process.env.NEXT_PUBLIC_FB_SECRET_CODE}`;
+
 export function scrapByUrl(url: string) {
   return new Promise<ScrapByURLResponse>((resolve) => {
     FB.api(
@@ -14,7 +16,7 @@ export function scrapByUrl(url: string) {
       {
         scrape: true,
         id: url,
-        access_token: `${process.env.NEXT_PUBLIC_FB_APP_ID}|${process.env.NEXT_PUBLIC_FB_SECRET_CODE}`,
+        access_token: accessToken,
       },
       (response: ScrapByURLResponse) => {
         resolve(response);

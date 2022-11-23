@@ -10,4 +10,4 @@ export const paginationByCursorSchema = yup.object({
   limit: yup.number().optional(),
 });
 
-export const urlSchema = yup.string().url();
+export const urlSchema = yup.string().url().required();

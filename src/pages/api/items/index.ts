@@ -7,6 +7,7 @@ import { withMethods } from '@/lib/api-middlewares/with-methods';
 import { authOptions } from '@/lib/auth';
 import { paginationSchema } from '@/lib/schema';
 import blogService from '@/services/blog.service';
+import fbService from '@/services/fb.service';
 import htmlService from '@/services/html.service';
 import itemService from '@/services/item.service';
 
@@ -37,22 +38,26 @@ const itemsIndexHandler: NextApiHandler = async (req, res) => {
     };
 
     const body = await newItemScheme.validate(decodedBody);
-    const scrapped = await htmlService.scraper(body.url);
+
+    const [scrapped, openGraph] = await Promise.all([
+      htmlService.scraper(body.url),
+      fbService.scrapOpenGraph(body.url),
+    ]);
 
     const blog = await blogService.getBlogByUrl({
       url: body.url,
       favicon: scrapped.favicon,
-      publisher: scrapped.publisher,
+      publisher: openGraph?.site_name || scrapped.publisher,
     });
 
     const item = await itemService.createItem({
-      userId: session.user.id,
-      blogId: blog.id,
+      title: openGraph?.title || scrapped?.title || body.title,
       description: body.title,
       url: body.url,
-      title: scrapped.title ?? body.title,
-      thumbnail: scrapped?.thumbnail,
+      thumbnail: openGraph.image?.at(0)?.url || scrapped?.thumbnail,
       favicon: scrapped?.favicon,
+      userId: session.user.id,
+      blogId: blog.id,
     });
 
     return res.status(201).json(item);

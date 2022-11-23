@@ -1,11 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+
+import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect';
 
 export default function useWindowFocus() {
-  const [focused, setFocus] = useState(true);
+  const [focused, setFocus] = useState(false);
   const handleFocus = () => setFocus(true);
   const handleBlur = () => setFocus(false);
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     window.addEventListener('focus', handleFocus);
     window.addEventListener('blur', handleBlur);
     return () => {

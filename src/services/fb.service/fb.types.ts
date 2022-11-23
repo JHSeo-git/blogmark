@@ -1,13 +1,10 @@
 export interface FaceBookScrapQueryParams {
   id: string;
   scrape: boolean;
+  access_token: string;
 }
 
-export interface ScrapByUrlParams {
-  url: string;
-}
-
-export interface ScrapByURLResponse {
+export interface ScrapOpenGraphResponse {
   url: string;
   type: string;
   title: string;
