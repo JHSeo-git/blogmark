@@ -26,3 +26,17 @@ export function getDateByString(dateText: string) {
 
   return getDate(date);
 }
+
+export function hasSearchInUrl(url: string) {
+  const urlObject = new URL(url);
+
+  return urlObject.search.length > 0;
+}
+
+export function delimiterSearchParam(url: string) {
+  if (hasSearchInUrl(url)) {
+    return '&';
+  }
+
+  return '?';
+}
