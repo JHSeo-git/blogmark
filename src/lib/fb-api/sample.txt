@@ -3,10 +3,8 @@
    "https://graph.facebook.com/v15.0/?scrape=true&id=https%3A%2F%2Fmusic.youtube.com%2Fwatch%3Fv%3DWYoAlYOCsZ8&list=OLAK5uy_lEqAPN9aCs-EidaSK2KlupKhpT1gN2lD0&access_token=<access token sanitized>"
 ==== Access Token Info
   {
-    "perms": [
-      "public_profile"
-    ],
-    "user_id": ...,
+    "perms": [],
+    "user_id": null,
     "app_id": ...
   }
 ==== Parameters
@@ -34,12 +32,10 @@
     ],
     "description": "Provided to YouTube by Absolute Marketing International Ltd Simple Life · edbl · Ella McMurray Simple Life ℗ 2021 edbl recordings Released on: 2021-09-03...",
     "site_name": "YouTube Music",
-    "updated_time": "2022-11-22T13:31:12+0000",
+    "updated_time": "2022-11-22T15:20:59+0000",
     "application": {
-      "id": "...",
+      "id": "364181942380876",
       "name": "YouTube Music",
       "url": "https://music.youtube.com/"
     }
   }
-==== Debug Information from Graph API Explorer
-- https://developers.facebook.com/tools/explorer/?method=POST&path=%3Fscrape%3Dtrue%26id%3Dhttps%3A%2F%2Fmusic.youtube.com%2Fwatch%3Fv%3DWYoAlYOCsZ8%26list%3DOLAK5uy_lEqAPN9aCs-EidaSK2KlupKhpT1gN2lD0&version=v15.0
