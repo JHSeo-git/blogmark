@@ -1,6 +1,7 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import * as yup from 'yup';
 
+import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect';
 import useWindowFocus from './useWindowFocus';
 
 type ClipboardType = 'url' | 'text';
@@ -29,7 +30,7 @@ export default function useClipboardReady({
     const clipboardText = await navigator.clipboard.readText();
 
     if (clipboardText) {
-      const isValid = validator[type].isValidSync(clipboardText);
+      const isValid = await validator[type].isValid(clipboardText);
 
       if (firstActionRef.current && isValid) {
         firstActionRef.current = false;
@@ -49,7 +50,7 @@ export default function useClipboardReady({
     };
   }, [timeOut, type]);
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (focused) {
       handleClipboardReady();
     }

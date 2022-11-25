@@ -1,5 +1,6 @@
 import type { RefObject } from 'react';
-import { useEffect } from 'react';
+
+import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect';
 
 type AnyEvent = MouseEvent | TouchEvent;
 
@@ -8,7 +9,7 @@ function useOnClickOutside<T extends HTMLElement = HTMLElement>(
   handler: (event: AnyEvent) => void,
   mouseEvent: 'mousedown' | 'mouseup' = 'mousedown',
 ) {
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const listener = (event: AnyEvent) => {
       const el = ref?.current;
 
