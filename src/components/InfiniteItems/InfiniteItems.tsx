@@ -57,7 +57,7 @@ function InfiniteItems() {
           <h2 className="text-2xl font-bold">Sorry, there is nothing yet.</h2>
         </div>
       ) : (
-        <ul className="p-4 pb-12 grid grid-cols-1 gap-10 md:p-6 md:grid-cols-2 xl:grid-cols-3">
+        <ul className="p-4 pb-12 grid grid-cols-1 gap-10 md:p-6 md:pb-12 md:grid-cols-2 xl:grid-cols-3">
           {items.map((item) => (
             <li key={item.id}>
               <Card
