@@ -1,7 +1,10 @@
 'use client';
 
+import { AnimatePresence, motion } from 'framer-motion';
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
+
+import LoadingIcon from '../__icons/Loading.Icon';
 
 export interface SignInButtonProps {
   className?: string;
@@ -24,7 +27,22 @@ function SignInButton({ className }: SignInButtonProps) {
 
   return (
     <button type="button" className={className} onClick={onSignInClick} disabled={isLoading}>
-      {isLoading ? '...loading' : '로그인'}
+      <AnimatePresence>
+        {isLoading ? (
+          <span className="flex items-center justify-center text-primary px-2">
+            <LoadingIcon width={16} height={16} />
+          </span>
+        ) : (
+          <motion.span
+            className="text-sm text-primary font-bold"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            Log In
+          </motion.span>
+        )}
+      </AnimatePresence>
     </button>
   );
 }
