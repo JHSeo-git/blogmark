@@ -8,18 +8,16 @@ const descriptions = [
   ($: CheerioAPI) => $('meta[itemprop="description"]').attr('content'),
 ];
 
-export const scrapDescription = ($: CheerioAPI) => {
-  let generated: string | undefined;
+export const scrapDescription = ($: CheerioAPI): Promise<string | undefined> =>
+  new Promise((resolve) => {
+    for (let i = 0; i < descriptions.length; i += 1) {
+      const description = descriptions[i];
+      const name = description($);
 
-  for (let i = 0; i < descriptions.length; i += 1) {
-    const description = descriptions[i];
-    const name = description($);
-
-    if (name) {
-      generated = name;
-      break;
+      if (name) {
+        resolve(name);
+        break;
+      }
     }
-  }
-
-  return generated;
-};
+    resolve(undefined);
+  });

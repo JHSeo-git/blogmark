@@ -11,18 +11,16 @@ const thumbnails = [
   ($: CheerioAPI) => $('meta[itemprop="image"]').attr('content'),
 ];
 
-export const scrapThumbnailUrl = ($: CheerioAPI) => {
-  let generated: string | undefined;
+export const scrapThumbnailUrl = ($: CheerioAPI): Promise<string | undefined> =>
+  new Promise((resolve) => {
+    for (let i = 0; i < thumbnails.length; i += 1) {
+      const thumbnail = thumbnails[i];
+      const name = thumbnail($);
 
-  for (let i = 0; i < thumbnails.length; i += 1) {
-    const thumbnail = thumbnails[i];
-    const name = thumbnail($);
-
-    if (name) {
-      generated = name;
-      break;
+      if (name) {
+        resolve(name);
+        break;
+      }
     }
-  }
-
-  return generated;
-};
+    resolve(undefined);
+  });

@@ -7,21 +7,19 @@ const favicons = [
   ($: CheerioAPI) => $('link[rel="icon"]').attr('href'),
 ];
 
-export const scrapFaviconUrl = ($: CheerioAPI) => {
-  let generated: string | undefined;
+export const scrapFaviconUrl = ($: CheerioAPI): Promise<string | undefined> =>
+  new Promise((resolve) => {
+    for (let i = 0; i < favicons.length; i += 1) {
+      const favicon = favicons[i];
+      const name = favicon($);
 
-  for (let i = 0; i < favicons.length; i += 1) {
-    const favicon = favicons[i];
-    const name = favicon($);
-
-    if (name) {
-      generated = name;
-      break;
+      if (name) {
+        resolve(name);
+        break;
+      }
     }
-  }
-
-  return generated;
-};
+    resolve(undefined);
+  });
 
 export const scrapFaviconUrlByUrl = (url: string) => {
   const urlObject = new URL(url);

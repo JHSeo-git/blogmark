@@ -75,7 +75,7 @@ function NewItemForm({ initialUrl }: NewItemFormProps) {
         label="URL"
         {...register('url')}
         error={errors.url?.message}
-        resetInput={watch('url') ? () => resetField('url') : undefined}
+        resetInput={watch('url') ? () => resetField('url', { defaultValue: '' }) : undefined}
       />
       <Input
         type="text"

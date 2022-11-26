@@ -19,21 +19,19 @@ const publishers = [
 ];
 const filter = (text: string) => text.replace(/(logo|ltd|llc|co)$/i, '').trim();
 
-export const scrapPublisher = ($: CheerioAPI) => {
-  let generated: string | undefined;
+export const scrapPublisher = ($: CheerioAPI): Promise<string | undefined> =>
+  new Promise((resolve) => {
+    for (let i = 0; i < publishers.length; i += 1) {
+      const publisher = publishers[i];
+      const name = publisher($);
 
-  for (let i = 0; i < publishers.length; i += 1) {
-    const publisher = publishers[i];
-    const name = publisher($);
-
-    if (name) {
-      generated = filter(name);
-      break;
+      if (name) {
+        resolve(filter(name));
+        break;
+      }
     }
-  }
-
-  return generated;
-};
+    resolve(undefined);
+  });
 
 const EXCEPT_URL = /.+\/\/|www.|\..+/g;
 export const scrapPublisherByUrl = (url: string) => url.replace(EXCEPT_URL, '');

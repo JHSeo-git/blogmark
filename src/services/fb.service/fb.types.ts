@@ -2,9 +2,10 @@ export interface FaceBookScrapQueryParams {
   id: string;
   scrape: boolean;
   access_token: string;
+  fields?: 'ob_object';
 }
 
-export interface ScrapOpenGraphResponse {
+export interface PostOpenGraphResponse {
   url: string;
   type: string;
   title: string;
@@ -23,4 +24,17 @@ interface Application {
 
 interface Image {
   url: string;
+}
+
+export interface GetOpenGraphResponse {
+  og_object?: OgObject;
+  id: string;
+}
+
+export interface OgObject {
+  id: string;
+  description: string;
+  title: string;
+  type: string;
+  updated_time: string;
 }

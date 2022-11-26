@@ -6,21 +6,19 @@ const titles = [
   ($: CheerioAPI) => $('title').text(),
 ];
 
-export const scrapTitle = ($: CheerioAPI) => {
-  let generated: string | undefined;
+export const scrapTitle = ($: CheerioAPI): Promise<string | undefined> =>
+  new Promise((resolve) => {
+    for (let i = 0; i < titles.length; i += 1) {
+      const title = titles[i];
+      const name = title($);
 
-  for (let i = 0; i < titles.length; i += 1) {
-    const title = titles[i];
-    const name = title($);
-
-    if (name) {
-      generated = parsedTitleOnly(name);
-      break;
+      if (name) {
+        resolve(parsedTitleOnly(name));
+        break;
+      }
     }
-  }
-
-  return generated;
-};
+    resolve(undefined);
+  });
 
 const parsedTitleOnly = (title: string) => {
   const parsedTitle = title.split(' - ')[0].split(' | ')[0].split(' : ')[0].trim();
