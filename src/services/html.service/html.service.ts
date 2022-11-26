@@ -16,7 +16,7 @@ import type { ScrapItem } from './html.types';
 
 const htmlService = {
   async checkScrapable(url: string) {
-    const response = await fetch(url, { method: 'HEAD' });
+    const response = await fetch(url, { method: 'HEAD', redirect: 'manual' });
 
     if (!response.ok) {
       return false;
@@ -26,8 +26,9 @@ const htmlService = {
       return false;
     }
 
-    const contentType = response.headers.get('content-type');
-    if (!contentType?.startsWith('text/html')) {
+    const contentType =
+      response.headers.get('content-type') || response.headers.get('Content-Type');
+    if (!contentType || !contentType.startsWith('text/html')) {
       return false;
     }
 
