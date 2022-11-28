@@ -16,14 +16,18 @@ const validator: Record<ClipboardType, yup.StringSchema> = {
   text: yup.string(),
 };
 
-export default function useClipboardReady({
+export default function useClipboardPop({
   timeOut = 15000,
   type = 'url',
 }: UseClipboardReadyProps = {}) {
   const focused = useWindowFocus();
   const firstActionRef = useRef(true);
-  const [ready, setReady] = useState(false);
+  const [isPop, setIsPop] = useState(false);
   const [text, setText] = useState<string | undefined>();
+
+  const onClose = useCallback(() => {
+    setIsPop(false);
+  }, []);
 
   const handleClipboardReady = useCallback(async () => {
     let timer: NodeJS.Timeout | undefined;
@@ -34,11 +38,11 @@ export default function useClipboardReady({
 
       if (firstActionRef.current && isValid) {
         firstActionRef.current = false;
-        setReady(true);
+        setIsPop(true);
         setText(clipboardText);
 
         timer = setTimeout(() => {
-          setReady(false);
+          setIsPop(false);
         }, timeOut);
       }
     }
@@ -56,5 +60,5 @@ export default function useClipboardReady({
     }
   }, [focused, handleClipboardReady]);
 
-  return { ready, text };
+  return { isPop, onClose, text };
 }

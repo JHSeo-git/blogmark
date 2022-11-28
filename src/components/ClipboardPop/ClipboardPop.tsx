@@ -3,10 +3,12 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 
-import useClipboardReady from '@/hooks/useClipboardReady';
+import useClipboardPop from '@/hooks/useClipboardPop';
+
+import CloseIcon from '../__icons/Close.Icon';
 
 function ClipboardPop() {
-  const { ready, text } = useClipboardReady();
+  const { isPop, onClose, text } = useClipboardPop();
   const router = useRouter();
 
   const onClick = () => {
@@ -19,16 +21,25 @@ function ClipboardPop() {
 
   return (
     <AnimatePresence>
-      {ready && (
+      {isPop && (
         <motion.div
-          className="fixed bottom-0 p-6 z-50 left-1/2 w-full max-w-xl"
+          className="fixed bottom-0 left-1/2 z-50 p-2 md:p-6 w-full max-w-xl"
           initial={{ opacity: 0, x: '-50%', y: 100 }}
           animate={{ opacity: 1, x: '-50%', y: 0 }}
           exit={{ opacity: 0, x: '-50%', y: 100 }}
         >
-          <div className="p-4 bg-base-100 rounded-xl shadow-2xl text-center">
-            <h4 className="text-lg font-bold">Could you BlogMark copy url?</h4>
-            <p className="break-all truncate">{text}</p>
+          <div className="p-6 bg-base-100 rounded-xl shadow-2xl">
+            <div className="pl-1 flex items-center justify-between">
+              <h4 className="text-lg font-bold text-neutral">Could you BlogMark copy url?</h4>
+              <button
+                type="button"
+                className="p-2 bg-base-200 rounded-lg hover:bg-base-300 transition-all"
+                onClick={onClose}
+              >
+                <CloseIcon width={16} height={16} />
+              </button>
+            </div>
+            <p className="mt-2 pl-1 break-all truncate">{text}</p>
             <button
               type="button"
               onClick={onClick}

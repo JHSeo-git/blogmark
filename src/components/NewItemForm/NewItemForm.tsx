@@ -14,7 +14,6 @@ import LoadingIcon from '../__icons/Loading.Icon';
 type FormData = {
   url: string;
   title: string;
-  description: string;
 };
 
 export const newItemScheme = yup.object().shape({
@@ -37,6 +36,7 @@ function NewItemForm({ initialUrl }: NewItemFormProps) {
     formState: { errors, isValid },
     watch,
     resetField,
+    reset,
   } = useForm<FormData>({
     defaultValues: {
       url: initialUrl ?? '',
@@ -57,10 +57,8 @@ function NewItemForm({ initialUrl }: NewItemFormProps) {
         url: encodeURIComponent(data.url),
       });
 
-      /**
-       * @see https://beta.nextjs.org/docs/data-fetching/mutating
-       */
-      router.refresh();
+      reset({ url: '', title: '' }, { keepDefaultValues: false });
+
       router.push('/');
     } catch (e) {
       console.error(e);
@@ -76,6 +74,7 @@ function NewItemForm({ initialUrl }: NewItemFormProps) {
         {...register('url')}
         error={errors.url?.message}
         resetInput={watch('url') ? () => resetField('url', { defaultValue: '' }) : undefined}
+        disabled={isLoading}
       />
       <Input
         type="text"
@@ -84,6 +83,7 @@ function NewItemForm({ initialUrl }: NewItemFormProps) {
         {...register('title')}
         error={errors.title?.message}
         resetInput={watch('title') ? () => resetField('title') : undefined}
+        disabled={isLoading}
       />
       <div className="mt-16 flex md:justify-end">
         <button

@@ -40,7 +40,7 @@ function InfiniteItems() {
   if (!isFetchingNextPage && isFetching) {
     return (
       <ul className="p-4 pb-12 grid grid-cols-1 gap-10 md:p-6 md:grid-cols-2 xl:grid-cols-3">
-        {Array.from({ length: 10 }).map((_, idx) => (
+        {Array.from({ length: 6 }).map((_, idx) => (
           // eslint-disable-next-line react/no-array-index-key
           <li key={`Initial_CardSkeleton_${idx}`}>
             <CardSkeleton />
