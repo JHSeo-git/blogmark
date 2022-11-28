@@ -76,7 +76,7 @@ function InfiniteItems() {
               <li ref={ref}>
                 <CardSkeleton />
               </li>
-              <li className="hidden md:block">
+              <li>
                 <CardSkeleton />
               </li>
               <li className="hidden xl:block">

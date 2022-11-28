@@ -29,7 +29,7 @@ const itemService = {
       items: items.map(serializeItem),
       pageInfo: {
         currentPage: page,
-        nextPage: total >= (page + 1) * limit ? page + 1 : undefined,
+        nextPage: total > page * limit ? page + 1 : undefined,
         total,
       },
     };
