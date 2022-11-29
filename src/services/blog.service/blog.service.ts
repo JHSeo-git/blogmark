@@ -8,7 +8,7 @@ interface GetBlogByUrlParams {
 }
 
 const blogService = {
-  async getBlogByUrl({ url, favicon, publisher }: GetBlogByUrlParams) {
+  async getBlog({ url, favicon, publisher }: GetBlogByUrlParams) {
     const urlObject = new URL(url);
     const domain = urlObject.hostname;
 

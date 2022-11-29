@@ -40,7 +40,7 @@ const itemsIndexHandler: NextApiHandler = async (req, res) => {
 
     const scrapped = await htmlService.scraper(body.url);
 
-    const blog = await blogService.getBlogByUrl({
+    const blog = await blogService.getBlog({
       url: body.url,
       favicon: scrapped.favicon,
       publisher: scrapped.publisher,
