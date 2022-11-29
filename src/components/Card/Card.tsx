@@ -3,6 +3,7 @@
 import { getDateByString } from '@/lib/utils';
 import type { SerializedItem } from '@/services/item.service/item.service';
 
+import ExternalLinkIcon from '../__icons/ExternalLink.Icon';
 import CardFavicon from './Card.Favicon';
 import CardThumbnail from './Card.Thumbnail';
 
@@ -11,11 +12,30 @@ interface CardProps {
 }
 
 function Card({ item }: CardProps) {
-  const { title, description, thumbnail, createdAt, userName, favicon, publisher, publisherUrl } =
-    item;
+  const {
+    url,
+    title,
+    description,
+    thumbnail,
+    createdAt,
+    userName,
+    favicon,
+    publisher,
+    publisherUrl,
+  } = item;
 
   return (
-    <article>
+    <article className="relative group">
+      {url && (
+        <a
+          href={url}
+          target="_blank"
+          rel="noreferrer"
+          className="z-10 absolute top-2 right-2 flex justify-center items-center p-2 rounded-lg text-primary group-hover:bg-base-100 transition-all"
+        >
+          <ExternalLinkIcon width={20} height={20} />
+        </a>
+      )}
       <CardThumbnail title={title} src={thumbnail} alt={`${title}'s thumbnail`}>
         <div className="bg-base-100 z-[1] rounded-full border-base-300 border-4 absolute p-1 -bottom-4 right-4">
           {favicon && (
