@@ -37,10 +37,7 @@ export const authOptions: NextAuthOptions = {
             type: 'avatar',
           });
 
-          await userService.updateUserImage({
-            userId: user.id,
-            imageUrl,
-          });
+          user.image = imageUrl;
         }
       }
 

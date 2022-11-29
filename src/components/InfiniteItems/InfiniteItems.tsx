@@ -60,15 +60,7 @@ function InfiniteItems() {
         <ul className="p-4 pb-12 grid grid-cols-1 gap-10 md:p-6 md:pb-12 md:grid-cols-2 xl:grid-cols-3">
           {items.map((item) => (
             <li key={item.id}>
-              <Card
-                title={item.title}
-                content={item.description}
-                thumbnail={item.thumbnail}
-                date={item.createdAt}
-                author={item.userName}
-                favicon={item.favicon}
-                publisher={item.publisher}
-              />
+              <Card item={item} />
             </li>
           ))}
           {hasNextPage && (

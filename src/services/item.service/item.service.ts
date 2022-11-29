@@ -142,6 +142,7 @@ const serializeItem = (item: Item & { user: User; blog: Blog }) => {
     thumbnail: item.thumbnail,
     favicon: item.blog.favicon,
     publisher: item.blog.name,
+    publisherUrl: item.blog.domain,
     userName: item.user.name,
     calendarDate: item.calendarDate,
     createdAt: item.createdAt.toISOString(),
