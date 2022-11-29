@@ -47,7 +47,7 @@ function CardFavicon({ src, alt, publisher }: CardFaviconProps) {
               'shadow-md bg-base-100 text-neutral rounded-md px-2 py-1',
             )}
           >
-            <span className="block text-sm">{publisher}</span>
+            <span className="block text-sm font-bold">{publisher}</span>
             <Tooltip.Arrow className="fill-base-100" />
           </Tooltip.Content>
         </Tooltip.Portal>

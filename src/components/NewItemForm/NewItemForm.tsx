@@ -11,6 +11,7 @@ import { createItem } from '@/lib/api/items';
 import { urlSchema } from '@/lib/schema';
 
 import LoadingIcon from '../__icons/Loading.Icon';
+import { clearClipboardForNewForm } from './NewItemForm.helpers';
 
 type FormData = {
   url: string;
@@ -54,12 +55,11 @@ function NewItemFormWithInitialValues({ url }: NewItemFormProps) {
     try {
       setIsLoading(true);
 
-      await createItem({
-        title: data.title,
-        url: encodeURIComponent(data.url),
-      });
+      await createItem({ title: data.title, url: encodeURIComponent(data.url) });
 
       reset({ url: '', title: '' });
+
+      clearClipboardForNewForm(data.url);
 
       router.push('/');
     } catch (e) {

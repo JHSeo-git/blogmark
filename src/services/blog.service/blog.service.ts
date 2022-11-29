@@ -10,7 +10,7 @@ interface GetBlogByUrlParams {
 const blogService = {
   async getBlog({ url, favicon, publisher }: GetBlogByUrlParams) {
     const urlObject = new URL(url);
-    const domain = urlObject.hostname;
+    const domain = urlObject.origin;
 
     const blog = await db.blog.findUnique({
       where: {
