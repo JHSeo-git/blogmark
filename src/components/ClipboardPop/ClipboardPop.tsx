@@ -12,6 +12,8 @@ function ClipboardPop() {
   const router = useRouter();
 
   const onClick = () => {
+    onClose();
+
     if (!text) {
       return;
     }

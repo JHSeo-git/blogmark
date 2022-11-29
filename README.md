@@ -4,8 +4,12 @@ Marking blog site. Like bookmark, but for blog.
 
 ## stack
 
-- next.js 13 with `/app`
+- next.js
+  - v13.x
+  - app directory
+  - edge functions
 - prisma
+- sqlite
 - cloudflare r2
 
 ## reference

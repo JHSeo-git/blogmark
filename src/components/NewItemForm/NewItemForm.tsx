@@ -1,13 +1,14 @@
 'use client';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
 import Input from '@/components/Input';
 import { createItem } from '@/lib/api/items';
+import { urlSchema } from '@/lib/schema';
 
 import LoadingIcon from '../__icons/Loading.Icon';
 
@@ -26,10 +27,11 @@ export const newItemScheme = yup.object().shape({
 });
 
 interface NewItemFormProps {
-  initialUrl?: string;
+  url?: string;
+  title?: string;
 }
 
-function NewItemForm({ initialUrl }: NewItemFormProps) {
+function NewItemFormWithInitialValues({ url }: NewItemFormProps) {
   const {
     register,
     handleSubmit,
@@ -39,7 +41,7 @@ function NewItemForm({ initialUrl }: NewItemFormProps) {
     reset,
   } = useForm<FormData>({
     defaultValues: {
-      url: initialUrl ?? '',
+      url: url ?? '',
     },
     mode: 'onChange',
     resolver: yupResolver(newItemScheme),
@@ -57,7 +59,7 @@ function NewItemForm({ initialUrl }: NewItemFormProps) {
         url: encodeURIComponent(data.url),
       });
 
-      reset({ url: '', title: '' }, { keepDefaultValues: false });
+      reset({ url: '', title: '' });
 
       router.push('/');
     } catch (e) {
@@ -96,6 +98,23 @@ function NewItemForm({ initialUrl }: NewItemFormProps) {
       </div>
     </form>
   );
+}
+
+function NewItemForm() {
+  const searchParams = useSearchParams();
+
+  const url = searchParams.get('markUrl') ?? undefined;
+
+  if (url && !urlSchema.isValidSync(url)) {
+    return (
+      <div className="absolute inset-0 flex flex-col items-center justify-center h-full">
+        <h1 className="text-2xl font-bold">Not valid url.</h1>
+        <p>{url}</p>
+      </div>
+    );
+  }
+
+  return <NewItemFormWithInitialValues url={url} />;
 }
 
 export default NewItemForm;

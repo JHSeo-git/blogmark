@@ -3,31 +3,9 @@ import { redirect } from 'next/navigation';
 import FolderHeartIcon from '@/components/__icons/FolderHeart.Icon';
 import NewItemForm from '@/components/NewItemForm';
 import { loginUrl } from '@/lib/auth';
-import { urlSchema } from '@/lib/schema';
 import { getUser } from '@/lib/session';
 
-interface NewPageProps {
-  searchParams: { markUrl?: string };
-}
-
-async function NewPage({ searchParams }: NewPageProps) {
-  let initialUrl: string | undefined;
-
-  if (searchParams.markUrl) {
-    initialUrl = decodeURIComponent(searchParams.markUrl);
-
-    const isValidUrl = await urlSchema.isValid(initialUrl);
-
-    if (!isValidUrl) {
-      return (
-        <div className="absolute inset-0 flex flex-col items-center justify-center h-full">
-          <h1 className="text-2xl font-bold">Not valid url.</h1>
-          <p>{initialUrl}</p>
-        </div>
-      );
-    }
-  }
-
+async function NewPage() {
   const user = await getUser();
 
   if (!user) {
@@ -42,7 +20,7 @@ async function NewPage({ searchParams }: NewPageProps) {
       </h1>
       <div className="w-full">
         <div className="h-6" />
-        <NewItemForm initialUrl={initialUrl} />
+        <NewItemForm />
       </div>
     </section>
   );
