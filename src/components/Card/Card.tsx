@@ -4,6 +4,7 @@ import { getDateByString } from '@/lib/utils';
 import type { SerializedItem } from '@/services/item.service/item.service';
 
 import ExternalLinkIcon from '../__icons/ExternalLink.Icon';
+import Hidden from '../Hidden';
 import CardFavicon from './Card.Favicon';
 import CardThumbnail from './Card.Thumbnail';
 
@@ -26,18 +27,17 @@ function Card({ item }: CardProps) {
 
   return (
     <article className="relative group">
-      {url && (
-        <a
-          href={url}
-          target="_blank"
-          rel="noreferrer"
-          className="z-10 absolute top-2 right-2 flex justify-center items-center p-2 rounded-lg text-primary group-hover:bg-base-100 transition-all"
-        >
-          <ExternalLinkIcon width={20} height={20} />
-        </a>
-      )}
-      <CardThumbnail title={title} src={thumbnail} alt={`${title}'s thumbnail`}>
-        <div className="bg-base-100 z-[1] rounded-full border-base-300 border-4 absolute p-1 -bottom-4 right-4">
+      <a
+        href={url ?? undefined}
+        target="_blank"
+        rel="noreferrer"
+        className="absolute inset-0 block"
+      >
+        <Hidden>link overlay</Hidden>
+      </a>
+
+      <CardThumbnail title={title} src={thumbnail} alt={`${title}'s thumbnail`} url={url}>
+        <div className="bg-base-100 rounded-full border-base-300 border-4 absolute p-1 -bottom-4 right-4">
           {favicon && (
             <a
               className="flex justify-center items-center"
@@ -50,7 +50,8 @@ function Card({ item }: CardProps) {
           )}
         </div>
       </CardThumbnail>
-      <div className="mt-4 px-1 flex gap-2 items-center">
+
+      <div className="mt-4 px-1 inline-flex gap-2 items-center relative">
         <p className="text-sm">{userName}</p>
         <div className="flex items-center gap-2">
           {createdAt && (
@@ -63,9 +64,14 @@ function Card({ item }: CardProps) {
           )}
         </div>
       </div>
-      <div className="mt-2 px-1">
-        <h2 className="text-xl text-neutral font-bold">{title}</h2>
-        <p className="mt-1">{description}</p>
+
+      <div className="mt-2 px-1 relative">
+        <a href={url ?? undefined} target="_blank" rel="noreferrer">
+          <h2 className="text-xl text-neutral font-bold">{title}</h2>
+        </a>
+        <a href={url ?? undefined} target="_blank" rel="noreferrer">
+          <p className="mt-1">{description}</p>
+        </a>
       </div>
     </article>
   );

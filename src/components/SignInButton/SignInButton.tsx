@@ -39,7 +39,7 @@ function SignInButton({ className }: SignInButtonProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            Log In
+            로그인
           </motion.span>
         )}
       </AnimatePresence>

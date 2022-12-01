@@ -7,10 +7,11 @@ Marking blog site. Like bookmark, but for blog.
 - next.js
   - v13.x
   - app directory
-  - edge functions
 - prisma
 - sqlite
 - cloudflare r2
+- assets
+  - icon: [lucide.dev](https://lucide.dev)
 
 ## reference
 
