@@ -19,9 +19,6 @@ export async function isMatchClipboardText(text: string, isDeep = false) {
     return clipboardText === text;
   }
 
-  console.log('clipboardText', clipboardText);
-  console.log('input text', text);
-
   return (
     clipboardText.toLowerCase().includes(text.toLowerCase()) ||
     text.toLowerCase().includes(clipboardText.toLowerCase())

@@ -1,14 +1,14 @@
 'use client';
 
-import { yupResolver } from '@hookform/resolvers/yup';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
 
 import Input from '@/components/Input';
 import { createItem } from '@/lib/api/items';
-import { urlSchema } from '@/lib/schema';
+import { itemSchema } from '@/lib/validations/item';
+import { urlSchema } from '@/lib/validations/url';
 
 import LoadingIcon from '../__icons/Loading.Icon';
 import { clearClipboardForNewForm } from './NewItemForm.helpers';
@@ -17,15 +17,6 @@ type FormData = {
   url: string;
   title: string;
 };
-
-export const newItemScheme = yup.object().shape({
-  url: yup.string().url('URL 형식에 맞게 작성해주세요.').required('URL을 입력해주세요.'),
-  title: yup
-    .string()
-    .min(2, '2~40글자를 입력해주세요.')
-    .max(40, '2~40글자를 입력해주세요.')
-    .required('제목을 입력해주세요.'),
-});
 
 interface NewItemFormProps {
   url?: string;
@@ -45,7 +36,7 @@ function NewItemFormWithInitialValues({ url }: NewItemFormProps) {
       url: url ?? '',
     },
     mode: 'onChange',
-    resolver: yupResolver(newItemScheme),
+    resolver: zodResolver(itemSchema),
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -105,7 +96,7 @@ function NewItemForm() {
 
   const url = searchParams.get('markUrl') ?? undefined;
 
-  if (url && !urlSchema.isValidSync(url)) {
+  if (url && !urlSchema.parse(url)) {
     return (
       <div className="absolute inset-0 flex flex-col items-center justify-center h-full">
         <h1 className="text-2xl font-bold">Not valid url.</h1>

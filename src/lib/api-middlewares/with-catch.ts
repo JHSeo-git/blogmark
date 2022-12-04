@@ -1,5 +1,5 @@
 import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
-import * as yup from 'yup';
+import { z } from 'zod';
 
 import { isAppError } from '../error';
 
@@ -10,7 +10,7 @@ export function withCatch(handler: NextApiHandler) {
     } catch (error) {
       console.error(error);
 
-      if (error instanceof yup.ValidationError) {
+      if (error instanceof z.ZodError) {
         res.status(422).json({ message: error.message });
       }
 

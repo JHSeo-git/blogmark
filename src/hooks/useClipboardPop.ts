@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState } from 'react';
-import * as yup from 'yup';
+import { z } from 'zod';
 
 import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect';
 import useWindowFocus from './useWindowFocus';
@@ -11,9 +11,9 @@ interface UseClipboardReadyProps {
   type?: ClipboardType;
 }
 
-const validator: Record<ClipboardType, yup.StringSchema> = {
-  url: yup.string().url(),
-  text: yup.string(),
+const validator: Record<ClipboardType, z.ZodString> = {
+  url: z.string().url(),
+  text: z.string(),
 };
 
 export default function useClipboardPop({
@@ -34,9 +34,9 @@ export default function useClipboardPop({
     const clipboardText = await navigator.clipboard.readText();
 
     if (clipboardText) {
-      const isValid = await validator[type].isValid(clipboardText);
+      const isValid = await validator[type].safeParse(clipboardText);
 
-      if (firstActionRef.current && isValid) {
+      if (firstActionRef.current && isValid.success) {
         firstActionRef.current = false;
         setIsPop(true);
         setText(clipboardText);

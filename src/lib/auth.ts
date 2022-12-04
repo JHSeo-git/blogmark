@@ -4,7 +4,6 @@ import type { NextAuthOptions } from 'next-auth';
 import GitHubProvider from 'next-auth/providers/github';
 
 import db from '@/lib/prisma';
-import userService from '@/services/user.service';
 
 import { uploadImage } from './r2';
 

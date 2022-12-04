@@ -3,7 +3,6 @@
 import { getDateByString } from '@/lib/utils';
 import type { SerializedItem } from '@/services/item.service/item.service';
 
-import ExternalLinkIcon from '../__icons/ExternalLink.Icon';
 import Hidden from '../Hidden';
 import CardFavicon from './Card.Favicon';
 import CardThumbnail from './Card.Thumbnail';
