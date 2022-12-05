@@ -45,7 +45,7 @@ function UserAddonMenu({ isOpen, onClose }: UserAddonMenuProps) {
             >
               <ul className="border bg-base-100 rounded-sm w-52 mt-1 shadow-lg">
                 <li className="border-b">
-                  <Link href="/" className="px-4 py-3 flex w-full hover:bg-base-200">
+                  <Link href="/me" className="px-4 py-3 flex w-full hover:bg-base-200">
                     사용자 정보
                   </Link>
                 </li>

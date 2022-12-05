@@ -45,7 +45,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             id={id}
             onFocus={() => setIsFocus(true)}
             onBlur={() => setIsFocus(false)}
-            className="border-none outline-none bg-inherit flex-1 py-2 px-3"
+            className="border-none outline-none bg-inherit flex-1 py-2 px-3 read-only:bg-base-200"
           />
           <AnimatePresence>
             {resetInput && isFocus && (
@@ -83,5 +83,4 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 );
 
 Input.displayName = 'Input';
-
 export default Input;

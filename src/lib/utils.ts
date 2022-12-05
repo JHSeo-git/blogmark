@@ -27,6 +27,17 @@ export function getDateByString(dateText: string) {
   return getDate(date);
 }
 
+export function getUTCDate(date: Date) {
+  const offset = date.getTimezoneOffset();
+  return new Date(date.getTime() - offset * 60 * 1000).toISOString().split('T')[0];
+}
+
+export function getUTCDateByString(dateText: string) {
+  const date = new Date(dateText);
+
+  return getUTCDate(date);
+}
+
 export function hasSearchInUrl(url: string) {
   const urlObject = new URL(url);
 
