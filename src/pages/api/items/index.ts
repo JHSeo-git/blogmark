@@ -3,7 +3,7 @@ import { unstable_getServerSession } from 'next-auth/next';
 
 import { withCatch } from '@/lib/api-middlewares/with-catch';
 import { withMethods } from '@/lib/api-middlewares/with-methods';
-import { authOptions } from '@/lib/auth';
+import { authOptions } from '@/lib/next-auth';
 import { itemSchema } from '@/lib/validations/item';
 import { paginationSchema } from '@/lib/validations/pagination';
 import blogService from '@/services/blog.service';

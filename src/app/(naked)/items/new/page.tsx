@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation';
 
 import FolderHeartIcon from '@/components/__icons/FolderHeart.Icon';
 import NewItemForm from '@/components/NewItemForm';
-import { loginUrl } from '@/lib/auth';
+import { loginUrl } from '@/lib/next-auth';
 import { getUser } from '@/lib/session';
 
 async function NewPage() {

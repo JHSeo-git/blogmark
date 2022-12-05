@@ -1,6 +1,6 @@
 import { unstable_getServerSession } from 'next-auth/next';
 
-import { authOptions } from './auth';
+import { authOptions } from './next-auth';
 
 export function getSession() {
   return unstable_getServerSession(authOptions);
