@@ -1,4 +1,5 @@
 import GithubIcon from '../__icons/Github.Icon';
+import GoogleIcon from '../__icons/Google.Icon';
 import Badge from './Badge';
 
 type Provider = 'github' | 'google';
@@ -21,6 +22,11 @@ function OAuthProviderBadge({ provider }: OAuthProviderBadgeProps) {
       {provider === 'github' && (
         <Badge>
           <GithubIcon />
+        </Badge>
+      )}
+      {provider === 'google' && (
+        <Badge>
+          <GoogleIcon />
         </Badge>
       )}
     </>

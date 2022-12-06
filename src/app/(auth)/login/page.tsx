@@ -9,7 +9,9 @@ function LoginPage() {
       <p className="text-sm">Enjoy marking a blog!</p>
       <div className="w-full">
         <div className="h-6" />
-        <LoginForm />
+        <section className="w-72">
+          <LoginForm />
+        </section>
         <div className="h-10" />
       </div>
     </section>

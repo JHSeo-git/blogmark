@@ -2,7 +2,7 @@ import type { Session } from 'next-auth';
 
 import MenuIcon from '../__icons/Menu.Icon';
 import { DrawerAction } from '../Drawer';
-import SignInButton from '../SignInButton';
+import SignInDialogButton from '../SignInDialogButton';
 import UserAddon from './UserAddon';
 
 interface BaseHeaderProps {
@@ -18,7 +18,7 @@ function BaseHeader({ user }: BaseHeaderProps) {
           <DrawerAction>
             <MenuIcon />
           </DrawerAction>
-          {user ? <UserAddon image={user.image} name={user.name} /> : <SignInButton />}
+          {user ? <UserAddon image={user.image} name={user.name} /> : <SignInDialogButton />}
         </nav>
       </div>
     </header>

@@ -16,13 +16,8 @@ function CardThumbnail({ title, src, alt, children, className, url }: CardThumbn
   const [isError, setIsError] = useState(false);
 
   return (
-    <a
-      href={url ?? undefined}
-      target="_blank"
-      rel="noreferrer"
-      className={cn('block relative', className)}
-    >
-      <section className={cn('relative', className)}>
+    <section className={cn('relative', className)}>
+      <a href={url ?? undefined} target="_blank" rel="noreferrer" className="block relative">
         {src && !isError ? (
           <div className="rounded-xl w-full aspect-video object-cover relative overflow-hidden">
             <Image
@@ -40,9 +35,9 @@ function CardThumbnail({ title, src, alt, children, className, url }: CardThumbn
             <h3 className="text-base-100 text-4xl font-bold truncate mx-4">{title}</h3>
           </div>
         )}
-        {children}
-      </section>
-    </a>
+      </a>
+      {children}
+    </section>
   );
 }
 

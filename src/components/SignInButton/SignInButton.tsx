@@ -8,9 +8,10 @@ import LoadingIcon from '../__icons/Loading.Icon';
 
 export interface SignInButtonProps {
   className?: string;
+  onClick: () => void;
 }
 
-function SignInButton({ className }: SignInButtonProps) {
+function SignInButton({ className, onClick }: SignInButtonProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const onSignInClick = async () => {
@@ -26,7 +27,7 @@ function SignInButton({ className }: SignInButtonProps) {
   };
 
   return (
-    <button type="button" className={className} onClick={onSignInClick} disabled={isLoading}>
+    <button type="button" className={className} onClick={onClick}>
       <AnimatePresence>
         {isLoading ? (
           <span className="flex items-center justify-center text-primary px-2">

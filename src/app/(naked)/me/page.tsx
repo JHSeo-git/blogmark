@@ -69,9 +69,9 @@ async function MePage() {
 
       <section className="w-full">
         <label className="label">
-          <span className="label-text">OAuth Provider</span>
+          <span className="label-text">연결된 OAuth</span>
         </label>
-        <div className="flex flex-wrap">
+        <div className="flex flex-wrap gap-4">
           {me.providers.map((provider) => (
             <OAuthProviderBadge key={provider} provider={provider} />
           ))}

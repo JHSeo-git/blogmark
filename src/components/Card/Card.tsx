@@ -36,10 +36,10 @@ function Card({ item }: CardProps) {
       </a>
 
       <CardThumbnail title={title} src={thumbnail} alt={`${title}'s thumbnail`} url={url}>
-        <div className="bg-base-100 rounded-full border-base-300 border-4 absolute p-1 -bottom-4 right-4">
+        <div className="bg-base-100 rounded-full border-base-300 border-4 absolute -bottom-4 right-4">
           {favicon && (
             <a
-              className="flex justify-center items-center"
+              className="p-1 flex justify-center items-center"
               href={publisherUrl}
               target="_blank"
               rel="noreferrer"

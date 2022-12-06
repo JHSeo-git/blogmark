@@ -4,18 +4,25 @@ import { useSearchParams } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 
-import GithubIcon from '../__icons/Github.Icon';
+import { cn } from '@/lib/utils';
 
-function LoginForm() {
+import GithubIcon from '../__icons/Github.Icon';
+import GoogleIcon from '../__icons/Google.Icon';
+
+interface LoginFormProps {
+  enableCallbackUrl?: boolean;
+}
+
+function LoginForm({ enableCallbackUrl = true }: LoginFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const searchParams = useSearchParams();
 
-  const onClickGithub = async () => {
+  const onLogin = async (provider: 'github' | 'google') => {
     try {
       setIsLoading(true);
       // The redirect option is only available for credentials and email providers.
-      await signIn('github', {
-        callbackUrl: searchParams.get('from') ?? '/',
+      await signIn(provider, {
+        callbackUrl: enableCallbackUrl ? searchParams.get('from') ?? '/' : '/',
       });
     } catch (e) {
       // only reset the state when occurs error
@@ -25,17 +32,32 @@ function LoginForm() {
   };
 
   return (
-    <section className="w-72">
+    <>
       <button
         type="button"
-        onClick={onClickGithub}
-        className="inline-flex gap-2 w-full items-center justify-center rounded-lg border bg-white px-5 py-2.5 text-center text-sm text-base-content hover:bg-base-200 focus:outline-none focus:ring-1 focus:ring-primary transition-all disabled:opacity-40"
+        onClick={() => onLogin('github')}
+        className={cn(
+          'inline-flex gap-2 w-full items-center justify-center rounded-lg border px-5 py-2.5 text-center text-sm',
+          'bg-base-100 hover:bg-base-200 focus:outline-none focus:ring-1 focus:ring-primary transition-all disabled:opacity-40 disabled:hover:bg-base-100',
+        )}
         disabled={isLoading}
       >
         <GithubIcon width={20} height={20} />
         <span className="font-bold">Github</span>
       </button>
-    </section>
+      <button
+        type="button"
+        onClick={() => onLogin('google')}
+        className={cn(
+          'mt-2 inline-flex gap-2 w-full items-center justify-center rounded-lg border px-5 py-2.5 text-center text-sm',
+          'bg-base-100 hover:bg-base-200 focus:outline-none focus:ring-1 focus:ring-primary transition-all disabled:opacity-40 disabled:hover:bg-base-100',
+        )}
+        disabled={isLoading}
+      >
+        <GoogleIcon width={20} height={20} />
+        <span className="font-bold">Google</span>
+      </button>
+    </>
   );
 }
 

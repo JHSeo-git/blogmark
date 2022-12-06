@@ -31,7 +31,7 @@ model Account {
   refresh_token            String?
   refresh_token_expires_in Int?
   access_token             String?
-  expires_in               Int?
+  expires_at               Int?
   token_type               String?
   scope                    String?
   id_token                 String?
