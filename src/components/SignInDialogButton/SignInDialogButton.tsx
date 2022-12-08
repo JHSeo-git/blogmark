@@ -2,31 +2,16 @@
 
 import * as Dialog from '@radix-ui/react-dialog';
 import { AnimatePresence, motion } from 'framer-motion';
-import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 
 import { cn } from '@/lib/utils';
 
 import CloseIcon from '../__icons/Close.Icon';
 import FolderHeartIcon from '../__icons/FolderHeart.Icon';
-import GithubIcon from '../__icons/Github.Icon';
 import LoginForm from '../LoginForm';
 
 function SignInDialogButton() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const onClickGithub = async () => {
-    try {
-      setIsLoading(true);
-      // The redirect option is only available for credentials and email providers.
-      await signIn('github');
-    } catch (e) {
-      // only reset the state when occurs error
-      // because the page will be redirected
-      setIsLoading(false);
-    }
-  };
 
   return (
     <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
