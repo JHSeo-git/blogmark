@@ -10,6 +10,10 @@ class ApiClient {
   static async request<TResponse>(url: string, config: RequestInit): Promise<TResponse> {
     const response = await fetch(url, config);
 
+    if (response.status === 204) {
+      return {} as TResponse;
+    }
+
     const data = await response.json();
 
     return data;
@@ -39,6 +43,20 @@ class ApiClient {
       },
       body: JSON.stringify(body),
       method: 'POST',
+    });
+  }
+
+  put<TResponse>(url: string, body: object, option?: ClientOpeion | undefined) {
+    const generatedUrl = this.generateUrl(url);
+
+    return ApiClient.request<TResponse>(generatedUrl, {
+      ...option,
+      headers: {
+        ...option?.headers,
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: JSON.stringify(body),
+      method: 'PUT',
     });
   }
 }

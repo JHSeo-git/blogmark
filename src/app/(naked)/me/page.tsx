@@ -3,11 +3,10 @@ import { notFound, redirect } from 'next/navigation';
 
 import UserIcon from '@/components/__icons/User.Icon';
 import Hidden from '@/components/Hidden';
-import Input from '@/components/Input';
 import OAuthProviderBadge from '@/components/OAuthProviderBadge';
+import UserForm from '@/components/UserForm';
 import { loginUrl } from '@/lib/next-auth';
 import { getUser } from '@/lib/session';
-import { getUTCDateByString } from '@/lib/utils';
 import userService from '@/services/user.service';
 
 async function MePage() {
@@ -19,7 +18,7 @@ async function MePage() {
 
   const me = await userService.getUserById(user.id);
 
-  if (!me) {
+  if (!me?.name || !me?.email) {
     return notFound();
   }
 
@@ -48,28 +47,21 @@ async function MePage() {
         </div>
       </div>
 
-      <section className="flex gap-4 w-full">
-        <div className="stats shadow mt-6">
+      <section className="flex gap-4 w-full mt-6">
+        <div className="stats shadow">
           <div className="stat">
-            <div className="stat-title">아이템</div>
+            <div className="stat-title">등록한 아이템</div>
             <div className="stat-value text-primary text-2xl md:text-4xl">{me.itemsCount}</div>
           </div>
         </div>
-        <div className="stats shadow mt-6">
-          <div className="stat">
-            <div className="stat-title">가입날짜</div>
-            <div className="stat-value text-2xl md:text-4xl">
-              {getUTCDateByString(me.createdAt)}
-            </div>
-          </div>
-        </div>
+        <div className="stats shadow mt-6" />
       </section>
 
-      <div className="divider my-10">내 정보</div>
+      <div className="divider my-10" />
 
       <section className="w-full">
         <label className="label">
-          <span className="label-text">연결된 OAuth</span>
+          <span className="label-text">연결된 로그인</span>
         </label>
         <div className="flex flex-wrap gap-4">
           {me.providers.map((provider) => (
@@ -78,7 +70,10 @@ async function MePage() {
         </div>
       </section>
 
-      <section className="flex flex-col gap-4 w-full mt-4">
+      <section className="w-full mt-4">
+        <UserForm userName={me.name} email={me.email} />
+      </section>
+      {/* <section className="flex flex-col gap-4 w-full mt-4">
         <Input className="w-full" label="이름" type="text" value={me.name ?? undefined} readOnly />
         <Input
           className="w-full"
@@ -87,7 +82,7 @@ async function MePage() {
           value={me.email ?? undefined}
           readOnly
         />
-      </section>
+      </section> */}
     </section>
   );
 }

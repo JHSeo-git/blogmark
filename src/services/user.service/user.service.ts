@@ -1,6 +1,10 @@
 import db from '@/lib/prisma';
 
-import type { UpdateUserImageParams } from './user.types';
+import type {
+  UpdateUserImageParams,
+  UpdateUserInfoByEmailParams,
+  UpdateUserInfoParams,
+} from './user.types';
 
 const userService = {
   async getUserById(userId: string) {
@@ -41,6 +45,32 @@ const userService = {
       },
       data: {
         image: imageUrl,
+      },
+    });
+
+    return user;
+  },
+
+  async updateUserInfo({ userName, userId }: UpdateUserInfoParams) {
+    const user = await db.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        name: userName,
+      },
+    });
+
+    return user;
+  },
+
+  async updateUserInfoByEmail({ userName, email }: UpdateUserInfoByEmailParams) {
+    const user = await db.user.update({
+      where: {
+        email,
+      },
+      data: {
+        name: userName,
       },
     });
 
