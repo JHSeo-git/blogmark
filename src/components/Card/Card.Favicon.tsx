@@ -1,8 +1,7 @@
-import * as Tooltip from '@radix-ui/react-tooltip';
 import Image from 'next/image';
 import { useState } from 'react';
 
-import { cn } from '@/lib/utils';
+import * as Tooltip from '../Tooltip';
 
 export interface CardFaviconProps {
   src?: string | null;
@@ -35,22 +34,7 @@ function CardFavicon({ src, alt, publisher }: CardFaviconProps) {
             )}
           </div>
         </Tooltip.Trigger>
-        <Tooltip.Portal>
-          <Tooltip.Content
-            sideOffset={15}
-            side="top"
-            className={cn(
-              'radix-side-top:animate-slide-down-fade',
-              'radix-side-right:animate-slide-left-fade',
-              'radix-side-bottom:animate-slide-up-fade',
-              'radix-side-left:animate-slide-right-fade',
-              'shadow-md bg-base-100 text-neutral rounded-md px-2 py-1',
-            )}
-          >
-            <span className="block text-sm font-bold">{publisher}</span>
-            <Tooltip.Arrow className="fill-base-100" />
-          </Tooltip.Content>
-        </Tooltip.Portal>
+        <Tooltip.Content>{publisher}</Tooltip.Content>
       </Tooltip.Root>
     </Tooltip.Provider>
   );
