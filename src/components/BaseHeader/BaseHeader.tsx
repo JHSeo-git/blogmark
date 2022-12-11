@@ -18,7 +18,11 @@ function BaseHeader({ user }: BaseHeaderProps) {
           <DrawerAction>
             <MenuIcon />
           </DrawerAction>
-          {user ? <UserAddon image={user.image} name={user.name} /> : <SignInDialogButton />}
+          {user ? (
+            <UserAddon image={user.image} name={user.name} />
+          ) : (
+            <SignInDialogButton>로그인</SignInDialogButton>
+          )}
         </nav>
       </div>
     </header>

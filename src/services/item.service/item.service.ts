@@ -172,7 +172,7 @@ const itemService = {
   },
 
   async deleteLikeItem({ userId, itemId }: LikeItemParam) {
-    await db.like.delete({
+    const existLikeItem = await db.like.findUnique({
       where: {
         userId_itemId: {
           itemId,
@@ -180,6 +180,17 @@ const itemService = {
         },
       },
     });
+
+    if (existLikeItem) {
+      await db.like.delete({
+        where: {
+          userId_itemId: {
+            itemId,
+            userId,
+          },
+        },
+      });
+    }
 
     const likes = await db.like.count({
       where: {

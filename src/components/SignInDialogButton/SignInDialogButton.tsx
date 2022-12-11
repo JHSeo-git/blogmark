@@ -7,7 +7,11 @@ import FolderHeartIcon from '../__icons/FolderHeart.Icon';
 import * as Dialog from '../Dialog';
 import LoginForm from '../LoginForm';
 
-function SignInDialogButton() {
+interface SignInDialogButtonProps {
+  children: React.ReactNode;
+}
+
+function SignInDialogButton({ children }: SignInDialogButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -20,7 +24,7 @@ function SignInDialogButton() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            로그인
+            {children}
           </motion.span>
         </button>
       </Dialog.Trigger>

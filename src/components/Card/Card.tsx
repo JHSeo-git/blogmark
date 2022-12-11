@@ -9,6 +9,7 @@ import type { SerializedItem } from '@/services/item.service/item.service';
 import HeartIcon from '../__icons/Heart.Icon';
 import MoreVerticalIcon from '../__icons/MoreVertical.Icon';
 import Hidden from '../Hidden';
+import SignInDialogButton from '../SignInDialogButton';
 import CardFavicon from './Card.Favicon';
 import CardThumbnail from './Card.Thumbnail';
 
@@ -38,15 +39,15 @@ function Card({ item, isLoggedIn }: CardProps) {
   const onLike = async () => {
     try {
       if (!isLoggedIn) {
-        // TODO: show login modal
         return;
       }
 
-      setIsLiked((prev) => !prev);
-      if (isLike) {
+      if (isLiked) {
+        setIsLiked(false);
         setLikesCount((prev) => prev - 1);
         await deleteLikeItem(itemId);
       } else {
+        setIsLiked(true);
         setLikesCount((prev) => prev + 1);
         await likeItem(itemId);
       }
@@ -105,18 +106,34 @@ function Card({ item, isLoggedIn }: CardProps) {
       </div>
 
       <div className="mt-2 flex justify-between items-center relative">
-        <div className="flex items-center gap-2" />
         <div className="flex items-center gap-2">
-          <button type="button" className="flex justify-center items-center" onClick={onLike}>
-            <HeartIcon
-              className={cn(
-                'transition-all group-hover:text-base-300',
-                isLiked ? 'text-red-500' : 'text-base-200',
-              )}
-              width={20}
-              height={20}
-            />
-          </button>
+          <Hidden>좋아요 {likesCount}</Hidden>
+        </div>
+        <div className="flex items-center gap-2">
+          {isLoggedIn ? (
+            <button type="button" className="flex justify-center items-center" onClick={onLike}>
+              <HeartIcon
+                className={cn(
+                  'transition-all',
+                  isLiked ? 'text-red-500' : 'group-hover:text-base-300 text-base-200',
+                )}
+                width={20}
+                height={20}
+              />
+            </button>
+          ) : (
+            <SignInDialogButton>
+              <HeartIcon
+                className={cn(
+                  'transition-all group-hover:text-base-300',
+                  isLiked ? 'text-red-500' : 'text-base-200',
+                )}
+                width={20}
+                height={20}
+              />
+            </SignInDialogButton>
+          )}
+
           <button type="button" className="flex justify-center items-center">
             <MoreVerticalIcon width={20} height={20} />
           </button>
