@@ -7,8 +7,3 @@ export interface UpdateUserInfoParams {
   userId: string;
   userName: string;
 }
-
-export interface UpdateUserInfoByEmailParams {
-  email: string;
-  userName: string;
-}

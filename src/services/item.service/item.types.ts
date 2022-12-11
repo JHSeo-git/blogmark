@@ -17,3 +17,8 @@ export interface CreateItemParam {
   thumbnail?: string;
   favicon?: string;
 }
+
+export interface LikeItemParam {
+  userId: string;
+  itemId: number;
+}

@@ -1,10 +1,15 @@
-import type { Blog, Item, User } from '@prisma/client';
+import type { Blog, Item, Like, User } from '@prisma/client';
 
 import db from '@/lib/prisma';
 import { uploadImage } from '@/lib/r2';
 import { getDate, slugify } from '@/lib/utils';
 
-import type { CreateItemParam, GetItemsByCursorParams, GetItemsParams } from './item.types';
+import type {
+  CreateItemParam,
+  GetItemsByCursorParams,
+  GetItemsParams,
+  LikeItemParam,
+} from './item.types';
 
 const DEFAULT_PAGINATION_LIMIT = 12;
 
@@ -16,6 +21,7 @@ const itemService = {
         include: {
           user: true,
           blog: true,
+          likes: true,
         },
         orderBy: {
           id: 'desc',
@@ -45,6 +51,7 @@ const itemService = {
         include: {
           user: true,
           blog: true,
+          likes: true,
         },
         orderBy: {
           id: 'desc',
@@ -97,6 +104,7 @@ const itemService = {
       include: {
         user: true,
         blog: true,
+        likes: true,
       },
     });
 
@@ -131,9 +139,60 @@ const itemService = {
 
     return serializeItem(item);
   },
+
+  async likeItem({ userId, itemId }: LikeItemParam) {
+    const alreadyLikeItem = await db.like.findUnique({
+      where: {
+        userId_itemId: {
+          itemId,
+          userId,
+        },
+      },
+    });
+
+    if (!alreadyLikeItem) {
+      await db.like.create({
+        data: {
+          userId,
+          itemId,
+        },
+      });
+    }
+
+    const likes = await db.like.count({
+      where: {
+        itemId,
+      },
+    });
+
+    return {
+      likes,
+    };
+  },
+
+  async deleteLikeItem({ userId, itemId }: LikeItemParam) {
+    await db.like.delete({
+      where: {
+        userId_itemId: {
+          itemId,
+          userId,
+        },
+      },
+    });
+
+    const likes = await db.like.count({
+      where: {
+        itemId,
+      },
+    });
+
+    return {
+      likes,
+    };
+  },
 };
 
-const serializeItem = (item: Item & { user: User; blog: Blog }) => {
+const serializeItem = (item: Item & { user: User; blog: Blog; likes: Like[] }) => {
   return {
     id: item.id,
     title: item.title,
@@ -144,6 +203,8 @@ const serializeItem = (item: Item & { user: User; blog: Blog }) => {
     publisher: item.blog.name,
     publisherUrl: item.blog.domain,
     userName: item.user.name,
+    likes: item.likes.length,
+    isLike: item.likes.some((like) => like.userId === item.userId),
     calendarDate: item.calendarDate,
     createdAt: item.createdAt.toISOString(),
   };

@@ -24,7 +24,7 @@ function UserForm({ userName, email }: UserFormProps) {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors, isValid, isDirty },
     watch,
     resetField,
   } = useForm<FormData>({
@@ -58,16 +58,14 @@ function UserForm({ userName, email }: UserFormProps) {
         type="text"
         {...register('userName')}
         error={errors.userName?.message}
-        resetInput={
-          watch('userName') ? () => resetField('userName', { defaultValue: '' }) : undefined
-        }
+        resetInput={watch('userName') ? () => resetField('userName') : undefined}
         disabled={isLoading}
       />
       <Input className="w-full" label="이메일" type="text" readOnly {...register('email')} />
       <div className="mt-16 flex md:justify-end">
         <button
           type="submit"
-          disabled={!isValid || isLoading}
+          disabled={!isDirty || !isValid || isLoading}
           className="btn w-full btn-primary no-animation active:bg-primary text-base md:w-auto"
         >
           {isLoading ? <LoadingIcon /> : 'UPDATE'}

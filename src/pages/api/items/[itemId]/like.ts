@@ -4,44 +4,45 @@ import { unstable_getServerSession } from 'next-auth/next';
 import { withCatch } from '@/lib/api-middlewares/with-catch';
 import { withMethods } from '@/lib/api-middlewares/with-methods';
 import { authOptions } from '@/lib/next-auth';
-import { userSchema } from '@/lib/validations/user';
-import userService from '@/services/user.service';
+import { likeItemSchema } from '@/lib/validations/item';
+import itemService from '@/services/item.service';
 
-const userIndexHandler: NextApiHandler = async (req, res) => {
+const itemLikeHandler: NextApiHandler = async (req, res) => {
   const { method } = req;
 
-  if (method === 'GET') {
+  if (method === 'POST') {
     const session = await unstable_getServerSession(req, res, authOptions);
 
     if (!session) {
       return res.status(403).end();
     }
 
-    const data = await userService.getUserById(session.user.id);
+    const params = await likeItemSchema.parseAsync(req.query);
+
+    const data = await itemService.likeItem({
+      userId: session.user.id,
+      itemId: params.itemId,
+    });
 
     return res.status(200).json(data);
   }
 
-  if (method === 'PATCH') {
+  if (method === 'DELETE') {
     const session = await unstable_getServerSession(req, res, authOptions);
 
     if (!session) {
       return res.status(403).end();
     }
 
-    const body = await userSchema.parseAsync(req.body);
+    const params = await likeItemSchema.parseAsync(req.query);
 
-    const data = await userService.updateUserInfo({
+    const data = await itemService.deleteLikeItem({
       userId: session.user.id,
-      userName: body.userName,
+      itemId: params.itemId,
     });
 
-    if (!data) {
-      return res.status(404).end();
-    }
-
-    return res.status(204).end();
+    return res.status(200).json(data);
   }
 };
 
-export default withCatch(withMethods(['GET', 'PATCH'], userIndexHandler));
+export default withCatch(withMethods(['POST', 'DELETE'], itemLikeHandler));

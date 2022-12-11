@@ -19,6 +19,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   items         Item[]
+  likes         Like[]
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 }
@@ -76,6 +77,7 @@ model Item {
   userId       String
   blog         Blog     @relation(fields: [blogId], references: [id], onDelete: Cascade)
   blogId       Int
+  likes        Like[]
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
@@ -90,4 +92,16 @@ model Blog {
   items     Item[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Like {
+  id        Int      @id @default(autoincrement())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  itemId    Int
+  item      Item     @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, itemId])
 }

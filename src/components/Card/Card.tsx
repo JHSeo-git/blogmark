@@ -1,8 +1,13 @@
 'use client';
 
-import { getDateByString } from '@/lib/utils';
+import { useState } from 'react';
+
+import { deleteLikeItem, likeItem } from '@/lib/api/items';
+import { cn, getDateByString } from '@/lib/utils';
 import type { SerializedItem } from '@/services/item.service/item.service';
 
+import HeartIcon from '../__icons/Heart.Icon';
+import MoreVerticalIcon from '../__icons/MoreVertical.Icon';
 import Hidden from '../Hidden';
 import CardFavicon from './Card.Favicon';
 import CardThumbnail from './Card.Thumbnail';
@@ -13,6 +18,7 @@ interface CardProps {
 
 function Card({ item }: CardProps) {
   const {
+    id: itemId,
     url,
     title,
     description,
@@ -22,7 +28,26 @@ function Card({ item }: CardProps) {
     favicon,
     publisher,
     publisherUrl,
+    likes,
+    isLike,
   } = item;
+  const [isLiked, setIsLiked] = useState(isLike);
+  const [likesCount, setLikesCount] = useState(likes ?? 0);
+
+  const onLike = async () => {
+    try {
+      setIsLiked((prev) => !prev);
+      if (isLike) {
+        setLikesCount((prev) => prev - 1);
+        await deleteLikeItem(itemId);
+      } else {
+        setLikesCount((prev) => prev + 1);
+        await likeItem(itemId);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   return (
     <article className="relative group">
@@ -50,7 +75,7 @@ function Card({ item }: CardProps) {
         </div>
       </CardThumbnail>
 
-      <div className="mt-4 px-1 inline-flex gap-2 items-center relative">
+      <div className="mt-4 px-1 flex gap-2 items-center relative">
         <p className="text-sm">{userName}</p>
         <div className="flex items-center gap-2">
           {createdAt && (
@@ -71,6 +96,22 @@ function Card({ item }: CardProps) {
         <a href={url ?? undefined} target="_blank" rel="noreferrer">
           <p className="mt-1">{description}</p>
         </a>
+      </div>
+
+      <div className="mt-2 flex justify-between items-center relative">
+        <div className="flex items-center gap-2" />
+        <div className="flex items-center gap-2">
+          <button type="button" className="flex justify-center items-center" onClick={onLike}>
+            <HeartIcon
+              className={cn('transition-all', isLiked ? 'text-red-500' : 'text-base-300')}
+              width={20}
+              height={20}
+            />
+          </button>
+          <button type="button" className="flex justify-center items-center">
+            <MoreVerticalIcon width={20} height={20} />
+          </button>
+        </div>
       </div>
     </article>
   );

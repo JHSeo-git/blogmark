@@ -32,7 +32,7 @@ class ApiClient {
     });
   }
 
-  post<TResponse>(url: string, body: object, option?: ClientOpeion | undefined) {
+  post<TResponse>(url: string, body?: object, option?: ClientOpeion | undefined) {
     const generatedUrl = this.generateUrl(url);
 
     return ApiClient.request<TResponse>(generatedUrl, {
@@ -46,7 +46,7 @@ class ApiClient {
     });
   }
 
-  put<TResponse>(url: string, body: object, option?: ClientOpeion | undefined) {
+  put<TResponse>(url: string, body?: object, option?: ClientOpeion | undefined) {
     const generatedUrl = this.generateUrl(url);
 
     return ApiClient.request<TResponse>(generatedUrl, {
@@ -57,6 +57,29 @@ class ApiClient {
       },
       body: JSON.stringify(body),
       method: 'PUT',
+    });
+  }
+
+  patch<TResponse>(url: string, body?: object, option?: ClientOpeion | undefined) {
+    const generatedUrl = this.generateUrl(url);
+
+    return ApiClient.request<TResponse>(generatedUrl, {
+      ...option,
+      headers: {
+        ...option?.headers,
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: JSON.stringify(body),
+      method: 'PATCH',
+    });
+  }
+
+  delete<TResponse>(url: string, option?: ClientOpeion | undefined) {
+    const generatedUrl = this.generateUrl(url);
+
+    return ApiClient.request<TResponse>(generatedUrl, {
+      ...option,
+      method: 'DELETE',
     });
   }
 }
