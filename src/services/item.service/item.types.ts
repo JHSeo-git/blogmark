@@ -1,11 +1,13 @@
 export interface GetItemsParams {
   page?: number;
   limit?: number;
+  userId?: string;
 }
 
 export interface GetItemsByCursorParams {
   cursor?: number;
   limit?: number;
+  userId?: string;
 }
 
 export interface CreateItemParam {

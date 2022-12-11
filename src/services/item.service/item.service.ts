@@ -14,7 +14,7 @@ import type {
 const DEFAULT_PAGINATION_LIMIT = 12;
 
 const itemService = {
-  async getItems({ page = 1, limit = DEFAULT_PAGINATION_LIMIT }: GetItemsParams = {}) {
+  async getItems({ page = 1, limit = DEFAULT_PAGINATION_LIMIT, userId }: GetItemsParams = {}) {
     const [total, items] = await Promise.all([
       db.item.count(),
       db.item.findMany({
@@ -32,7 +32,7 @@ const itemService = {
     ]);
 
     return {
-      items: items.map(serializeItem),
+      items: items.map((item) => serializeItem(item, userId)),
       pageInfo: {
         currentPage: page,
         nextPage: total > page * limit ? page + 1 : undefined,
@@ -44,6 +44,7 @@ const itemService = {
   async getItemsByCursor({
     cursor,
     limit = DEFAULT_PAGINATION_LIMIT,
+    userId,
   }: GetItemsByCursorParams = {}) {
     const [total, itemsWithNext] = await Promise.all([
       db.item.count(),
@@ -65,7 +66,7 @@ const itemService = {
 
     const nextCursor = itemsWithNext[limit] ? itemsWithNext[limit].id : null;
 
-    const serializeItems = items.map(serializeItem);
+    const serializeItems = items.map((item) => serializeItem(item, userId));
 
     return {
       items: serializeItems,
@@ -137,7 +138,7 @@ const itemService = {
       });
     }
 
-    return serializeItem(item);
+    return serializeItem(item, data.userId);
   },
 
   async likeItem({ userId, itemId }: LikeItemParam) {
@@ -192,7 +193,10 @@ const itemService = {
   },
 };
 
-const serializeItem = (item: Item & { user: User; blog: Blog; likes: Like[] }) => {
+const serializeItem = (
+  item: Item & { user: User; blog: Blog; likes: Like[] },
+  sessionUserId?: string,
+) => {
   return {
     id: item.id,
     title: item.title,
@@ -204,7 +208,7 @@ const serializeItem = (item: Item & { user: User; blog: Blog; likes: Like[] }) =
     publisherUrl: item.blog.domain,
     userName: item.user.name,
     likes: item.likes.length,
-    isLike: item.likes.some((like) => like.userId === item.userId),
+    isLike: item.likes.some((like) => like.userId === sessionUserId),
     calendarDate: item.calendarDate,
     createdAt: item.createdAt.toISOString(),
   };

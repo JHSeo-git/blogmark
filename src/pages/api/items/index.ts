@@ -14,11 +14,14 @@ const itemsIndexHandler: NextApiHandler = async (req, res) => {
   const { method } = req;
 
   if (method === 'GET') {
+    const session = await unstable_getServerSession(req, res, authOptions);
+
     const query = await paginationSchema.parseAsync(req.query);
 
     const data = await itemService.getItems({
       page: query.page,
       limit: query.limit,
+      userId: session?.user?.id,
     });
 
     return res.status(200).json(data);
