@@ -14,9 +14,10 @@ import CardThumbnail from './Card.Thumbnail';
 
 interface CardProps {
   item: SerializedItem;
+  isLoggedIn?: boolean;
 }
 
-function Card({ item }: CardProps) {
+function Card({ item, isLoggedIn }: CardProps) {
   const {
     id: itemId,
     url,
@@ -36,6 +37,11 @@ function Card({ item }: CardProps) {
 
   const onLike = async () => {
     try {
+      if (!isLoggedIn) {
+        // TODO: show login modal
+        return;
+      }
+
       setIsLiked((prev) => !prev);
       if (isLike) {
         setLikesCount((prev) => prev - 1);
@@ -103,7 +109,10 @@ function Card({ item }: CardProps) {
         <div className="flex items-center gap-2">
           <button type="button" className="flex justify-center items-center" onClick={onLike}>
             <HeartIcon
-              className={cn('transition-all', isLiked ? 'text-red-500' : 'text-base-300')}
+              className={cn(
+                'transition-all group-hover:text-base-300',
+                isLiked ? 'text-red-500' : 'text-base-200',
+              )}
               width={20}
               height={20}
             />

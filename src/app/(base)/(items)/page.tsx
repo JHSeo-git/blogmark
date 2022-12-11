@@ -11,7 +11,7 @@ async function ItemsPage() {
       <Hidden>
         <h1>Items Page</h1>
       </Hidden>
-      <InfiniteItems />
+      <InfiniteItems isLoggedIn={Boolean(user)} />
       {user && <ClipboardPop />}
     </>
   );
