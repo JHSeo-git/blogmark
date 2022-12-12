@@ -124,10 +124,7 @@ function Card({ item, isLoggedIn }: CardProps) {
           ) : (
             <SignInDialogButton>
               <HeartIcon
-                className={cn(
-                  'transition-all group-hover:text-base-300',
-                  isLiked ? 'text-red-500' : 'text-base-200',
-                )}
+                className="transition-all text-base-200 group-hover:text-base-300"
                 width={20}
                 height={20}
               />

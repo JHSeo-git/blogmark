@@ -50,6 +50,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           <AnimatePresence>
             {resetInput && isFocus && (
               <motion.button
+                key="reset-button"
                 tabIndex={-1}
                 type="button"
                 className="flex pr-3 text-gray-400"
@@ -67,6 +68,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         <AnimatePresence>
           {error && (
             <motion.label
+              key="error-label"
               className="label p-0 px-2"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: '32px' }}

@@ -43,7 +43,7 @@ function LoginForm({ enableCallbackUrl = true }: LoginFormProps) {
         disabled={isLoading}
       >
         <GithubIcon width={20} height={20} />
-        <span className="font-bold">Github</span>
+        <span className="font-bold">Sign in with Github</span>
       </button>
       <button
         type="button"
@@ -55,7 +55,7 @@ function LoginForm({ enableCallbackUrl = true }: LoginFormProps) {
         disabled={isLoading}
       >
         <GoogleIcon width={20} height={20} />
-        <span className="font-bold">Google</span>
+        <span className="font-bold">Sign in with Google</span>
       </button>
     </>
   );

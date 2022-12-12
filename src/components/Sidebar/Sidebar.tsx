@@ -5,7 +5,7 @@ import LogoIcon from '../__icons/Logo.Icon';
 function Sidebar() {
   return (
     <aside className="bg-base-100 w-[80vw] max-w-sm">
-      <div className="px-6 py-6 border-b">
+      <div className="px-6 py-6 lg:py-7 border-b">
         <LogoIcon height="24" />
       </div>
       <ul className="py-4">

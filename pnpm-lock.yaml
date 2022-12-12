@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@aws-sdk/client-s3': ^3.223.0
+  '@headlessui/react': ^1.7.5
   '@hookform/resolvers': ^2.9.10
   '@next-auth/prisma-adapter': 1.0.5
   '@prisma/client': 4.7.1
@@ -57,6 +58,7 @@ specifiers:
 
 dependencies:
   '@aws-sdk/client-s3': 3.223.0
+  '@headlessui/react': 1.7.5_biqbaboplfbrettd7655fr4n2y
   '@hookform/resolvers': 2.9.10_react-hook-form@7.38.0
   '@next-auth/prisma-adapter': 1.0.5_inxn7o352d4boegikzpvj3st6e
   '@prisma/client': 4.7.1_prisma@4.7.1
@@ -77,13 +79,14 @@ dependencies:
   react-hook-form: 7.38.0_react@18.2.0
   react-intersection-observer: 9.4.1_react@18.2.0
   sharp: 0.31.2
+  tailwind-merge: 1.7.0
   zod: 3.19.1
 
 devDependencies:
   '@tailwindcss/line-clamp': 0.4.2_tailwindcss@3.2.4
   '@types/facebook-js-sdk': 3.3.6
   '@types/mime-types': 2.1.1
-  '@types/node': 18.11.11
+  '@types/node': 18.11.13
   '@types/qs': 6.9.7
   '@types/react': 18.0.26
   '@types/react-dom': 18.0.9
@@ -106,10 +109,9 @@ devDependencies:
   postcss: 8.4.18
   prettier: 2.8.1
   prisma: 4.7.1
-  tailwind-merge: 1.7.0
   tailwindcss: 3.2.4_neo3lunb2qpadwxplzw7r2isgm
   tailwindcss-radix: 2.6.1
-  ts-node: 10.9.1_5wyqbr5ddly62zcv3ehcsfny4y
+  ts-node: 10.9.1_zwbbn7v4nhzhfdmlr6kgywzsoe
   typescript: 4.8.4
 
 packages:
@@ -1156,6 +1158,18 @@ packages:
       - '@types/react'
     dev: false
 
+  /@headlessui/react/1.7.5_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-UZSxOfA0CYKO7QDT5OGlFvesvlR1SKkawwSjwQJwt7XQItpzRKdE3ZUQxHcg4LEz3C0Wler2s9psdb872ynwrQ==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: ^16 || ^17 || ^18
+      react-dom: ^16 || ^17 || ^18
+    dependencies:
+      client-only: 0.0.1
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
   /@hookform/resolvers/2.9.10_react-hook-form@7.38.0:
     resolution: {integrity: sha512-JIL1DgJIlH9yuxcNGtyhsWX/PgNltz+5Gr6+8SX9fhXc/hPbEIk6wPI82nhgvp3uUb6ZfAM5mqg/x7KR7NAb+A==}
     peerDependencies:
@@ -1789,7 +1803,7 @@ packages:
     resolution: {integrity: sha512-ZUxbzKl0IfJILTS6t7ip5fQQM/J3TJYubDm3nMbgubNNYS62eXeUpoLUC8/7fJNiFYHTrGPQn7hspDUzIHX3UA==}
     dependencies:
       '@types/minimatch': 5.1.2
-      '@types/node': 18.11.11
+      '@types/node': 18.11.13
     dev: true
 
   /@types/json-schema/7.0.11:
@@ -1808,8 +1822,8 @@ packages:
     resolution: {integrity: sha512-K0VQKziLUWkVKiRVrx4a40iPaxTUefQmjtkQofBkYRcoaaL/8rhwDWww9qWbrgicNOgnpIsMxyNIUM4+n6dUIA==}
     dev: true
 
-  /@types/node/18.11.11:
-    resolution: {integrity: sha512-KJ021B1nlQUBLopzZmPBVuGU9un7WJd/W4ya7Ih02B4Uwky5Nja0yGYav2EfYIk0RR2Q9oVhf60S2XR1BCWJ2g==}
+  /@types/node/18.11.13:
+    resolution: {integrity: sha512-IASpMGVcWpUsx5xBOrxMj7Bl8lqfuTY7FKAnPmu5cHkfQVWF8GulWS1jbRqA934qZL35xh5xN/+Xe/i26Bod4w==}
     dev: true
 
   /@types/prop-types/15.7.5:
@@ -4315,7 +4329,7 @@ packages:
     dependencies:
       lilconfig: 2.0.6
       postcss: 8.4.18
-      ts-node: 10.9.1_5wyqbr5ddly62zcv3ehcsfny4y
+      ts-node: 10.9.1_zwbbn7v4nhzhfdmlr6kgywzsoe
       yaml: 1.10.2
     dev: true
 
@@ -4848,7 +4862,7 @@ packages:
 
   /tailwind-merge/1.7.0:
     resolution: {integrity: sha512-A7oBapTWhV9M4bwLtxLQS9ZpPrvcikp21l+Xhwbet5SbaxUVogbHGLy+VDZcHe4LHWE99RpRbSpCBKaVqBs5Og==}
-    dev: true
+    dev: false
 
   /tailwindcss-radix/2.6.1:
     resolution: {integrity: sha512-ejh4BHkn/3g349l+JiEW6I4//uclU4nllEqnOK3/8zpORscIk9WbjLyYR2UzqwVRjjzgd72I/hMDJZm3+XO48w==}
@@ -4931,7 +4945,7 @@ packages:
       is-number: 7.0.0
     dev: true
 
-  /ts-node/10.9.1_5wyqbr5ddly62zcv3ehcsfny4y:
+  /ts-node/10.9.1_zwbbn7v4nhzhfdmlr6kgywzsoe:
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -4950,7 +4964,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.3
-      '@types/node': 18.11.11
+      '@types/node': 18.11.13
       acorn: 8.8.1
       acorn-walk: 8.2.0
       arg: 4.1.3

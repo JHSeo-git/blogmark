@@ -22,11 +22,12 @@ function UserAddonMenu({ isOpen, onClose }: UserAddonMenuProps) {
   };
 
   return (
-    <AnimatePresence>
-      <nav>
+    <nav>
+      <AnimatePresence>
         {isOpen && (
           <>
             <motion.div
+              key="user-addon-menu"
               className="absolute top-[100%] right-0 z-20"
               initial={{
                 opacity: 0,
@@ -40,7 +41,11 @@ function UserAddonMenu({ isOpen, onClose }: UserAddonMenuProps) {
               }}
               exit={{
                 opacity: 0,
-                scale: 0,
+                scale: 0.9,
+                transition: {
+                  ease: 'easeIn',
+                  duration: 0.15,
+                },
               }}
             >
               <ul className="border bg-base-100 rounded-sm w-52 mt-1 shadow-lg">
@@ -65,8 +70,8 @@ function UserAddonMenu({ isOpen, onClose }: UserAddonMenuProps) {
             </button>
           </>
         )}
-      </nav>
-    </AnimatePresence>
+      </AnimatePresence>
+    </nav>
   );
 }
 

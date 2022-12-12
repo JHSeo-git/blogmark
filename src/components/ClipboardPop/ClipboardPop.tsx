@@ -25,10 +25,11 @@ function ClipboardPop() {
     <AnimatePresence>
       {isPop && (
         <motion.div
+          key="clipboard-pop"
           className="fixed bottom-0 left-1/2 z-50 p-2 md:p-6 w-full max-w-xl"
-          initial={{ opacity: 0, x: '-50%', y: 100 }}
+          initial={{ opacity: 0, x: '-50%', y: 50 }}
           animate={{ opacity: 1, x: '-50%', y: 0 }}
-          exit={{ opacity: 0, x: '-50%', y: 100 }}
+          exit={{ opacity: 0, x: '-50%', y: 50, transition: { ease: 'easeIn', duration: 0.15 } }}
         >
           <div className="p-6 bg-base-100 rounded-xl shadow-2xl">
             <div className="pl-1 flex items-center justify-between">
