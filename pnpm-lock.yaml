@@ -2,7 +2,6 @@ lockfileVersion: 5.4
 
 specifiers:
   '@aws-sdk/client-s3': ^3.223.0
-  '@headlessui/react': ^1.7.5
   '@hookform/resolvers': ^2.9.10
   '@next-auth/prisma-adapter': 1.0.5
   '@prisma/client': 4.7.1
@@ -58,7 +57,6 @@ specifiers:
 
 dependencies:
   '@aws-sdk/client-s3': 3.223.0
-  '@headlessui/react': 1.7.5_biqbaboplfbrettd7655fr4n2y
   '@hookform/resolvers': 2.9.10_react-hook-form@7.38.0
   '@next-auth/prisma-adapter': 1.0.5_inxn7o352d4boegikzpvj3st6e
   '@prisma/client': 4.7.1_prisma@4.7.1
@@ -1156,18 +1154,6 @@ packages:
       use-isomorphic-layout-effect: 1.1.2_kzbn2opkn2327fwg5yzwzya5o4
     transitivePeerDependencies:
       - '@types/react'
-    dev: false
-
-  /@headlessui/react/1.7.5_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-UZSxOfA0CYKO7QDT5OGlFvesvlR1SKkawwSjwQJwt7XQItpzRKdE3ZUQxHcg4LEz3C0Wler2s9psdb872ynwrQ==}
-    engines: {node: '>=10'}
-    peerDependencies:
-      react: ^16 || ^17 || ^18
-      react-dom: ^16 || ^17 || ^18
-    dependencies:
-      client-only: 0.0.1
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /@hookform/resolvers/2.9.10_react-hook-form@7.38.0:
