@@ -63,7 +63,11 @@ export function ToastContextProvider({ children }: { children: React.ReactNode }
   );
 
   const clearAll = useCallback(() => {
-    setToasts([]);
+    setToasts((prev) => prev.map((item) => ({ ...item, visible: false })));
+
+    setTimeout(() => {
+      setToasts([]);
+    }, 200);
   }, [setToasts]);
 
   const value = useMemo<ContextProps>(
