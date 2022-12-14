@@ -1,8 +1,8 @@
+import type { Provider } from '@/types/oauth-provider';
+
 import GithubIcon from '../__icons/Github.Icon';
 import GoogleIcon from '../__icons/Google.Icon';
 import Badge from './Badge';
-
-type Provider = 'github' | 'google';
 
 function isProvider(value: string): value is Provider {
   return ['github', 'google'].includes(value);

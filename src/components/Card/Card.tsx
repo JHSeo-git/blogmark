@@ -1,6 +1,5 @@
 'use client';
 
-import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 
 import { deleteLikeItem, likeItem } from '@/lib/api/items';
@@ -33,16 +32,11 @@ function Card({ item }: CardProps) {
     likes,
     isLike,
   } = item;
-  const session = useSession();
   const [isLiked, setIsLiked] = useState(isLike);
   const [likesCount, setLikesCount] = useState(likes ?? 0);
 
   const onLike = async () => {
     try {
-      if (session.status !== 'authenticated') {
-        return;
-      }
-
       if (isLiked) {
         setIsLiked(false);
         setLikesCount((prev) => prev - 1);
@@ -126,13 +120,13 @@ function Card({ item }: CardProps) {
             />
           </ProtectedButton>
 
-          <button type="button" className="flex justify-center items-center group">
+          <ProtectedButton type="button" className="flex justify-center items-center group">
             <MoreVerticalIcon
               className="transition-all group-hover:text-gray-400 text-gray-300"
               width={20}
               height={20}
             />
-          </button>
+          </ProtectedButton>
         </div>
       </div>
     </article>
