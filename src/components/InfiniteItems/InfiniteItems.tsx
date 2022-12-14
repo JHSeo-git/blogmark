@@ -8,11 +8,7 @@ import { getItems } from '@/lib/api/items';
 
 import Card, { CardSkeleton } from '../Card';
 
-interface InfiniteItemsProps {
-  isLoggedIn?: boolean;
-}
-
-function InfiniteItems({ isLoggedIn }: InfiniteItemsProps) {
+function InfiniteItems() {
   const { ref, inView } = useInView();
 
   const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage } = useInfiniteQuery({
@@ -64,7 +60,7 @@ function InfiniteItems({ isLoggedIn }: InfiniteItemsProps) {
         <ul className="p-4 pb-12 grid grid-cols-1 gap-10 md:p-6 md:pb-12 md:grid-cols-2 xl:grid-cols-3">
           {items.map((item) => (
             <li key={item.id}>
-              <Card item={item} isLoggedIn={isLoggedIn} />
+              <Card item={item} />
             </li>
           ))}
           {hasNextPage && (

@@ -1,18 +1,15 @@
 import ClipboardPop from '@/components/ClipboardPop';
 import Hidden from '@/components/Hidden';
 import InfiniteItems from '@/components/InfiniteItems';
-import { getUser } from '@/lib/session';
 
-async function ItemsPage() {
-  const user = await getUser();
-
+function ItemsPage() {
   return (
     <>
       <Hidden>
         <h1>Items Page</h1>
       </Hidden>
-      <InfiniteItems isLoggedIn={Boolean(user)} />
-      {user && <ClipboardPop />}
+      <InfiniteItems />
+      <ClipboardPop />
     </>
   );
 }

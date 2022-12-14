@@ -1,5 +1,6 @@
 'use client';
 
+import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 
 import { deleteLikeItem, likeItem } from '@/lib/api/items';
@@ -9,16 +10,15 @@ import type { SerializedItem } from '@/services/item.service/item.service';
 import HeartIcon from '../__icons/Heart.Icon';
 import MoreVerticalIcon from '../__icons/MoreVertical.Icon';
 import Hidden from '../Hidden';
-import SignInDialogButton from '../SignInDialogButton';
+import ProtectedButton from '../ProtectedButton';
 import CardFavicon from './Card.Favicon';
 import CardThumbnail from './Card.Thumbnail';
 
 interface CardProps {
   item: SerializedItem;
-  isLoggedIn?: boolean;
 }
 
-function Card({ item, isLoggedIn }: CardProps) {
+function Card({ item }: CardProps) {
   const {
     id: itemId,
     url,
@@ -33,12 +33,13 @@ function Card({ item, isLoggedIn }: CardProps) {
     likes,
     isLike,
   } = item;
+  const session = useSession();
   const [isLiked, setIsLiked] = useState(isLike);
   const [likesCount, setLikesCount] = useState(likes ?? 0);
 
   const onLike = async () => {
     try {
-      if (!isLoggedIn) {
+      if (session.status !== 'authenticated') {
         return;
       }
 
@@ -57,14 +58,14 @@ function Card({ item, isLoggedIn }: CardProps) {
   };
 
   return (
-    <article className="relative group">
+    <article className="relative">
       <a
         href={url ?? undefined}
         target="_blank"
         rel="noreferrer"
         className="absolute inset-0 block"
       >
-        <Hidden>link overlay</Hidden>
+        <Hidden>Go to {url}</Hidden>
       </a>
 
       <CardThumbnail title={title} src={thumbnail} alt={`${title}'s thumbnail`} url={url}>
@@ -106,33 +107,31 @@ function Card({ item, isLoggedIn }: CardProps) {
       </div>
 
       <div className="mt-2 flex justify-between items-center relative">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-4">
           <Hidden>좋아요 {likesCount}</Hidden>
         </div>
-        <div className="flex items-center gap-2">
-          {isLoggedIn ? (
-            <button type="button" className="flex justify-center items-center" onClick={onLike}>
-              <HeartIcon
-                className={cn(
-                  'transition-all',
-                  isLiked ? 'text-red-500' : 'group-hover:text-base-300 text-base-200',
-                )}
-                width={20}
-                height={20}
-              />
-            </button>
-          ) : (
-            <SignInDialogButton>
-              <HeartIcon
-                className="transition-all text-base-200 group-hover:text-base-300"
-                width={20}
-                height={20}
-              />
-            </SignInDialogButton>
-          )}
+        <div className="flex items-center gap-4">
+          <ProtectedButton
+            type="button"
+            className="flex justify-center items-center group"
+            onClick={onLike}
+          >
+            <HeartIcon
+              className={cn(
+                'transition-all',
+                isLiked ? 'text-red-500' : 'group-hover:text-gray-400 text-gray-300',
+              )}
+              width={20}
+              height={20}
+            />
+          </ProtectedButton>
 
-          <button type="button" className="flex justify-center items-center">
-            <MoreVerticalIcon width={20} height={20} />
+          <button type="button" className="flex justify-center items-center group">
+            <MoreVerticalIcon
+              className="transition-all group-hover:text-gray-400 text-gray-300"
+              width={20}
+              height={20}
+            />
           </button>
         </div>
       </div>

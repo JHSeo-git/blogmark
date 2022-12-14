@@ -1,18 +1,21 @@
 import '@/styles/global.css';
 
 import Providers from '@/components/Providers';
+import { getSession } from '@/lib/session';
 
 interface RootLayoutProps {
   children: React.ReactNode;
 }
 
-function RootLayout({ children }: RootLayoutProps) {
+async function RootLayout({ children }: RootLayoutProps) {
+  const session = await getSession();
+
   return (
     <html lang="ko" data-theme="winter" className="antialiased">
       {/* TODO: data-theme */}
       <head />
       <body>
-        <Providers>{children}</Providers>
+        <Providers session={session}>{children}</Providers>
       </body>
     </html>
   );

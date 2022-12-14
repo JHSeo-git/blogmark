@@ -2,12 +2,14 @@
 
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
 import useClipboardPop from '@/hooks/useClipboardPop';
 
 import CloseIcon from '../__icons/Close.Icon';
 
 function ClipboardPop() {
+  const session = useSession();
   const { isPop, onClose, text } = useClipboardPop();
   const router = useRouter();
 
@@ -20,6 +22,10 @@ function ClipboardPop() {
 
     router.push(`/items/new?markUrl=${encodeURIComponent(text)}`);
   };
+
+  if (session.status !== 'authenticated') {
+    return null;
+  }
 
   return (
     <AnimatePresence>
