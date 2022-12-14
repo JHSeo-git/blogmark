@@ -13,7 +13,7 @@ function CardFavicon({ src, alt, publisher }: CardFaviconProps) {
   const [isError, setIsError] = useState(false);
 
   return (
-    <Tooltip.Provider>
+    <Tooltip.Provider delayDuration={100}>
       <Tooltip.Root>
         <Tooltip.Trigger asChild>
           <div className="rounded-full overflow-hidden h-5 w-5">

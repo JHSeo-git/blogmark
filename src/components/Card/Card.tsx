@@ -107,22 +107,22 @@ function Card({ item }: CardProps) {
         <div className="flex items-center gap-4">
           <ProtectedButton
             type="button"
-            className="flex justify-center items-center group"
+            className="flex justify-center items-center"
             onClick={onLike}
           >
             <HeartIcon
               className={cn(
                 'transition-all',
-                isLiked ? 'text-red-500' : 'group-hover:text-gray-400 text-gray-300',
+                isLiked ? 'text-red-500' : 'hover:text-gray-400 text-gray-300',
               )}
               width={20}
               height={20}
             />
           </ProtectedButton>
 
-          <ProtectedButton type="button" className="flex justify-center items-center group">
+          <ProtectedButton type="button" className="flex justify-center items-center">
             <MoreVerticalIcon
-              className="transition-all group-hover:text-gray-400 text-gray-300"
+              className="transition-all hover:text-gray-400 text-gray-300"
               width={20}
               height={20}
             />
