@@ -23,15 +23,17 @@ export function Content({
   return (
     <>
       <AnimatePresence>
-        <PrimitiveDialog.Overlay asChild>
-          <motion.div
-            key="overlay"
-            className="bg-black/50 fixed inset-0 z-[99]"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          />
-        </PrimitiveDialog.Overlay>
+        {isOpen && (
+          <PrimitiveDialog.Overlay forceMount asChild>
+            <motion.div
+              key="overlay"
+              className="bg-black/50 fixed inset-0 z-[99]"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1, transition: { ease: 'easeOut', duration: 0.15 } }}
+              exit={{ opacity: 0, transition: { ease: 'easeIn', duration: 0.15 } }}
+            />
+          </PrimitiveDialog.Overlay>
+        )}
       </AnimatePresence>
       <AnimatePresence>
         {isOpen && (

@@ -10,6 +10,7 @@ import HeartIcon from '../__icons/Heart.Icon';
 import MoreVerticalIcon from '../__icons/MoreVertical.Icon';
 import Hidden from '../Hidden';
 import ProtectedButton from '../ProtectedButton';
+import { useToast } from '../Toast';
 import CardFavicon from './Card.Favicon';
 import CardThumbnail from './Card.Thumbnail';
 
@@ -18,85 +19,82 @@ interface CardProps {
 }
 
 function Card({ item }: CardProps) {
-  const {
-    id: itemId,
-    url,
-    title,
-    description,
-    thumbnail,
-    createdAt,
-    userName,
-    favicon,
-    publisher,
-    publisherUrl,
-    likes,
-    isLike,
-  } = item;
-  const [isLiked, setIsLiked] = useState(isLike);
-  const [likesCount, setLikesCount] = useState(likes ?? 0);
+  const [isLiked, setIsLiked] = useState(item.isLike);
+  const [likesCount, setLikesCount] = useState(item.likes ?? 0);
+  const toast = useToast();
 
   const onLike = async () => {
     try {
       if (isLiked) {
         setIsLiked(false);
         setLikesCount((prev) => prev - 1);
-        await deleteLikeItem(itemId);
+        await deleteLikeItem(item.id);
       } else {
         setIsLiked(true);
         setLikesCount((prev) => prev + 1);
-        await likeItem(itemId);
+        await likeItem(item.id);
       }
     } catch (e) {
       console.error(e);
+      toast.add({
+        title: '에러',
+        description: '좋아요 처리에 실패했습니다.',
+      });
     }
   };
 
   return (
-    <article className="relative">
+    <article className="relative group">
       <a
-        href={url ?? undefined}
+        href={item.url ?? undefined}
         target="_blank"
         rel="noreferrer"
         className="absolute inset-0 block"
       >
-        <Hidden>Go to {url}</Hidden>
+        <Hidden>Go to {item.url}</Hidden>
       </a>
 
-      <CardThumbnail title={title} src={thumbnail} alt={`${title}'s thumbnail`} url={url}>
+      <CardThumbnail
+        className="group-hover:-translate-y-1 transition-transform"
+        title={item.title}
+        src={item.thumbnail}
+        alt={`${item.title}'s thumbnail`}
+        url={item.url}
+      >
         <div className="bg-base-100 rounded-full border-base-300 border-4 absolute -bottom-4 right-4">
-          {favicon && (
+          {item.favicon && (
             <a
               className="p-1 flex justify-center items-center"
-              href={publisherUrl}
+              href={item.publisherUrl}
               target="_blank"
               rel="noreferrer"
             >
-              <CardFavicon src={favicon} publisher={publisher} />
+              <CardFavicon src={item.favicon} publisher={item.publisher} />
             </a>
           )}
         </div>
       </CardThumbnail>
 
       <div className="mt-4 px-1 flex gap-2 items-center relative">
-        <p className="text-sm">{userName}</p>
+        <p className="text-sm">{item.userName}</p>
         <div className="flex items-center gap-2">
-          {createdAt && (
+          {item.createdAt && (
             <time
               className="px-3 py-0.5 rounded-full border bg-base-100 text-sm"
-              dateTime={createdAt ?? undefined}
+              dateTime={item.createdAt ?? undefined}
             >
-              {getDateByString(createdAt)}
+              {getDateByString(item.createdAt)}
             </time>
           )}
         </div>
       </div>
 
       <div className="mt-2 px-1 relative">
-        <a href={url ?? undefined} target="_blank" rel="noreferrer">
-          <h2 className="text-xl text-neutral font-bold">{title}</h2>
+        <a href={item.url ?? undefined} target="_blank" rel="noreferrer">
+          <h2 className="text-xl text-neutral font-bold">{item.title}</h2>
         </a>
-        <a href={url ?? undefined} target="_blank" rel="noreferrer">
-          <p className="mt-1">{description}</p>
+        <a href={item.url ?? undefined} target="_blank" rel="noreferrer">
+          <p className="mt-1">{item.description}</p>
         </a>
       </div>
 

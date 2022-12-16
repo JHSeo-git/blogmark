@@ -10,6 +10,10 @@ Marking blog site. Like bookmark, but for blog.
 - prisma
 - sqlite
 - cloudflare r2
+- ui
+  - tailwindcss
+  - radix-ui
+  - framer-motion
 - assets
   - icon: [lucide.dev](https://lucide.dev)
 
