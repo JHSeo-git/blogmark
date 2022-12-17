@@ -84,7 +84,7 @@ function CardMore({ itemId, url, isOpen, setIsOpen }: CardMoreProps) {
               onClick={onClipboardCopyClick}
               className="btn btn-sm btn-block btn-ghost no-animation"
             >
-              {copied ? '복사 완료 ✅' : '링크 복사 🔗'}
+              {copied ? '복사 완료' : '링크 복사'}
             </button>
           </li>
           <li className="py-1">
