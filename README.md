@@ -10,6 +10,7 @@ Marking blog site. Like bookmark, but for blog.
 - prisma
 - sqlite
 - cloudflare r2
+- react-query, react-hook-form, zod
 - ui
   - tailwindcss
   - radix-ui
@@ -21,3 +22,7 @@ Marking blog site. Like bookmark, but for blog.
 
 - https://github.com/prisma/prisma-examples
 - https://github.com/shadcn/taxonomy
+
+## LICENSE
+
+[MIT](./LICENSE)
