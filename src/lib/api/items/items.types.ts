@@ -11,8 +11,9 @@ export interface GetItemsParams {
   limit?: number;
 }
 export type GetItemsResponse = GetItems;
+export type DeleteItemResponse = {};
 
 export interface LikeItemResponse {
   likes: number;
 }
-export type DeleteItemResponse = LikeItemResponse;
+export type DeleteLikeItemResponse = LikeItemResponse;

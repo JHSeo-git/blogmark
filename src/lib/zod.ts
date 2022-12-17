@@ -10,4 +10,4 @@ export const numericString = (schema: ZodTypeAny) =>
       return a;
     }
     return undefined;
-  }, schema);
+  }, schema) as z.ZodEffects<z.ZodTypeAny, number, number>;

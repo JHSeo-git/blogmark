@@ -1,14 +1,16 @@
 import type { Blog, Item, Like, User } from '@prisma/client';
 
+import AppError from '@/lib/error';
 import db from '@/lib/prisma';
 import { uploadImage } from '@/lib/r2';
 import { getDate, slugify } from '@/lib/utils';
 
 import type {
-  CreateItemParam,
+  CreateItemParams,
+  DeleteItemParams,
   GetItemsByCursorParams,
   GetItemsParams,
-  LikeItemParam,
+  LikeItemParams,
 } from './item.types';
 
 const DEFAULT_PAGINATION_LIMIT = 12;
@@ -77,7 +79,7 @@ const itemService = {
     };
   },
 
-  async createItem(data: CreateItemParam) {
+  async createItem(data: CreateItemParams) {
     let slug = slugify(data.title);
 
     const alreadyExists = await db.item.findUnique({
@@ -141,7 +143,31 @@ const itemService = {
     return serializeItem(item, data.userId);
   },
 
-  async likeItem({ userId, itemId }: LikeItemParam) {
+  async deleteItem({ userId, itemId }: DeleteItemParams) {
+    const item = await db.item.findUnique({
+      where: {
+        id: itemId,
+      },
+    });
+
+    if (!item) {
+      throw new AppError('BadRequest');
+    }
+
+    if (item.userId !== userId) {
+      throw new AppError('Unauthorized');
+    }
+
+    const deletedItem = await db.item.delete({
+      where: {
+        id: itemId,
+      },
+    });
+
+    return deletedItem;
+  },
+
+  async likeItem({ userId, itemId }: LikeItemParams) {
     const alreadyLikeItem = await db.like.findUnique({
       where: {
         userId_itemId: {
@@ -171,7 +197,7 @@ const itemService = {
     };
   },
 
-  async deleteLikeItem({ userId, itemId }: LikeItemParam) {
+  async deleteLikeItem({ userId, itemId }: LikeItemParams) {
     const existLikeItem = await db.like.findUnique({
       where: {
         userId_itemId: {

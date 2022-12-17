@@ -10,6 +10,6 @@ export const itemSchema = z.object({
     .max(40, '2~40글자를 입력해주세요.'),
 });
 
-export const likeItemSchema = z.object({
+export const itemIdSchema = z.object({
   itemId: numericString(z.number({ required_error: 'itemId를 입력해주세요.' })),
 });

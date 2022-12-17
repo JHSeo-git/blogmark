@@ -4,7 +4,7 @@ import { unstable_getServerSession } from 'next-auth/next';
 import { withCatch } from '@/lib/api-middlewares/with-catch';
 import { withMethods } from '@/lib/api-middlewares/with-methods';
 import { authOptions } from '@/lib/next-auth';
-import { likeItemSchema } from '@/lib/validations/item';
+import { itemIdSchema } from '@/lib/validations/item';
 import itemService from '@/services/item.service';
 
 const itemLikeHandler: NextApiHandler = async (req, res) => {
@@ -17,7 +17,7 @@ const itemLikeHandler: NextApiHandler = async (req, res) => {
       return res.status(403).end();
     }
 
-    const params = await likeItemSchema.parseAsync(req.query);
+    const params = await itemIdSchema.parseAsync(req.query);
 
     const data = await itemService.likeItem({
       userId: session.user.id,
@@ -34,7 +34,7 @@ const itemLikeHandler: NextApiHandler = async (req, res) => {
       return res.status(403).end();
     }
 
-    const params = await likeItemSchema.parseAsync(req.query);
+    const params = await itemIdSchema.parseAsync(req.query);
 
     const data = await itemService.deleteLikeItem({
       userId: session.user.id,

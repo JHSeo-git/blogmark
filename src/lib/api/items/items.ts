@@ -5,6 +5,7 @@ import type {
   CreateItemParams,
   CreateItemResponse,
   DeleteItemResponse,
+  DeleteLikeItemResponse,
   GetItemsParams,
   GetItemsResponse,
   LikeItemResponse,
@@ -24,6 +25,12 @@ export async function getItems({ page, limit }: GetItemsParams) {
   return data;
 }
 
+export async function deleteItem(itemId: number) {
+  const data = await client.delete<DeleteItemResponse>(`/api/items/${itemId}`);
+
+  return data;
+}
+
 export async function likeItem(itemId: number) {
   const data = await client.post<LikeItemResponse>(`/api/items/${itemId}/like`);
 
@@ -31,7 +38,7 @@ export async function likeItem(itemId: number) {
 }
 
 export async function deleteLikeItem(itemId: number) {
-  const data = await client.delete<DeleteItemResponse>(`/api/items/${itemId}/like`);
+  const data = await client.delete<DeleteLikeItemResponse>(`/api/items/${itemId}/like`);
 
   return data;
 }

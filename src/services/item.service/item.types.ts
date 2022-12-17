@@ -10,7 +10,7 @@ export interface GetItemsByCursorParams {
   userId?: string;
 }
 
-export interface CreateItemParam {
+export interface CreateItemParams {
   userId: string;
   blogId: number;
   title: string;
@@ -20,7 +20,12 @@ export interface CreateItemParam {
   favicon?: string;
 }
 
-export interface LikeItemParam {
+export interface DeleteItemParams {
+  userId: string;
+  itemId: number;
+}
+
+export interface LikeItemParams {
   userId: string;
   itemId: number;
 }

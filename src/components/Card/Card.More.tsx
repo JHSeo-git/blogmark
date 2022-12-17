@@ -7,15 +7,18 @@ import MoreVerticalIcon from '../__icons/MoreVertical.Icon';
 import * as Popover from '../Popover';
 import ProtectedButton from '../ProtectedButton';
 import { useToast } from '../Toast';
+import useDeleteItem from './useDeleteItem';
 
 interface CardMoreProps {
+  itemId: number;
   url?: string | null;
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
 }
 
-function CardMore({ url, isOpen, setIsOpen }: CardMoreProps) {
+function CardMore({ itemId, url, isOpen, setIsOpen }: CardMoreProps) {
   const { copied, copy } = useClipboardCopy();
+  const { mutate, isLoading } = useDeleteItem(itemId);
   const toast = useToast();
 
   const onClipboardCopyClick = () => {
@@ -28,6 +31,11 @@ function CardMore({ url, isOpen, setIsOpen }: CardMoreProps) {
       title: '복사 완료 ✅',
       description: '링크가 복사되었습니다.',
     });
+  };
+
+  const onDeleteClick = () => {
+    setIsOpen(false);
+    mutate(itemId);
   };
 
   return (
@@ -80,7 +88,12 @@ function CardMore({ url, isOpen, setIsOpen }: CardMoreProps) {
             </button>
           </li>
           <li className="py-1">
-            <button type="button" className="btn btn-sm btn-block btn-ghost no-animation">
+            <button
+              type="button"
+              onClick={onDeleteClick}
+              disabled={isLoading}
+              className="btn btn-sm btn-block btn-ghost no-animation"
+            >
               삭제
             </button>
           </li>
