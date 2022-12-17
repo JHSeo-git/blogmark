@@ -7,11 +7,11 @@ import { cn, getDateByString } from '@/lib/utils';
 import type { SerializedItem } from '@/services/item.service/item.service';
 
 import HeartIcon from '../__icons/Heart.Icon';
-import MoreVerticalIcon from '../__icons/MoreVertical.Icon';
 import Hidden from '../Hidden';
 import ProtectedButton from '../ProtectedButton';
 import { useToast } from '../Toast';
 import CardFavicon from './Card.Favicon';
+import CardMore from './Card.More';
 import CardThumbnail from './Card.Thumbnail';
 
 interface CardProps {
@@ -21,6 +21,7 @@ interface CardProps {
 function Card({ item }: CardProps) {
   const [isLiked, setIsLiked] = useState(item.isLike);
   const [likesCount, setLikesCount] = useState(item.likes ?? 0);
+  const [isMoreOpen, setIsMoreOpen] = useState(false);
   const toast = useToast();
 
   const onLike = async () => {
@@ -118,13 +119,7 @@ function Card({ item }: CardProps) {
             />
           </ProtectedButton>
 
-          <ProtectedButton type="button" className="flex justify-center items-center">
-            <MoreVerticalIcon
-              className="transition-all hover:text-gray-400 text-gray-300"
-              width={20}
-              height={20}
-            />
-          </ProtectedButton>
+          <CardMore isOpen={isMoreOpen} setIsOpen={setIsMoreOpen} />
         </div>
       </div>
     </article>
