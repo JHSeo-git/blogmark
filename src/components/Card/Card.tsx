@@ -119,7 +119,7 @@ function Card({ item }: CardProps) {
             />
           </ProtectedButton>
 
-          <CardMore isOpen={isMoreOpen} setIsOpen={setIsMoreOpen} />
+          <CardMore url={item.url} isOpen={isMoreOpen} setIsOpen={setIsMoreOpen} />
         </div>
       </div>
     </article>

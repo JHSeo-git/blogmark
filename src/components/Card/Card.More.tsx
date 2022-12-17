@@ -1,16 +1,35 @@
 import { AnimatePresence, motion } from 'framer-motion';
 
+import useClipboardCopy from '@/hooks/useClipboardCopy';
+
 import CloseIcon from '../__icons/Close.Icon';
 import MoreVerticalIcon from '../__icons/MoreVertical.Icon';
 import * as Popover from '../Popover';
 import ProtectedButton from '../ProtectedButton';
+import { useToast } from '../Toast';
 
 interface CardMoreProps {
+  url?: string | null;
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
 }
 
-function CardMore({ isOpen, setIsOpen }: CardMoreProps) {
+function CardMore({ url, isOpen, setIsOpen }: CardMoreProps) {
+  const { copied, copy } = useClipboardCopy();
+  const toast = useToast();
+
+  const onClipboardCopyClick = () => {
+    if (!url) {
+      return;
+    }
+    copy(url);
+    setIsOpen(false);
+    toast.add({
+      title: '복사 완료 ✅',
+      description: '링크가 복사되었습니다.',
+    });
+  };
+
   return (
     <Popover.Root open={isOpen} onOpenChange={setIsOpen}>
       <Popover.Trigger asChild>
@@ -51,8 +70,13 @@ function CardMore({ isOpen, setIsOpen }: CardMoreProps) {
       <Popover.Content className="border p-1" hasCloseButton={false}>
         <ul>
           <li className="border-b py-1">
-            <button type="button" className="btn btn-sm btn-block btn-ghost no-animation">
-              링크 복사
+            <button
+              type="button"
+              disabled={copied}
+              onClick={onClipboardCopyClick}
+              className="btn btn-sm btn-block btn-ghost no-animation"
+            >
+              {copied ? '복사 완료 ✅' : '링크 복사 🔗'}
             </button>
           </li>
           <li className="py-1">
