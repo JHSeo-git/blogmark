@@ -9,6 +9,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'pub-f32feec30d8e4eee8750681495853339.r2.dev',
       },
+      {
+        protocol: 'https',
+        hostname: 'files-blogmark.seonest.net',
+      },
     ],
   },
 

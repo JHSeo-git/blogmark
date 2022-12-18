@@ -14,8 +14,11 @@ if (!process.env.R2_BUCKET_NAME) {
   throw new Error('Please define the R2_BUCKET_NAME environment variable');
 }
 
-// TODO: subdomain
-const r2SiteUrl = 'https://pub-f32feec30d8e4eee8750681495853339.r2.dev';
+if (!process.env.R2_DOMAIN_URL) {
+  throw new Error('Please define the R2_DOMAIN_URL environment variables');
+}
+
+const r2SiteUrl = process.env.R2_DOMAIN_URL;
 
 /**
  * @see https://developers.cloudflare.com/r2/examples/aws-sdk-js-v3/

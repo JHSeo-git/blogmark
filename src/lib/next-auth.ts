@@ -18,6 +18,12 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
   );
 }
 
+if (!process.env.R2_DOMAIN_URL) {
+  throw new Error('Please define the R2_DOMAIN_URL environment variables');
+}
+
+const urlObject = new URL(process.env.R2_DOMAIN_URL);
+
 export const authOptions: NextAuthOptions = {
   providers: [
     GitHubProvider({
@@ -41,8 +47,7 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async signIn({ user }) {
       if (user.image) {
-        // FIXME: change domain
-        if (!user.image.includes('pub-f32feec30d8e4eee8750681495853339.r2.dev')) {
+        if (!user.image.includes(urlObject.hostname)) {
           const imageUrl = await uploadImage({
             id: nanoid(),
             imageUrl: user.image,
