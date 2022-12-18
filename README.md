@@ -30,7 +30,7 @@ pnpm i
 2. update environment variables.
 
 ```bash
-cp .env.example .env
+cp .env.example .env.local
 ```
 
 3. run dev server.
