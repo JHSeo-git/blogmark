@@ -12,7 +12,8 @@
     "lint": "eslint . --fix --ext .ts,.tsx --ignore-path .gitignore && prettier -w .",
     "preview": "next build && next start",
     "seed": "node -r esbuild-register prisma/seed.ts",
-    "start": "next start"
+    "start": "next start",
+    "vercel-build": "prisma generate && prisma migrate deploy && next build"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.223.0",
