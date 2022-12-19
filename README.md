@@ -1,8 +1,21 @@
 # Blogmark
 
+> Work In Progress
+
 Marking blog site. Like bookmark, but for blog.
 
-## stack
+## Features
+
+- OAuth SignIn: Google, Github
+- Sites marking
+
+## ScreenShot
+
+![screen-lg](./__docs/images/screen-lg.png)
+![screen-md](./__docs/images/screen-md.png)
+![screen-sm](./__docs/images/screen-sm.png)
+
+## Stack
 
 - [next.js](https://beta.nextjs.org/docs/getting-started)
   - v13.x
