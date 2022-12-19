@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useSearchParams } from 'next/navigation';
 import { signIn } from 'next-auth/react';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { cn } from '@/lib/utils';
 import type { Provider } from '@/types/oauth-provider';
@@ -21,6 +21,7 @@ function LoginForm({ enableCallbackUrl = true }: LoginFormProps) {
     github: false,
     google: false,
   });
+  const isLoading = useMemo(() => Object.values(loadingStatus).some(Boolean), [loadingStatus]);
   const searchParams = useSearchParams();
 
   const onLogin = async (provider: Provider) => {
@@ -46,7 +47,7 @@ function LoginForm({ enableCallbackUrl = true }: LoginFormProps) {
           'relative inline-flex gap-2 w-full items-center justify-center rounded-lg border px-5 py-2.5 text-center text-sm',
           'bg-base-100 hover:bg-base-200 focus:outline-none focus:ring-1 focus:ring-primary transition-all disabled:opacity-40 disabled:hover:bg-base-100',
         )}
-        disabled={loadingStatus.github}
+        disabled={isLoading}
       >
         <GithubIcon width={20} height={20} />
         <span className="font-bold">Sign in with Github</span>
@@ -71,7 +72,7 @@ function LoginForm({ enableCallbackUrl = true }: LoginFormProps) {
           'mt-2 relative inline-flex gap-2 w-full items-center justify-center rounded-lg border px-5 py-2.5 text-center text-sm',
           'bg-base-100 hover:bg-base-200 focus:outline-none focus:ring-1 focus:ring-primary transition-all disabled:opacity-40 disabled:hover:bg-base-100',
         )}
-        disabled={loadingStatus.google}
+        disabled={isLoading}
       >
         <GoogleIcon width={20} height={20} />
         <span className="font-bold">Sign in with Google</span>
