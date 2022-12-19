@@ -4,6 +4,12 @@
 
 Marking blog site. Like bookmark, but for blog.
 
+## About this project
+
+The beginning of this project is to learn next.js(specially next@13.x), prisma, and other technologies.
+
+Currently it is a personal project, but anyone can use it.
+
 ## Features
 
 - OAuth SignIn: Google, Github
