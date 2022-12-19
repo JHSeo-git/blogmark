@@ -8,7 +8,7 @@ import { useToast } from '../Toast';
 export function useCreateItem() {
   const toast = useToast();
   const router = useRouter();
-  const { mutate, isLoading } = useMutation({
+  const { mutateAsync, isLoading } = useMutation({
     mutationKey: ['createItem'],
     mutationFn: createItem,
     onSuccess: () => {
@@ -28,7 +28,7 @@ export function useCreateItem() {
   });
 
   return {
-    mutate,
+    mutate: mutateAsync,
     isLoading,
   };
 }

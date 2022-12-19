@@ -38,8 +38,8 @@ function NewItemFormWithInitialValues({ url }: NewItemFormProps) {
   });
   const { mutate, isLoading } = useCreateItem();
 
-  const onSubmit = handleSubmit((data) => {
-    mutate({ title: data.title, url: encodeURIComponent(data.url) });
+  const onSubmit = handleSubmit(async (data) => {
+    await mutate({ title: data.title, url: encodeURIComponent(data.url) });
 
     reset({ url: '', title: '' });
   });
