@@ -7,7 +7,7 @@ import MoreVerticalIcon from '../__icons/MoreVertical.Icon';
 import * as Popover from '../Popover';
 import ProtectedButton from '../ProtectedButton';
 import { useToast } from '../Toast';
-import useDeleteItem from './useDeleteItem';
+import { useDeleteItem } from './useDeleteItem';
 
 interface CardMoreProps {
   itemId: number;

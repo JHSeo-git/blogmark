@@ -38,7 +38,7 @@ function Card({ item }: CardProps) {
     } catch (e) {
       console.error(e);
       toast.add({
-        title: '에러',
+        title: '실패 😭',
         description: '좋아요 처리에 실패했습니다.',
       });
     }

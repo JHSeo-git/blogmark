@@ -6,7 +6,7 @@ import type { GetItems } from '@/services/item.service/item.service';
 
 import { useToast } from '../Toast';
 
-export default function useDeleteItem(itemId: number) {
+export function useDeleteItem(itemId: number) {
   const toast = useToast();
   const queryClient = useQueryClient();
   const { mutate, isLoading } = useMutation({
@@ -33,13 +33,13 @@ export default function useDeleteItem(itemId: number) {
     },
     onSuccess: () => {
       toast.add({
-        title: '삭제 성공 ✅',
+        title: '삭제 ✅',
         description: '삭제되었습니다.',
       });
     },
     onError: () => {
       toast.add({
-        title: '에러',
+        title: '에러 ❌',
         description: '삭제에 실패했습니다.',
       });
     },

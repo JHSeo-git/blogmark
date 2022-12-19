@@ -1,16 +1,15 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 
 import Input from '@/components/Input';
-import { createItem } from '@/lib/api/items';
 import { itemSchema } from '@/lib/validations/item';
 import { urlSchema } from '@/lib/validations/url';
 
 import LoadingIcon from '../__icons/Loading.Icon';
+import { useCreateItem } from './useCreateItem';
 
 type FormData = {
   url: string;
@@ -37,23 +36,12 @@ function NewItemFormWithInitialValues({ url }: NewItemFormProps) {
     mode: 'onChange',
     resolver: zodResolver(itemSchema),
   });
+  const { mutate, isLoading } = useCreateItem();
 
-  const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
+  const onSubmit = handleSubmit((data) => {
+    mutate({ title: data.title, url: encodeURIComponent(data.url) });
 
-  const onSubmit = handleSubmit(async (data) => {
-    try {
-      setIsLoading(true);
-
-      await createItem({ title: data.title, url: encodeURIComponent(data.url) });
-
-      reset({ url: '', title: '' });
-
-      router.push('/');
-    } catch (e) {
-      console.error(e);
-      setIsLoading(false);
-    }
+    reset({ url: '', title: '' });
   });
 
   return (

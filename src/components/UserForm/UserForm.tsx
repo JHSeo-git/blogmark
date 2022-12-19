@@ -1,14 +1,13 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { updateUserName } from '@/lib/api/user';
 import { userSchema } from '@/lib/validations/user';
 
 import LoadingIcon from '../__icons/Loading.Icon';
 import Input from '../Input';
+import { useUpdateUserName } from './useUpdateUserName';
 
 type FormData = {
   userName: string;
@@ -35,19 +34,10 @@ function UserForm({ userName, email }: UserFormProps) {
     mode: 'onChange',
     resolver: zodResolver(userSchema),
   });
+  const { mutate, isLoading } = useUpdateUserName();
 
-  const [isLoading, setIsLoading] = useState(false);
-
-  const onSubmit = handleSubmit(async (data) => {
-    try {
-      setIsLoading(true);
-
-      await updateUserName({ userName: data.userName, email: data.email });
-    } catch (e) {
-      console.error(e);
-    } finally {
-      setIsLoading(false);
-    }
+  const onSubmit = handleSubmit((data) => {
+    mutate({ userName: data.userName, email: data.email });
   });
 
   return (

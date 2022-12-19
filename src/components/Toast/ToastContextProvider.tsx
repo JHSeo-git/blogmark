@@ -13,13 +13,13 @@ interface ToastInfo {
 
 type Add = (info: ToastInfo & ToastOption) => string;
 
-interface ContextProps {
+interface ToastContext {
   add: Add;
   clear: (toastId: string) => void;
   clearAll: () => void;
 }
 
-const Context = createContext<ContextProps>({
+const Context = createContext<ToastContext>({
   add: () => '',
   clear: () => {},
   clearAll: () => {},
@@ -70,7 +70,7 @@ export function ToastContextProvider({ children }: { children: React.ReactNode }
     }, 200);
   }, [setToasts]);
 
-  const value = useMemo<ContextProps>(
+  const value = useMemo<ToastContext>(
     () => ({
       add,
       clear,
