@@ -73,10 +73,16 @@ npx prisma migrate dev
 pnpm dev
 ```
 
-## reference
+## Reference
 
 - https://github.com/prisma/prisma-examples
 - https://github.com/shadcn/taxonomy
+
+## Todos
+
+- [ ] search
+- [ ] dark mode
+- [ ] this day / this week / this month pages
 
 ## LICENSE
 
