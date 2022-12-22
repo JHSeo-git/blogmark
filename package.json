@@ -39,6 +39,7 @@
     "react-dom": "18.2.0",
     "react-hook-form": "7.38.0",
     "react-intersection-observer": "^9.4.1",
+    "sanitize-html": "^2.8.0",
     "sharp": "^0.31.2",
     "tailwind-merge": "1.7.0",
     "zod": "^3.19.1"
@@ -51,6 +52,7 @@
     "@types/qs": "^6.9.7",
     "@types/react": "latest",
     "@types/react-dom": "latest",
+    "@types/sanitize-html": "^2.8.0",
     "@typescript-eslint/eslint-plugin": "latest",
     "@typescript-eslint/parser": "latest",
     "autoprefixer": "10.4.12",

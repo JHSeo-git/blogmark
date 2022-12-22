@@ -79,6 +79,23 @@ const itemService = {
     };
   },
 
+  async getItemsByIds(ids: number[]) {
+    const items = await db.item.findMany({
+      where: {
+        id: {
+          in: ids,
+        },
+      },
+      include: {
+        user: true,
+        blog: true,
+        likes: true,
+      },
+    });
+
+    return items.map((item) => serializeItem(item));
+  },
+
   async createItem(data: CreateItemParams) {
     let slug = slugify(data.title);
 

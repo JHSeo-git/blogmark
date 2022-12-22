@@ -7,9 +7,12 @@ export interface SearchParams {
 export interface SearchItem {
   id: number;
   title: string;
-  description: string;
-  url: string;
+  description?: string | null;
+  url?: string | null;
+  thumbnail?: string | null;
+  favicon?: string | null;
   publisher: string;
-  userName: string;
-  calendarDate: string;
+  publisherUrl: string;
+  userName?: string | null;
+  calendarDate: string | null;
 }
