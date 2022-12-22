@@ -28,7 +28,7 @@ function SignInDialogButton({ children }: SignInDialogButtonProps) {
           </motion.span>
         </button>
       </Dialog.Trigger>
-      <Dialog.Content isOpen={isOpen}>
+      <Dialog.Content className="max-w-sm" isOpen={isOpen}>
         <Dialog.Title>로그인</Dialog.Title>
         <div className="mt-4 mb-2 flex flex-col items-center">
           <FolderHeartIcon />
