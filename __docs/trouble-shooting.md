@@ -21,3 +21,12 @@ postgresql connection string내에 특수문자가 있을 경우 encoding하지 
 ```bash
 git config core.ignorecase false
 ```
+
+## useQuery과 disabled query 사용 시 loading 상태 문제
+
+> https://tanstack.com/query/v4/docs/react/guides/migrating-to-react-query-4#disabled-queries
+
+enable를 통해 disabled 시키고 refetch를 사용하여 데이터를 가져오는 방식을 사용할 경우가 있습니다.
+fetch 상태에서 idle 상태가 제거되었기 때문에 isLoading 상태값이 처음부터 true가 됩니다.
+
+그래서 isLoading 대신에 isInitialLoading을 사용하면 됩니다.

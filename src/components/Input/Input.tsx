@@ -3,6 +3,8 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { forwardRef, useId, useState } from 'react';
 
+import { cn } from '@/lib/utils';
+
 import XCircleIcon from '../__icons/XCircle.Icon';
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -10,10 +12,27 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
   error?: string;
   leftIcon?: React.ReactNode;
   resetInput?: () => void;
+  boxSize?: 'sm' | 'md';
+  outlined?: boolean;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ label, error, className, leftIcon, resetInput, ...rest }, forwardedRef) => {
+  (
+    {
+      //
+      label,
+      error,
+      className,
+      leftIcon,
+      resetInput,
+      boxSize = 'md',
+      outlined = true,
+      onFocus,
+      onBlur,
+      ...rest
+    },
+    forwardedRef,
+  ) => {
     const [isFocus, setIsFocus] = useState(false);
     const isError = Boolean(error);
     const id = useId();
@@ -23,18 +42,23 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         {label && (
           <label htmlFor={id} className="label">
             <span
-              className={`label-text transition-colors${
-                !isError && isFocus ? ' text-primary' : ''
-              }${isError ? ' text-error' : ''}`}
+              className={cn(
+                'label-text transition-colors',
+                !isError && isFocus && 'text-primary',
+                isError && ' text-error',
+              )}
             >
               {label}
             </span>
           </label>
         )}
         <div
-          className={`overflow-hidden flex items-center border rounded-md group-focus:border-primary transition-all${
-            !isError && isFocus ? ' border-primary' : ''
-          }${isError ? ' border-error' : ''}`}
+          className={cn(
+            'overflow-hidden flex items-center border rounded-md group-focus:border-primary transition-all',
+            !isError && isFocus && 'border-primary',
+            isError && 'border-error',
+            !outlined && 'border-none outline-none',
+          )}
         >
           {leftIcon && <div className="flex pl-3">{leftIcon}</div>}
           <input
@@ -43,9 +67,19 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             {...rest}
             ref={forwardedRef}
             id={id}
-            onFocus={() => setIsFocus(true)}
-            onBlur={() => setIsFocus(false)}
-            className="border-none outline-none bg-inherit flex-1 py-2 px-3 read-only:bg-base-200"
+            onFocus={(e) => {
+              setIsFocus(true);
+              onFocus?.(e);
+            }}
+            onBlur={(e) => {
+              setIsFocus(false);
+              onBlur?.(e);
+            }}
+            className={cn(
+              'border-none outline-none bg-inherit flex-1 read-only:bg-base-200',
+              boxSize === 'md' && 'py-2 px-3 ',
+              boxSize === 'sm' && 'py-0.5 px-2',
+            )}
           />
           <AnimatePresence>
             {resetInput && isFocus && (
@@ -85,4 +119,5 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 );
 
 Input.displayName = 'Input';
+
 export default Input;

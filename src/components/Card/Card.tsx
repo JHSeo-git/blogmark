@@ -15,7 +15,12 @@ import CardMore from './Card.More';
 import CardThumbnail from './Card.Thumbnail';
 
 interface CardProps {
-  item: SerializedItem;
+  item: SerializedItem & {
+    highlight?: {
+      title?: string;
+      description?: string;
+    };
+  };
 }
 
 function Card({ item }: CardProps) {
@@ -92,10 +97,28 @@ function Card({ item }: CardProps) {
 
       <div className="mt-2 px-1 relative">
         <a href={item.url ?? undefined} target="_blank" rel="noreferrer">
-          <h2 className="text-xl text-neutral font-bold">{item.title}</h2>
+          {item.highlight?.title ? (
+            <h2
+              className="text-xl text-neutral font-bold [&>em]:text-primary"
+              dangerouslySetInnerHTML={{
+                __html: item.highlight.title,
+              }}
+            />
+          ) : (
+            <h2 className="text-xl text-neutral font-bold">{item.title}</h2>
+          )}
         </a>
         <a href={item.url ?? undefined} target="_blank" rel="noreferrer">
-          <p className="mt-1">{item.description}</p>
+          {item.highlight?.description ? (
+            <p
+              className="mt-1 [&>em]:text-primary"
+              dangerouslySetInnerHTML={{
+                __html: item.highlight?.description,
+              }}
+            />
+          ) : (
+            <p className="mt-1">{item.description}</p>
+          )}
         </a>
       </div>
 
