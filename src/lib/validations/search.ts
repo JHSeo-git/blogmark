@@ -7,3 +7,7 @@ export const searchSchema = z.object({
   page: numericString(z.number()).optional(),
   limit: numericString(z.number()).optional(),
 });
+
+export const searchFormSchema = z.object({
+  search: z.string({ required_error: '검색어를 입력해주세요.' }),
+});

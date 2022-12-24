@@ -49,6 +49,7 @@ function NewItemFormWithInitialValues({ url }: NewItemFormProps) {
       <Input
         type="text"
         label="URL"
+        placeholder="https://example.com"
         {...register('url')}
         error={errors.url?.message}
         resetInput={watch('url') ? () => resetField('url', { defaultValue: '' }) : undefined}
@@ -57,6 +58,7 @@ function NewItemFormWithInitialValues({ url }: NewItemFormProps) {
       <Input
         type="text"
         label="제목"
+        placeholder="제목을 입력해주세요."
         className="mt-4 md:mt-6"
         {...register('title')}
         error={errors.title?.message}
