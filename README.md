@@ -80,7 +80,7 @@ pnpm dev
 
 ## Todos
 
-- [ ] search
+- [x] search
 - [ ] dark mode
 - [ ] this day / this week / this month pages
 
