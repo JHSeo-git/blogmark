@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-import LoadingIcon from '../__icons/Loading.Icon';
 import Card, { CardSkeleton } from '../Card';
 import { useSearchItems } from './useSearchItems';
 
