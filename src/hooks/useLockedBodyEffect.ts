@@ -12,7 +12,9 @@ export default function useLockedBodyEffect(hidden = false) {
       // document.body.style.marginLeft = "0";
       // document.body.style.marginRight = "0";
       // document.body.style.marginTop = "0";
-    } else {
+    }
+
+    return () => {
       document.body.style.overflow = '';
       // document.body.style.overscrollBehavior = "";
       // document.body.style.position = "";
@@ -22,6 +24,6 @@ export default function useLockedBodyEffect(hidden = false) {
       // document.body.style.marginLeft = "";
       // document.body.style.marginRight = "";
       // document.body.style.marginTop = "";
-    }
+    };
   }, [hidden]);
 }
