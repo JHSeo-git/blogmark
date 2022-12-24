@@ -1,38 +1,23 @@
 'use client';
 
-import { zodResolver } from '@hookform/resolvers/zod';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
 
-import { searchFormSchema } from '@/lib/validations/search';
+import useDebounce from '@/hooks/useDebounce';
 
+import ChevronLeftIcon from '../__icons/ChevronLeft.Icon';
 import Input from '../Input';
-
-interface FormData {
-  search: string;
-}
+import SearchItems from './SearchItems';
 
 function SearchForm() {
-  const {
-    register,
-    handleSubmit,
-    formState: { isValid },
-    watch,
-    resetField,
-    reset,
-  } = useForm<FormData>({
-    defaultValues: {
-      search: '',
-    },
-    mode: 'onChange',
-    resolver: zodResolver(searchFormSchema),
-  });
   const [focused, setFocused] = useState(false);
+  const [query, setQuery] = useState('');
+  const debouncedQuery = useDebounce(query, 500);
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
-  });
+  const onBack = () => {
+    setFocused(false);
+    setQuery('');
+  };
 
   return (
     <div className="flex items-center">
@@ -43,26 +28,47 @@ function SearchForm() {
             key="search-form-frame"
             className="fixed inset-0 bg-base-100 z-50"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.5 }}
+            animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-          />
+          >
+            {debouncedQuery && (
+              <article className="max-w-7xl mx-auto">
+                <div className="mt-[112px] w-full">
+                  <SearchItems query={debouncedQuery} />
+                </div>
+              </article>
+            )}
+          </motion.div>
         )}
       </AnimatePresence>
-      <form className="relative z-50 w-full" onSubmit={onSubmit}>
+      <div className="relative z-50 w-full">
+        <AnimatePresence>
+          {focused && (
+            <motion.button
+              key="search-form-back"
+              type="button"
+              className="absolute top-1/2 -left-12 -translate-y-1/2 inline-flex"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={onBack}
+            >
+              <ChevronLeftIcon />
+            </motion.button>
+          )}
+        </AnimatePresence>
         <Input
           className="w-full"
           type="text"
           boxSize="sm"
           outlined={false}
           placeholder="검색하기"
-          {...register('search')}
-          resetInput={watch('search') ? () => resetField('search') : undefined}
-          // onChange={onChange}
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
           onFocus={() => setFocused(true)}
-          onBlur={() => setFocused(false)}
-          // disabled={isLoading}
+          resetInput={query ? () => setQuery('') : undefined}
         />
-      </form>
+      </div>
     </div>
   );
 }
