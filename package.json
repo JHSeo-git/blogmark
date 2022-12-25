@@ -23,6 +23,7 @@
     "@prisma/client": "4.7.1",
     "@radix-ui/react-dialog": "^1.0.2",
     "@radix-ui/react-popover": "^1.0.2",
+    "@radix-ui/react-portal": "^1.0.1",
     "@radix-ui/react-toast": "^1.1.2",
     "@radix-ui/react-tooltip": "^1.0.2",
     "@tanstack/react-query": "^4.15.0",

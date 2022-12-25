@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 
 import useDebounce from '@/hooks/useDebounce';
+import useLockedBodyEffect from '@/hooks/useLockedBodyEffect';
 
 import ChevronLeftIcon from '../__icons/ChevronLeft.Icon';
 import Input from '../Input';
@@ -12,7 +13,9 @@ import SearchItems from './SearchItems';
 function SearchForm() {
   const [focused, setFocused] = useState(false);
   const [query, setQuery] = useState('');
+
   const debouncedQuery = useDebounce(query, 500);
+  useLockedBodyEffect(focused);
 
   const onBack = () => {
     setFocused(false);
@@ -26,14 +29,15 @@ function SearchForm() {
           <motion.div
             // TODO: animation
             key="search-form-frame"
-            className="fixed inset-0 bg-base-100 z-50"
+            className="fixed inset-0 bg-base-100 z-50 overflow-y-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
+            <div className="sticky top-0 h-[88px] z-[1] bg-base-100" />
             {debouncedQuery && (
               <article className="max-w-7xl mx-auto">
-                <div className="mt-[112px] w-full">
+                <div className="mt w-full">
                   <SearchItems query={debouncedQuery} />
                 </div>
               </article>

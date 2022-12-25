@@ -7,6 +7,7 @@ specifiers:
   '@prisma/client': 4.7.1
   '@radix-ui/react-dialog': ^1.0.2
   '@radix-ui/react-popover': ^1.0.2
+  '@radix-ui/react-portal': ^1.0.1
   '@radix-ui/react-toast': ^1.1.2
   '@radix-ui/react-tooltip': ^1.0.2
   '@tailwindcss/line-clamp': ^0.4.2
@@ -67,6 +68,7 @@ dependencies:
   '@prisma/client': 4.7.1_prisma@4.7.1
   '@radix-ui/react-dialog': 1.0.2_ib3m5ricvtkl2cll7qpr2f6lvq
   '@radix-ui/react-popover': 1.0.2_ib3m5ricvtkl2cll7qpr2f6lvq
+  '@radix-ui/react-portal': 1.0.1_biqbaboplfbrettd7655fr4n2y
   '@radix-ui/react-toast': 1.1.2_biqbaboplfbrettd7655fr4n2y
   '@radix-ui/react-tooltip': 1.0.2_ib3m5ricvtkl2cll7qpr2f6lvq
   '@tanstack/react-query': 4.16.1_biqbaboplfbrettd7655fr4n2y
