@@ -2,6 +2,8 @@ import { algolia } from '@/lib/algolia';
 
 import type { SearchItem, SearchParams } from './search.types';
 
+const useAloglia = process.env.USE_ALGOLIA === 'true';
+
 const searchService = {
   async search({ query, page = 0, limit = 20 }: SearchParams) {
     const response = await algolia.search<SearchItem>(query, {
@@ -22,6 +24,10 @@ const searchService = {
   },
 
   save(item: SearchItem) {
+    if (!useAloglia) {
+      return;
+    }
+
     return algolia.saveObject({
       ...item,
       objectID: item.id.toString(),
@@ -29,6 +35,10 @@ const searchService = {
   },
 
   delete(objectID: string | number) {
+    if (!useAloglia) {
+      return;
+    }
+
     return algolia.deleteObject(objectID.toString());
   },
 };

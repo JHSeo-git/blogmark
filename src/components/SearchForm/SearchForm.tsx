@@ -5,8 +5,10 @@ import { useState } from 'react';
 
 import useDebounce from '@/hooks/useDebounce';
 import useLockedBodyEffect from '@/hooks/useLockedBodyEffect';
+import useLockedElementByIdEffect from '@/hooks/useLockedElementByIdEffect';
 
 import ChevronLeftIcon from '../__icons/ChevronLeft.Icon';
+import { DRAWER_CONTENT } from '../Drawer';
 import Input from '../Input';
 import SearchItems from './SearchItems';
 
@@ -16,6 +18,7 @@ function SearchForm() {
 
   const debouncedQuery = useDebounce(query, 500);
   useLockedBodyEffect(focused);
+  useLockedElementByIdEffect(DRAWER_CONTENT, focused);
 
   const onBack = () => {
     setFocused(false);

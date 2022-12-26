@@ -39,7 +39,7 @@ function SearchItems({ query }: SearchItemsProps) {
   return (
     <>
       {items.length === 0 ? (
-        <div className="flex items-center justify-center h-full">
+        <div className="px-6 flex items-center justify-center h-full">
           <h2 className="mt-10 text-2xl font-bold">Sorry, No results found for your search.</h2>
         </div>
       ) : (
