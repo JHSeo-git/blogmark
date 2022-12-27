@@ -14,6 +14,7 @@ interface CardThumbnailProps {
 
 function CardThumbnail({ title, src, alt, children, className, url }: CardThumbnailProps) {
   const [isError, setIsError] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   return (
     <section className={cn('relative', className)}>
@@ -25,8 +26,12 @@ function CardThumbnail({ title, src, alt, children, className, url }: CardThumbn
               alt={alt ?? 'thumbnail'}
               fill
               onError={() => setIsError(true)}
+              onLoad={() => setIsLoaded(true)}
               loading="lazy"
-              className="object-cover"
+              className={cn(
+                'object-cover transition-opacity',
+                isLoaded ? 'opacity-100' : 'opacity-0',
+              )}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </div>
